@@ -1,5 +1,4 @@
 import os
-import sys
 
 fileDir = os.path.dirname(os.path.abspath(__file__))
 print(fileDir)
@@ -9,3 +8,5 @@ print(propfile)
 props = dict( l.rstrip().split('=') for l in open(propfile)
   if not l.startswith("#") )
 print (props);
+
+print(props['mail.user.id'])
