@@ -1,4 +1,5 @@
 import re
+import os
 
 class Moneycontrol:
   def __init__(self, url):
@@ -23,12 +24,23 @@ class Moneycontrol:
     ratioURL = "https://www.moneycontrol.com/financials/" + self.companyname + "/ratiosVI/" + self.companycode
     return ratioURL
 
+def getProperties():
+  fileDir = os.path.dirname(os.path.abspath(__file__))
+  propfile = os.path.join(fileDir, '../config/fortuna.properties')
+  props = dict( l.rstrip().split('=') for l in open(propfile)
+    if not l.startswith("#") )
+  return props
+
 # --------------------------------------------------------
-f = open('list.txt', 'r')
+# Main program
+# --------------------------------------------------------
+
+pr=getProperties()
+f = open(pr['genshell.input.filename'], 'r')
 mcList = f.read().splitlines()
 f.close()
 
-fYrFin= open("/home/ec2-user/plutus/wgetYrFin.sh","w+")
+fYrFin= open(pr['genshell.output.finyr.filename'],"w+")
 
 for mcListItem in mcList:
   mc = Moneycontrol(mcListItem)
@@ -39,18 +51,4 @@ fYrFin.write("exit\n")
 fYrFin.close()
 # --------------------------------------------------------
 
-fYrFinData= open("/home/ec2-user/plutus/biocon.html","r")
-yrFinData=""
-yrFinDataList = fYrFinData.read().splitlines()
-fYrFinData.close()
-companyNameRegex="<H1 class=\"b_42 PT20\">(.*)</H1>"
 
-for yrFinDataListItem in yrFinDataList:
-  yrFinData+=yrFinDataListItem.strip()
-
-if re.search(companyNameRegex, yrFinData):
-  m=re.search(companyNameRegex, yrFinData)
-  companyName=m.group(1)
-  print("**** [" + companyName + "] ****")
-
-# --------------------------------------------------------
