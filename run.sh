@@ -4,8 +4,8 @@
 cd ~/fortuna
 rm -f -R -- */
 
-git clone https://github.com/mintomohan/hellopython
-cd hellopython
+git clone https://github.com/pyfortuna/fortuna
+cd fortuna
 python3 hello.py
 
 # cd ~/plutus
