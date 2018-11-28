@@ -5,7 +5,7 @@ cd ~/fortuna
 rm -f -R -- */
 
 git clone https://github.com/pyfortuna/fortuna
-cd fortuna
+cd fortuna/src
 python3 hello.py
 
 # cd ~/plutus
