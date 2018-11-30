@@ -86,7 +86,7 @@ def parseFinYrFile(iFilename):
   y=np.zeros(5)
   pattern = re.compile(plRegex)
   for (idx, pl) in enumerate(re.findall(pattern, plList), start=1):
-      pl=float(pl.replace(",", ""))
+      pl=float(pl.replace(",", "").replace("--", ""))
       if idx==1:
         pl1=pl
         x[4]=5
@@ -121,7 +121,7 @@ def parseFinYrFile(iFilename):
   y=np.zeros(5)
   pattern = re.compile(epsRegex)
   for (idx, eps) in enumerate(re.findall(pattern, epsList), start=1):
-      eps=float(eps.replace(",", ""))
+      eps=float(eps.replace(",", "").replace("--", ""))
       if idx==1:
         eps1=eps
         x[4]=5
