@@ -58,6 +58,6 @@ def sendMail(subject,body,attachmentFilename):
         server.sendmail(gmail_user, recipient_address, msg.as_string())
         server.close()    
 
-        print('Email sent!')
+        print('Email sent to ' + recipient_address)
     except:
         print('Something went wrong...')
