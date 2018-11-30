@@ -2,6 +2,7 @@
 import fortunacommon
 import re   # for Regex
 import csv  # for CSV file creation
+import numpy as np # for Regression analysis
 
 # Regular expressions
 companyNameRegex="<H1 class=\"b_42 PT20\">(.*)</H1>"
@@ -15,6 +16,21 @@ epsListRegex="<tr height=\"22px\"><td colspan=\"1\" class=\"det\" width=\"40%\">
 epsRegex="<td align=\"right\" class=\"det\">(.*?)</td>"
 
 # Start processing
+
+def estimate_coef(x, y):
+  # https://www.geeksforgeeks.org/linear-regression-python-implementation/
+  # number of observations/points
+  n = np.size(x)
+  # mean of x and y vector
+  m_x, m_y = np.mean(x), np.mean(y)
+  # calculating cross-deviation and deviation about x
+  SS_xy = np.sum(y*x) - n*m_y*m_x
+  SS_xx = np.sum(x*x) - n*m_x*m_x
+  # calculating regression coefficients
+  b_1 = SS_xy / SS_xx
+  b_0 = m_y - b_1*m_x
+  return(b_0, b_1)
+
 def parseFinYrFile(iFilename):
   # Read file
   # http://python-notes.curiousefficiency.org/en/latest/python3/text_file_processing.html
@@ -66,19 +82,32 @@ def parseFinYrFile(iFilename):
     plList=m.group(1)
 
   pl1,pl2,pl3,pl4,pl5="","","","",""
+  x=np.zeros(5)
+  y=np.zeros(5)
   pattern = re.compile(plRegex)
   for (idx, pl) in enumerate(re.findall(pattern, plList), start=1):
       if idx==1:
         pl1=pl
+        x[5]=5
+        y[5]=pl
       elif idx==2:
         pl2=pl
+        x[4]=4
+        y[4]=pl
       elif idx==3:
         pl3=pl
+        x[3]=3
+        y[3]=pl
       elif idx==4:
         pl4=pl
+        x[2]=2
+        y[2]=pl
       elif idx==5:
         pl5=pl
-
+        x[1]=1
+        y[1]=pl
+  pl_coef = estimate_coef(x, y) 
+  
   if re.search(epsListRegex, yrFinData):
     m=re.search(epsListRegex, yrFinData)
     epsList=m.group(1)
@@ -114,6 +143,7 @@ def parseFinYrFile(iFilename):
     "pl3": pl3,
     "pl4": pl4,
     "pl5": pl5,
+    "pl_coef":pl_coef,
     "eps1": eps1,
     "eps2": eps2,
     "eps3": eps3,
@@ -133,14 +163,14 @@ csvOutputFilename=pr['finyr.output.filename']
 
 # process html files and create csv file
 with open(csvOutputFilename, 'w') as csvfile:
-  fieldnames = ['companyName', 'bseId', 'nseId', 'isin', 'sector', 'nsePrice','monthName1','monthName2','monthName3','monthName4','monthName5','pl1','pl2','pl3','pl4','pl5','eps1','eps2','eps3','eps4','eps5']
+  fieldnames = ['companyName', 'bseId', 'nseId', 'isin', 'sector', 'nsePrice','monthName1','monthName2','monthName3','monthName4','monthName5','pl1','pl2','pl3','pl4','pl5','pl_coef','eps1','eps2','eps3','eps4','eps5']
   writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
   writer.writeheader()
   fList = fortunacommon.getFiles(pr['finyr.input.directory'],r'.*\.html')
   for fListItem in fList:
     print("Processing : " + fListItem)
     c=parseFinYrFile(pr['finyr.input.directory'] + fListItem)
-    writer.writerow({'companyName':c["companyName"], 'bseId':c["bseId"], 'nseId':c["nseId"], 'isin':c["isin"], 'sector':c["sector"], 'nsePrice':c["nsePrice"],'monthName1':c["monthName1"],'monthName2':c["monthName2"],'monthName3':c["monthName3"],'monthName4':c["monthName4"],'monthName5':c["monthName5"],'pl1':c["pl1"],'pl2':c["pl2"],'pl3':c["pl3"],'pl4':c["pl4"],'pl5':c["pl5"],'eps1':c["eps1"],'eps2':c["eps2"],'eps3':c["eps3"],'eps4':c["eps4"],'eps5':c["eps5"]})
+    writer.writerow({'companyName':c["companyName"], 'bseId':c["bseId"], 'nseId':c["nseId"], 'isin':c["isin"], 'sector':c["sector"], 'nsePrice':c["nsePrice"],'monthName1':c["monthName1"],'monthName2':c["monthName2"],'monthName3':c["monthName3"],'monthName4':c["monthName4"],'monthName5':c["monthName5"],'pl1':c["pl1"],'pl2':c["pl2"],'pl3':c["pl3"],'pl4':c["pl4"],'pl5':c["pl5"],'pl_coef':c["pl_coef"],'eps1':c["eps1"],'eps2':c["eps2"],'eps3':c["eps3"],'eps4':c["eps4"],'eps5':c["eps5"]})
 
 # Send csv file as mail attachment
 subject="[Fortuna]: Yearly Financial results"
