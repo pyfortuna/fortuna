@@ -25,10 +25,12 @@ try:
     msg.attach(content)
    
     # Attachment
-    filename = pr['finyr.output.filename']
-    f = file(filename)
-    attachment = MIMEText(f.read())
-    attachment.add_header('Content-Disposition', 'attachment', filename=filename)           
+    attachmentFilename = pr['finyr.output.filename']
+    print(attachmentFilename)
+    attachmentFile = file(attachmentFilename)
+    print(attachmentFile)
+    attachment = MIMEText(attachmentFile.read())
+    attachment.add_header('Content-Disposition', 'attachment', filename=attachmentFilename)           
     msg.attach(attachment)
     
     server.sendmail(gmail_user, recipient_address, msg.as_string())
