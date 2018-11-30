@@ -81,7 +81,7 @@ def parseFinYrFile(iFilename):
     m=re.search(plListRegex, yrFinData)
     plList=m.group(1)
 
-  pl1,pl2,pl3,pl4,pl5="","","","",""
+  pl1,pl2,pl3,pl4,pl5=0,0,0,0,0
   x=np.zeros(5)
   y=np.zeros(5)
   pattern = re.compile(plRegex)
@@ -116,7 +116,7 @@ def parseFinYrFile(iFilename):
     m=re.search(epsListRegex, yrFinData)
     epsList=m.group(1)
 
-  eps1,eps2,eps3,eps4,eps5="","","","",""
+  eps1,eps2,eps3,eps4,eps5=0,0,0,0,0
   x=np.zeros(5)
   y=np.zeros(5)
   pattern = re.compile(epsRegex)
