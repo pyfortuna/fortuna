@@ -126,9 +126,13 @@ def parseFinYrFile(iFilename):
 # --------------------------------------------------------
 # Main program
 # --------------------------------------------------------
-pr=fortunacommon.loadAppProperties()
 
-with open(pr['finyr.output.filename'], 'w') as csvfile:
+# load properties
+pr=fortunacommon.loadAppProperties()
+csvOutputFilename=pr['finyr.output.filename']
+
+# process html files and create csv file
+with open(csvOutputFilename, 'w') as csvfile:
   fieldnames = ['companyName', 'bseId', 'nseId', 'isin', 'sector', 'nsePrice','monthName1','monthName2','monthName3','monthName4','monthName5','pl1','pl2','pl3','pl4','pl5','eps1','eps2','eps3','eps4','eps5']
   writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
   writer.writeheader()
@@ -138,4 +142,8 @@ with open(pr['finyr.output.filename'], 'w') as csvfile:
     c=parseFinYrFile(pr['finyr.input.directory'] + fListItem)
     writer.writerow({'companyName':c["companyName"], 'bseId':c["bseId"], 'nseId':c["nseId"], 'isin':c["isin"], 'sector':c["sector"], 'nsePrice':c["nsePrice"],'monthName1':c["monthName1"],'monthName2':c["monthName2"],'monthName3':c["monthName3"],'monthName4':c["monthName4"],'monthName5':c["monthName5"],'pl1':c["pl1"],'pl2':c["pl2"],'pl3':c["pl3"],'pl4':c["pl4"],'pl5':c["pl5"],'eps1':c["eps1"],'eps2':c["eps2"],'eps3':c["eps3"],'eps4':c["eps4"],'eps5':c["eps5"]})
 
-print("*** Completed ***")
+# Send csv file as mail attachment
+subject="[Fortuna]: Yearly Financial results"
+body="This is an automated e-mail message sent from Fortuna."
+fortunacommon.sendMail(subject,body,csvOutputFilename)
+
