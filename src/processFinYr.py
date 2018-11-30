@@ -57,7 +57,7 @@ def parseFinYrFile(iFilename):
 
   if re.search(nsePriceRegex, yrFinData):
     m=re.search(nsePriceRegex, yrFinData)
-    nsePrice=m.group(1)
+    nsePrice=m.group(1).replace(",", "")
 
   if re.search(monthListRegex, yrFinData):
     m=re.search(monthListRegex, yrFinData)
@@ -86,6 +86,7 @@ def parseFinYrFile(iFilename):
   y=np.zeros(5)
   pattern = re.compile(plRegex)
   for (idx, pl) in enumerate(re.findall(pattern, plList), start=1):
+      pl=pl.replace(",", "")
       if idx==1:
         pl1=pl
         x[4]=5
