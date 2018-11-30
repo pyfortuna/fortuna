@@ -196,6 +196,7 @@ with open(csvOutputFilename, 'w') as csvfile:
       writer.writerow({'companyName':c["companyName"], 'bseId':c["bseId"], 'nseId':c["nseId"], 'isin':c["isin"], 'sector':c["sector"], 'nsePrice':c["nsePrice"],'monthName1':c["monthName1"],'monthName2':c["monthName2"],'monthName3':c["monthName3"],'monthName4':c["monthName4"],'monthName5':c["monthName5"],'pl1':c["pl1"],'pl2':c["pl2"],'pl3':c["pl3"],'pl4':c["pl4"],'pl5':c["pl5"],'pl_coef':c["pl_coef"],'eps1':c["eps1"],'eps2':c["eps2"],'eps3':c["eps3"],'eps4':c["eps4"],'eps5':c["eps5"],'eps_coef':c["eps_coef"]})
     except:
       print("Error in : " + fListItem)
+      pass
 
 # Send csv file as mail attachment
 subject="[Fortuna]: Yearly Financial results"
