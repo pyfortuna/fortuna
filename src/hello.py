@@ -109,6 +109,30 @@ for (idx, eps) in enumerate(re.findall(pattern, epsList), start=1):
     elif idx==5:
       eps5=eps
 
+companydata = {
+  "companyName": companyName,
+  "bseId": bseId,
+  "nseId": nseId,
+  "isin": isin,
+  "sector": sector,
+  "nsePrice": nsePrice,
+  "monthName1": monthName1,
+  "monthName2": monthName2,
+  "monthName3": monthName3,
+  "monthName4": monthName4,
+  "monthName5": monthName5,
+  "pl1": pl1,
+  "pl2": pl2,
+  "pl3": pl3,
+  "pl4": pl4,
+  "pl5": pl5,
+  "eps1": eps1,
+  "eps2": eps2,
+  "eps3": eps3,
+  "eps4": eps4,
+  "eps5": eps5
+}
+print(companydata)
 # --------------------------------
 
 with open('/home/ec2-user/plutus/finYr.csv', 'w') as csvfile:
