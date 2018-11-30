@@ -121,15 +121,18 @@ def parseFinYrFile(iFilename):
     "eps5": eps5
   }
   return companydata
-# --------------------------------
 
+
+# --------------------------------------------------------
+# Main program
+# --------------------------------------------------------
 pr=fortunacommon.loadAppProperties()
 
 with open(pr['finyr.output.filename'], 'w') as csvfile:
   fieldnames = ['companyName', 'bseId', 'nseId', 'isin', 'sector', 'nsePrice','monthName1','monthName2','monthName3','monthName4','monthName5','pl1','pl2','pl3','pl4','pl5','eps1','eps2','eps3','eps4','eps5']
   writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
   writer.writeheader()
-  fList = fortunacommon.getFiles(pr['finyr.input.directory'],".*\.html")
+  fList = fortunacommon.getFiles(pr['finyr.input.directory'],r'.*\.html')
   for fListItem in fList:
     print("Processing : " + fListItem)
     c=parseFinYrFile(pr['finyr.input.directory'] + fListItem)
