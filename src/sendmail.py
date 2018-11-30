@@ -1,9 +1,11 @@
+# Import libraries
 import smtplib
 import os
 from os.path import basename
 import fortunacommon
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
 
 pr=fortunacommon.loadAppProperties()
 gmail_user=pr['mail.user.id']
@@ -54,6 +56,5 @@ try:
     server.close()    
     
     print('Email sent!')
-except error:
+except:
     print('Something went wrong...')
-    print(error)
