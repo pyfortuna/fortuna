@@ -1,5 +1,6 @@
 import smtplib
 import os
+from os.path import basename
 import fortunacommon
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
