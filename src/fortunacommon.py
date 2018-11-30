@@ -28,7 +28,7 @@ def getFiles(inputDirectory,filenameRegexPattern):
 # Send mail (with attachment)
 # ------------------------------------------------------------------
 def sendMail(subject,body,attachmentFilename):
-    pr=fortunacommon.loadAppProperties()
+    pr=loadAppProperties()
     gmail_user=pr['mail.user.id']
     gmail_password=pr['mail.user.password']
     recipient_address=pr['mail.recepient.address']    
