@@ -54,6 +54,6 @@ try:
     server.close()    
     
     print('Email sent!')
-except Exception, err:
+except error:
     print('Something went wrong...')
-    print Exception, err
+    print(error)
