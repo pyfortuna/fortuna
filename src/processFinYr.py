@@ -108,7 +108,7 @@ def parseFinYrFile(iFilename):
         x[0]=1
         y[0]=pl
   a=np.ones(5, dtype=np.float64)
-  a*=(float64)pl5
+  a*=float(pl5)
   pl_coef = estimate_coef(x, y/a)[1]
   
   if re.search(epsListRegex, yrFinData):
