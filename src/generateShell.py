@@ -24,7 +24,7 @@ class Moneycontrol:
     ratioURL = "https://www.moneycontrol.com/financials/" + self.companyname + "/ratiosVI/" + self.companycode
     return ratioURL
 
-def getProperties():
+def loadAppProperties():
   fileDir = os.path.dirname(os.path.abspath(__file__))
   propfile = os.path.join(fileDir, '../config/fortuna.properties')
   props = dict( l.rstrip().split('=') for l in open(propfile)
@@ -35,7 +35,7 @@ def getProperties():
 # Main program
 # --------------------------------------------------------
 
-pr=getProperties()
+pr=loadAppProperties()
 f = open(pr['genshell.input.filename'], 'r')
 mcList = f.read().splitlines()
 f.close()
