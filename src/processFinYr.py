@@ -88,24 +88,24 @@ def parseFinYrFile(iFilename):
   for (idx, pl) in enumerate(re.findall(pattern, plList), start=1):
       if idx==1:
         pl1=pl
-        x[5]=5
-        y[5]=pl
+        x[4]=5
+        y[4]=pl
       elif idx==2:
         pl2=pl
-        x[4]=4
-        y[4]=pl
+        x[3]=4
+        y[3]=pl
       elif idx==3:
         pl3=pl
-        x[3]=3
-        y[3]=pl
+        x[2]=3
+        y[2]=pl
       elif idx==4:
         pl4=pl
-        x[2]=2
-        y[2]=pl
+        x[1]=2
+        y[1]=pl
       elif idx==5:
         pl5=pl
-        x[1]=1
-        y[1]=pl
+        x[0]=1
+        y[0]=pl
   pl_coef = estimate_coef(x, y) 
   
   if re.search(epsListRegex, yrFinData):
