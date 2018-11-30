@@ -35,15 +35,15 @@ try:
     #msg.attach(attachment)
     
     #
-    attachmentFilename = pr['finyr.output.filename']
-    print(attachmentFilename)
-    attachmentFile = file(attachmentFilename)
-    attachment = MIMEBase('application', 'octet-stream')
-    attachment.set_payload(open(attachmentFile, 'rb').read())
-    encoders.encode_base64(attachment)
-    attachment.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(attachmentFile))
-    msg.attach(attachment)
-
+    f = pr['finyr.output.filename']
+    with open(f, "rb") as fil:
+        part = MIMEApplication(
+            fil.read(),
+            Name=basename(f)
+        )
+    # After the file is closed
+    part['Content-Disposition'] = 'attachment; filename="%s"' % basename(f)
+    msg.attach(part)
     
     server.sendmail(gmail_user, recipient_address, msg.as_string())
     server.close()    
