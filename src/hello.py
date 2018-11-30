@@ -30,7 +30,6 @@ for yrFinDataListItem in yrFinDataList:
 if re.search(companyNameRegex, yrFinData):
   m=re.search(companyNameRegex, yrFinData)
   companyName=m.group(1)
-  print(companyName)
 
 if re.search(compdetailsRegex, yrFinData):
   m=re.search(compdetailsRegex, yrFinData)
@@ -38,21 +37,15 @@ if re.search(compdetailsRegex, yrFinData):
   nseId=m.group(2)
   isin=m.group(3)
   sector=m.group(4)
-  print(bseId)
-  print(nseId)
-  print(isin)
-  print(sector)
 
 if re.search(nsePriceRegex, yrFinData):
   m=re.search(nsePriceRegex, yrFinData)
   nsePrice=m.group(1)
-  print(nsePrice)
 
 if re.search(monthListRegex, yrFinData):
   m=re.search(monthListRegex, yrFinData)
   monthList=m.group(1)
 
-print("* Months:")
 monthName1,monthName2,monthName3,monthName4,monthName5="","","","",""
 pattern = re.compile(monthRegex)
 for (idx, monthName) in enumerate(re.findall(pattern, monthList), start=1):
@@ -66,14 +59,12 @@ for (idx, monthName) in enumerate(re.findall(pattern, monthList), start=1):
     elif idx==4:
       monthName4=monthName
     elif idx==5:
-      monthName5=monthName
-      
+      monthName5=monthName      
 
 if re.search(plListRegex, yrFinData):
   m=re.search(plListRegex, yrFinData)
   plList=m.group(1)
 
-print(r"* P/L:")
 pl1,pl2,pl3,pl4,pl5="","","","",""
 pattern = re.compile(plRegex)
 for (idx, pl) in enumerate(re.findall(pattern, plList), start=1):
@@ -93,7 +84,6 @@ if re.search(epsListRegex, yrFinData):
   m=re.search(epsListRegex, yrFinData)
   epsList=m.group(1)
 
-print(r"* EPS:")
 eps1,eps2,eps3,eps4,eps5="","","","",""
 pattern = re.compile(epsRegex)
 for (idx, eps) in enumerate(re.findall(pattern, epsList), start=1):
@@ -132,12 +122,13 @@ companydata = {
   "eps4": eps4,
   "eps5": eps5
 }
-print(companydata)
 # --------------------------------
 
 with open('/home/ec2-user/plutus/finYr.csv', 'w') as csvfile:
   fieldnames = ['companyName', 'bseId', 'nseId', 'isin', 'sector', 'nsePrice','monthName1','monthName2','monthName3','monthName4','monthName5','pl1','pl2','pl3','pl4','pl5','eps1','eps2','eps3','eps4','eps5']
   writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
   writer.writeheader()
-  writer.writerow({'companyName':companyName, 'bseId':bseId, 'nseId':nseId, 'isin':isin, 'sector':sector, 'nsePrice':nsePrice,'monthName1':monthName1,'monthName2':monthName2,'monthName3':monthName3,'monthName4':monthName4,'monthName5':monthName5,'pl1':pl1,'pl2':pl2,'pl3':pl3,'pl4':pl4,'pl5':pl5,'eps1':eps1,'eps2':eps2,'eps3':eps3,'eps4':eps4,'eps5':eps5})
+  c=companydata
+  writer.writerow({'companyName':c["companyName"], 'bseId':c["bseId"], 'nseId':c["nseId"], 'isin':c["isin"], 'sector':c["sector"], 'nsePrice':c["nsePrice"],'monthName1':c["monthName1"],'monthName2':c["monthName2"],'monthName3':c["monthName3"],'monthName4':c["monthName4"],'monthName5':c["monthName5"],'pl1':c["pl1"],'pl2':c["pl2"],'pl3':c["pl3"],'pl4':c["pl4"],'pl5':c["pl5"],'eps1':c["eps1"],'eps2':c["eps2"],'eps3':c["eps3"],'eps4':c["eps4"],'eps5':c["eps5"]})
 
+print("*** Completed ***")
