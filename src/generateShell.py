@@ -1,5 +1,5 @@
 import re
-import os
+import fortunacommon
 
 class Moneycontrol:
   def __init__(self, url):
@@ -24,18 +24,11 @@ class Moneycontrol:
     ratioURL = "https://www.moneycontrol.com/financials/" + self.companyname + "/ratiosVI/" + self.companycode
     return ratioURL
 
-def loadAppProperties():
-  fileDir = os.path.dirname(os.path.abspath(__file__))
-  propfile = os.path.join(fileDir, '../config/fortuna.properties')
-  props = dict( l.rstrip().split('=') for l in open(propfile)
-    if not l.startswith("#") )
-  return props
-
 # --------------------------------------------------------
 # Main program
 # --------------------------------------------------------
 
-pr=loadAppProperties()
+pr=fortunacommon.loadAppProperties()
 f = open(pr['genshell.input.filename'], 'r')
 mcList = f.read().splitlines()
 f.close()
