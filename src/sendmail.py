@@ -37,18 +37,23 @@ try:
     
     #
     f = pr['finyr.output.filename']
+    print("f: " + f)
     with open(f, "rb") as fil:
         part = MIMEApplication(
             fil.read(),
             Name=basename(f)
         )
+    print("[[[2]]]")
     # After the file is closed
     part['Content-Disposition'] = 'attachment; filename="%s"' % basename(f)
+    print("[[[3]]]")
     msg.attach(part)
+    print("[[[4]]]")
     
     server.sendmail(gmail_user, recipient_address, msg.as_string())
     server.close()    
     
     print('Email sent!')
-except:  
+except Exception, err:
     print('Something went wrong...')
+    print Exception, err
