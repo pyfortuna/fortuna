@@ -7,8 +7,8 @@ pr=fortunacommon.loadAppProperties()
 gmail_user=pr['mail.user.id']
 gmail_password=pr['mail.user.password']
 recipient_address=pr['mail.recepient.address']
-subject="[Fortuna]: test mail"
-body="This is an automated mail message."
+subject="[Fortuna]: Yearly Financial results"
+body="This is an automated e-mail message sent from Fortuna."
 
 #email_text = "From: %s\nTo: %s\nSubject: %s\n\n%s" % (gmail_user, to, subject, body)
 
@@ -17,14 +17,23 @@ try:
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     server.ehlo()
     server.login(gmail_user, gmail_password)
-
+    
+    # Message
     msg['Subject'] = subject
     msg['From'] = gmail_user
     content = MIMEText(body, 'plain')
     msg.attach(content)
+   
+    # Attachment
+    filename = pr['finyr.output.filename']
+    f = file(filename)
+    attachment = MIMEText(f.read())
+    attachment.add_header('Content-Disposition', 'attachment', filename=filename)           
+    msg.attach(attachment)
+    
     server.sendmail(gmail_user, recipient_address, msg.as_string())
-    server.close()
-
+    server.close()    
+    
     print('Email sent!')
 except:  
     print('Something went wrong...')
