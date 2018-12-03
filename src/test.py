@@ -1,12 +1,18 @@
-import os
+import fortunacommon
 
-fileDir = os.path.dirname(os.path.abspath(__file__))
-print(fileDir)
-propfile = os.path.join(fileDir, '../config/fortuna.properties')
-print(propfile)
+# --------------------------------------------------------
+# Main program
+# --------------------------------------------------------
 
-props = dict( l.rstrip().split('=') for l in open(propfile)
-  if not l.startswith("#") )
-print (props);
+pr=fortunacommon.loadAppProperties()
+f = open('/user/ec2-user/fortuna/fortuna/data/pf.txt', 'r')
+pfList = f.read().splitlines()
+f.close()
 
-print(props['mail.user.id'])
+i = 0
+while i < len(pfList):
+	print("=========================="])
+	print(i + " : " + pfList[i])
+	print(i + " : " + pfList[i+2])
+	print(i + " : " + pfList[i+4])
+	i += 5
