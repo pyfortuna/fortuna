@@ -37,7 +37,7 @@ fYrFin= open(pr['genshell.output.finyr.filename'],"w+")
 
 for mcListItem in mcList:
   mc = Moneycontrol(mcListItem)
-  yrFinGetCommand = "wget " + mc.getYrFinURL() + r" -O ~/plutus/" + mc.getCompanyName() + ".html" + "\n"
+  yrFinGetCommand = "wget " + mc.getYrFinURL() + " -O " + pr['finyr.input.directory'] + mc.getCompanyName() + ".html" + "\n"
   fYrFin.write(yrFinGetCommand)
 
 fYrFin.write("exit\n")
