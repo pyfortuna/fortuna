@@ -16,3 +16,4 @@ while i < len(pfList):
 	print(str(i) + " : " + pfList[i+2])
 	print(str(i) + " : " + pfList[i+4])
 	i += 5
+print("-----------------------")
