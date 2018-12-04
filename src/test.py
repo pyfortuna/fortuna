@@ -24,5 +24,7 @@ while i < len(pfList):
 	sector=pfList[i+2]
 	print("Sector : " + sector)
 	print(str(i) + " : " + pfList[i+4])
+	l=pfList[i+4].split("\t")
+	print(str(l))
 	i += 5
 print("-----------------------")
