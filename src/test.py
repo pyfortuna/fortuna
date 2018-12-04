@@ -15,17 +15,17 @@ f.close()
 i = 0
 while i < len(pfList):
 	print("==========================")
-	print(str(i) + " : " + pfList[i])
+	#print(str(i) + " : " + pfList[i])
 	if re.search(companyNameRegex,str(pfList[i])):
 		m=re.search(companyNameRegex,pfList[i])
 		companyName=m.group(1)
 		print("Company : " + companyName)
-	print(str(i) + " : " + pfList[i+2])
+	#print(str(i) + " : " + pfList[i+2])
 	sector=pfList[i+2]
 	print("Sector : " + sector)
-	print(str(i) + " : " + pfList[i+4])
+	#print(str(i) + " : " + pfList[i+4])
 	l=pfList[i+4].split("\t")
-	print(str(l))
+	#print(str(l))
 	livePrice=l[0]
 	priceChange=l[1].replace("+","")
 	quantity=l[2]
