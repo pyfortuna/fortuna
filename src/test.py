@@ -26,5 +26,24 @@ while i < len(pfList):
 	print(str(i) + " : " + pfList[i+4])
 	l=pfList[i+4].split("\t")
 	print(str(l))
+	livePrice=l[0]
+	priceChange=l[1].replace("+","")
+	quantity=l[2]
+	invPrice=l[3].replace(",","")
+	daysGain=l[4].replace(",","")
+	daysGainPercent=l[5]
+	totalGain=l[6].replace(",","")
+	totalGainPercent=l[7]
+	currentValue=l[8].replace(",","")
+	print("Live Price : " + livePrice)
+	print("Change : " + priceChange)
+	print("Quantity : " + quantity)
+	print("Investment Price : " + invPrice)
+	print("Day's Gain : " + daysGain)
+	print("Day's Gain % : " + daysGainPercent)
+	print("Total Gain : " + totalGain)
+	print("Total Gain % : " + totalGainPercent)
+	print("Current Value : " + currentValue)
+	
 	i += 5
 print("-----------------------")
