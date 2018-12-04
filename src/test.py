@@ -15,7 +15,7 @@ pfList = f.read().splitlines()
 f.close()
 
 # process pf file and create csv file
-with open('/home/ec2-user/plutus/data/pf.csv', 'w') as csvfile:
+with open('/home/ec2-user/plutus/pf.csv', 'w') as csvfile:
 	fieldnames = ['companyName', 'sector', 'livePrice', 'priceChange', 'quantity', 'invPrice','daysGain','daysGainPercent','totalGain','totalGainPercent','currentValue']
 	writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 	writer.writeheader()
