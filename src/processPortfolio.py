@@ -7,7 +7,7 @@ import csv  # for CSV file creation
 # Main program
 # --------------------------------------------------------
 
-companyNameRegex="(.*)\s[\(\d{1,3}\)]{0,1}"
+companyNameRegex="(.*)\s(?:\(\d{1,3}\))?"
 
 pr=fortunacommon.loadAppProperties()
 f = open('/home/ec2-user/fortuna/fortuna/data/pf.txt', 'r')
