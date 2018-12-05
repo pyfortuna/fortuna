@@ -23,3 +23,19 @@ for (idx, matchData) in enumerate(re.findall(pattern, etrecoData), start=1):
     datetime_object = datetime.strptime(dateTimeStr[0:-14], "%b %d, %Y")
     dateTimeVal = datetime_object.strftime("%d-%b-%Y")
     print(recoType + "\t" + companyName + "\t" + price + "\t" + recommender + "\t" + dateTimeVal)
+    recoData = {
+      "recoType": recoType,
+      "companyName": companyName,
+      "price": price,
+      "recommender": recommender,
+      "dateTimeVal": dateTimeVal
+      }
+    recoList.append(recoData)
+
+  # Write output file
+  with open("/home/ec2-user/plutus/etreco.csv", 'w') as csvfile:
+    fieldnames = ['recoType', 'companyName', 'price', 'recommender', 'dateTimeVal']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    for r in recoList:
+      writer.writerow({'recoType':r['recoType'], 'companyName':r['companyName'], 'price':r['price'], 'recommender':r['recommender'], 'dateTimeVal':r['dateTimeVal']})
