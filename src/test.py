@@ -22,8 +22,8 @@ pattern = re.compile(dataRegex)
 for (idx, matchData) in enumerate(re.findall(pattern, etrecoData), start=1):
   if re.search(itemRegex, matchData):
     m=re.search(itemRegex, matchData)
-    recoType=m.group(1)
-    companyName=m.group(2)
-    recommender=m.group(3)
-    dateTime=m.group(4)
+    recoType=m.group(1).strip()
+    companyName=m.group(2).strip()
+    recommender=m.group(3).strip()
+    dateTime=m.group(4).strip()
     print(recoType + "\t" + companyName + "\t" + recommender + "\t" + dateTime)
