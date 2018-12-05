@@ -3,6 +3,9 @@ import fortunacommon
 import re   # for Regex
 from datetime import datetime # for date parsing and formatting
 
+# Initialize
+recoList=[]
+
 # Regular expressions
 dataRegex="itemprop=\"name\">[\"Buy\"|\"Sell\"].*?</a></h3><time class=\"date-format\" data-time=\".*?\">"
 itemRegex="itemprop=\"name\">(Buy|Sell)\s(.*?), target Rs\s(.*?)\:\s(.*)</a></h3><time class=\"date-format\" data-time=\"(.*?)\">"
