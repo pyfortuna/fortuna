@@ -4,7 +4,7 @@ import re   # for Regex
 
 # Regular expressions
 dataRegex="itemprop=\"name\">[\"Buy\"|\"Sell\"].*?</a></h3><time class=\"date-format\" data-time=\".*?\">"
-itemRegex="itemprop=\"name\">([\"Buy\"|\"Sell\"].*?)</a></h3><time class=\"date-format\" data-time=\"(.*?)\">"
+itemRegex="itemprop=\"name\">([\"Buy\"|\"Sell\"])\s(.*?), target Rs (.*?):\s(.*)</a></h3><time class=\"date-format\" data-time=\"(.*?)\">"
 
 # Read file
 # http://python-notes.curiousefficiency.org/en/latest/python3/text_file_processing.html
@@ -22,7 +22,11 @@ pattern = re.compile(dataRegex)
 for (idx, matchData) in enumerate(re.findall(pattern, etrecoData), start=1):
   if re.search(itemRegex, matchData):
     m=re.search(itemRegex, matchData)
-    recoText=m.group(1)
-    dateTime=m.group(2)
-    print("recoText : " + recoText)
+    recoType=m.group(1)
+    companyName=m.group(2)
+    recommender=m.group(3)
+    dateTime=m.group(4)
+    print("recoType : " + recoType)
+    print("companyName : " + companyName)
+    print("recommender : " + recommender)
     print("dateTime : " + dateTime)
