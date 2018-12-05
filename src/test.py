@@ -4,7 +4,7 @@ import re   # for Regex
 
 # Regular expressions
 dataRegex="itemprop=\"name\">[\"Buy\"|\"Sell\"].*?</a></h3><time class=\"date-format\" data-time=\".*?\">"
-itemRegex="itemprop=\"name\">([\"Buy\"|\"Sell\"])\s(.*?), target Rs (.*?):\s(.*)</a></h3><time class=\"date-format\" data-time=\"(.*?)\">"
+itemRegex="itemprop=\"name\">(Buy|Sell)\s(.*?), target Rs\s(.*?)\:\s(.*)</a></h3><time class=\"date-format\" data-time=\"(.*?)\">"
 
 # Read file
 # http://python-notes.curiousefficiency.org/en/latest/python3/text_file_processing.html
