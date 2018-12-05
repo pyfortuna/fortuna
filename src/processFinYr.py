@@ -6,6 +6,7 @@ import numpy as np # for Regression analysis
 
 # Regular expressions
 companyNameRegex="<H1 class=\"b_42 PT20\">(.*)</H1>"
+companyShortNameRegex="id=\"sc_comp\" value=\"(.*?)\""
 compdetailsRegex="<div class=\"FL gry10\">BSE: (.*?)<span class=\"PR7 PL7\">\|</span>NSE: (.*?)<span class=\"PR7 PL7\">\|</span>ISIN: (.*?)<span class=\"PR7 PL7\">\|</span>SECTOR: (.*?)</div>"
 nsePriceRegex="<span id=\"Nse_Prc_tick\" class=\"PA2\"><strong>(.*?)</strong>"
 monthListRegex="<tr height=\"22px\"><td colspan=\"1\" class=\"detb\" width=\"40%\"></td>(.*?)</tr>"
@@ -44,9 +45,15 @@ def parseFinYrFile(iFilename):
     yrFinData+=yrFinDataListItem.strip()
 
   # Search using regex
+  # Company Name (Long)
   if re.search(companyNameRegex, yrFinData):
     m=re.search(companyNameRegex, yrFinData)
     companyName=m.group(1)
+
+  # Company Short Name
+  if re.search(companyShortNameRegex, yrFinData):
+    m=re.search(companyShortNameRegex, yrFinData)
+    companyShortName=m.group(1)
 
   if re.search(compdetailsRegex, yrFinData):
     m=re.search(compdetailsRegex, yrFinData)
@@ -148,6 +155,7 @@ def parseFinYrFile(iFilename):
   eps_coef = format(estimate_coef(x, y)[1], '.3f')
 
   companydata = {
+    "companyShortName": companyShortName,
     "companyName": companyName,
     "bseId": bseId,
     "nseId": nseId,
@@ -185,7 +193,7 @@ csvOutputFilename=pr['finyr.output.filename']
 
 # process html files and create csv file
 with open(csvOutputFilename, 'w') as csvfile:
-  fieldnames = ['companyName', 'bseId', 'nseId', 'isin', 'sector', 'nsePrice','monthName1','monthName2','monthName3','monthName4','monthName5','pl1','pl2','pl3','pl4','pl5','pl_coef','eps1','eps2','eps3','eps4','eps5','eps_coef']
+  fieldnames = ['companyShortName', 'companyName', 'bseId', 'nseId', 'isin', 'sector', 'nsePrice','monthName1','monthName2','monthName3','monthName4','monthName5','pl1','pl2','pl3','pl4','pl5','pl_coef','eps1','eps2','eps3','eps4','eps5','eps_coef']
   writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
   writer.writeheader()
   fList = fortunacommon.getFiles(pr['finyr.input.directory'],r'.*\.html')
@@ -193,7 +201,7 @@ with open(csvOutputFilename, 'w') as csvfile:
     print("Processing : " + fListItem)
     try:
       c=parseFinYrFile(pr['finyr.input.directory'] + fListItem)
-      writer.writerow({'companyName':c["companyName"], 'bseId':c["bseId"], 'nseId':c["nseId"], 'isin':c["isin"], 'sector':c["sector"], 'nsePrice':c["nsePrice"],'monthName1':c["monthName1"],'monthName2':c["monthName2"],'monthName3':c["monthName3"],'monthName4':c["monthName4"],'monthName5':c["monthName5"],'pl1':c["pl1"],'pl2':c["pl2"],'pl3':c["pl3"],'pl4':c["pl4"],'pl5':c["pl5"],'pl_coef':c["pl_coef"],'eps1':c["eps1"],'eps2':c["eps2"],'eps3':c["eps3"],'eps4':c["eps4"],'eps5':c["eps5"],'eps_coef':c["eps_coef"]})
+      writer.writerow({'companyShortName':c["companyShortName"], 'companyName':c["companyName"], 'bseId':c["bseId"], 'nseId':c["nseId"], 'isin':c["isin"], 'sector':c["sector"], 'nsePrice':c["nsePrice"],'monthName1':c["monthName1"],'monthName2':c["monthName2"],'monthName3':c["monthName3"],'monthName4':c["monthName4"],'monthName5':c["monthName5"],'pl1':c["pl1"],'pl2':c["pl2"],'pl3':c["pl3"],'pl4':c["pl4"],'pl5':c["pl5"],'pl_coef':c["pl_coef"],'eps1':c["eps1"],'eps2':c["eps2"],'eps3':c["eps3"],'eps4':c["eps4"],'eps5':c["eps5"],'eps_coef':c["eps_coef"]})
     except:
       print("Error in : " + fListItem)
       pass
@@ -201,5 +209,5 @@ with open(csvOutputFilename, 'w') as csvfile:
 # Send csv file as mail attachment
 subject="[Fortuna]: Yearly Financial results"
 body="This is an automated e-mail message sent from Fortuna."
-fortunacommon.sendMail(subject,body,csvOutputFilename)
+#fortunacommon.sendMail(subject,body,csvOutputFilename)
 
