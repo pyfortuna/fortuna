@@ -1,7 +1,7 @@
 import pandas as pd
 
 dfPF = pd.read_csv("/home/ec2-user/plutus/pf.csv")
-dfFinYr = pd.read_csv("/home/ec2-user/plutus/FinYr.csv")
+dfFinYr = pd.read_csv("/home/ec2-user/plutus/finYr.csv")
 print(dfPF)
 print(dfFinYr)
 
