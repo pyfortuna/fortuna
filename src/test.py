@@ -26,7 +26,7 @@ for (idx, matchData) in enumerate(re.findall(pattern, etrecoData), start=1):
     dateTimeStr=m.group(5).strip()
     datetime_object = datetime.strptime(dateTimeStr[0:-14], "%b %d, %Y")
     dateTimeVal = datetime_object.strftime("%d-%b-%Y")
-    print(recoType + "\t" + companyName + "\t" + price + "\t" + recommender + "\t" + dateTimeVal)
+    #print(recoType + "\t" + companyName + "\t" + price + "\t" + recommender + "\t" + dateTimeVal)
     recoData = {
       "recoType": recoType,
       "companyName": companyName,
