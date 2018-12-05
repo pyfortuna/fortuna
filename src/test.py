@@ -8,15 +8,7 @@ dataRegex="itemprop=\"name\">[\"Buy\"|\"Sell\"].*?</a></h3><time class=\"date-fo
 itemRegex="itemprop=\"name\">(Buy|Sell)\s(.*?), target Rs\s(.*?)\:\s(.*)</a></h3><time class=\"date-format\" data-time=\"(.*?)\">"
 
 # Read file
-# http://python-notes.curiousefficiency.org/en/latest/python3/text_file_processing.html
-etrecoDataFile= open("/home/ec2-user/plutus/etreco.html","r", encoding="ascii", errors="surrogateescape")
-etrecoData=""
-etrecoDataLines = etrecoDataFile.read().splitlines()
-etrecoDataFile.close()
-
-# Remove linefeeds
-for etrecoDataLine in etrecoDataLines:
-  etrecoData+=etrecoDataLine.strip()
+etrecoData=fortunacommon.fileToString("/home/ec2-user/plutus/etreco.html")
 
 # Search using regex
 pattern = re.compile(dataRegex)
