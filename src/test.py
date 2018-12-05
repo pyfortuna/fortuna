@@ -1,7 +1,8 @@
 # Import libraries
 import fortunacommon
-import re   # for Regex
-from datetime import datetime # for date parsing and formatting
+import re   # for Regex evaluation
+import csv  # for CSV file output
+from datetime import datetime # for Date parsing and formatting
 
 # Initialize
 recoList=[]
