@@ -33,4 +33,4 @@ res1=res.sort_values(by='eps_coef', ascending=False)
 
 urlList=res['livePriceURL']
 for urlListItem in urlList:
-    print("URL : " + urlListItem)
+    printPrice(urlListItem)
