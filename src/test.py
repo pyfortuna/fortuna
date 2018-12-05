@@ -8,8 +8,8 @@ from datetime import datetime # for Date parsing and formatting
 recoList=[]
 
 # Regular expressions
-dataRegex="itemprop=\"name\">[\"Buy\"|\"Sell\"].*?</a></h3><time class=\"date-format\" data-time=\".*?\">"
-itemRegex="itemprop=\"name\">(Buy|Sell)\s(.*?), target Rs\s(.*?)\:\s(.*)</a></h3><time class=\"date-format\" data-time=\"(.*?)\">"
+dataRegex="itemprop=\"name\">[\"Buy\"|\"Sell\"|\"Hold\"].*?</a></h3><time class=\"date-format\" data-time=\".*?\">"
+itemRegex="itemprop=\"name\">(Buy|Sell|Hold)\s(.*?), target Rs\s(.*?)\:\s(.*)</a></h3><time class=\"date-format\" data-time=\"(.*?)\">"
 
 # Read file
 etrecoData=fortunacommon.fileToString("/home/ec2-user/plutus/etreco.html")
