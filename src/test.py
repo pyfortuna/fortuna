@@ -26,7 +26,4 @@ for (idx, matchData) in enumerate(re.findall(pattern, etrecoData), start=1):
     companyName=m.group(2)
     recommender=m.group(3)
     dateTime=m.group(4)
-    print("recoType : " + recoType)
-    print("companyName : " + companyName)
-    print("recommender : " + recommender)
-    print("dateTime : " + dateTime)
+    print(recoType + "\t" + companyName + "\t" + recommender + "\t" + dateTime)
