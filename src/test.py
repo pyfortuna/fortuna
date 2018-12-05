@@ -1,7 +1,7 @@
 import pandas as pd
 
-dfPF = pd.read_csv("/home/ec2-user/plutus/pf.csv")['companyName','currentValue']
-dfFinYr = pd.read_csv("/home/ec2-user/plutus/finYr.csv")['companyShortName','pl_coef','eps_coef']
+dfPF = pd.read_csv("/home/ec2-user/plutus/pf.csv")[['companyName','currentValue']]
+dfFinYr = pd.read_csv("/home/ec2-user/plutus/finYr.csv")[['companyShortName','pl_coef','eps_coef']]
 print(dfPF)
 print(dfFinYr)
 
