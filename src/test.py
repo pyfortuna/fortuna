@@ -43,3 +43,5 @@ for (idx, matchData) in enumerate(re.findall(pattern, etrecoData), start=1):
     writer.writeheader()
     for r in recoList:
       writer.writerow({'recoType':r['recoType'], 'companyName':r['companyName'], 'price':r['price'], 'recommender':r['recommender'], 'dateTimeVal':r['dateTimeVal']})
+
+print("FORTUNA: etreco.csv file created")
