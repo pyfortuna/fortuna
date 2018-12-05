@@ -15,12 +15,11 @@ with urlopen('https://www.moneycontrol.com/india/stockpricequote/infrastructure-
 	for line in response:
 		line = line.decode('utf-8')  # Decoding the binary data to text.
 		if 'Nse_Prc_tick' in line:  # look for NSE Price
-			print(line)
 			m=re.search("<strong>(.*?)</strong>",line)
 			livePrice=m.group(1)
-			print("livePrice : " + livePrice)
+			#print("livePrice : " + livePrice)
 		elif 'compname_imp' in line:  # look for Company Name
-			print(line)
 			m=re.search("value=\"(.*?)\"",line)
 			companyName=m.group(1)
-			print("companyName : " + companyName)
+			#print("companyName : " + companyName)
+print(companyName + " : " + livePrice)
