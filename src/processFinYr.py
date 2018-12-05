@@ -15,6 +15,7 @@ plListRegex="<tr height=\"22px\"><td colspan=\"1\" class=\"det\" width=\"40%\">N
 plRegex="<td align=\"right\" class=\"det\">(.*?)</td>"
 epsListRegex="<tr height=\"22px\"><td colspan=\"1\" class=\"det\" width=\"40%\">Basic EPS</td>(.*?)</tr>"
 epsRegex="<td align=\"right\" class=\"det\">(.*?)</td>"
+livePriceURLRegex="<a href=\"(.*?)\" title=\".*?\sStock Price \""
 
 # Start processing
 
@@ -54,6 +55,11 @@ def parseFinYrFile(iFilename):
   if re.search(companyShortNameRegex, yrFinData):
     m=re.search(companyShortNameRegex, yrFinData)
     companyShortName=m.group(1)
+
+  # Live Price URL
+  if re.search(livePriceURLRegex, yrFinData):
+    m=re.search(livePriceURLRegex, yrFinData)
+    livePriceURL="https://www.moneycontrol.com" + m.group(1)
 
   if re.search(compdetailsRegex, yrFinData):
     m=re.search(compdetailsRegex, yrFinData)
@@ -157,6 +163,7 @@ def parseFinYrFile(iFilename):
   companydata = {
     "companyShortName": companyShortName,
     "companyName": companyName,
+    "livePriceURL": livePriceURL,
     "bseId": bseId,
     "nseId": nseId,
     "isin": isin,
@@ -193,7 +200,7 @@ csvOutputFilename=pr['finyr.output.filename']
 
 # process html files and create csv file
 with open(csvOutputFilename, 'w') as csvfile:
-  fieldnames = ['companyShortName', 'companyName', 'bseId', 'nseId', 'isin', 'sector', 'nsePrice','monthName1','monthName2','monthName3','monthName4','monthName5','pl1','pl2','pl3','pl4','pl5','pl_coef','eps1','eps2','eps3','eps4','eps5','eps_coef']
+  fieldnames = ['companyShortName', 'companyName', 'livePriceURL', 'bseId', 'nseId', 'isin', 'sector', 'nsePrice','monthName1','monthName2','monthName3','monthName4','monthName5','pl1','pl2','pl3','pl4','pl5','pl_coef','eps1','eps2','eps3','eps4','eps5','eps_coef']
   writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
   writer.writeheader()
   fList = fortunacommon.getFiles(pr['finyr.input.directory'],r'.*\.html')
@@ -201,7 +208,7 @@ with open(csvOutputFilename, 'w') as csvfile:
     print("Processing : " + fListItem)
     try:
       c=parseFinYrFile(pr['finyr.input.directory'] + fListItem)
-      writer.writerow({'companyShortName':c["companyShortName"], 'companyName':c["companyName"], 'bseId':c["bseId"], 'nseId':c["nseId"], 'isin':c["isin"], 'sector':c["sector"], 'nsePrice':c["nsePrice"],'monthName1':c["monthName1"],'monthName2':c["monthName2"],'monthName3':c["monthName3"],'monthName4':c["monthName4"],'monthName5':c["monthName5"],'pl1':c["pl1"],'pl2':c["pl2"],'pl3':c["pl3"],'pl4':c["pl4"],'pl5':c["pl5"],'pl_coef':c["pl_coef"],'eps1':c["eps1"],'eps2':c["eps2"],'eps3':c["eps3"],'eps4':c["eps4"],'eps5':c["eps5"],'eps_coef':c["eps_coef"]})
+      writer.writerow({'companyShortName':c["companyShortName"], 'companyName':c["companyName"], 'livePriceURL':c["livePriceURL"], 'bseId':c["bseId"], 'nseId':c["nseId"], 'isin':c["isin"], 'sector':c["sector"], 'nsePrice':c["nsePrice"],'monthName1':c["monthName1"],'monthName2':c["monthName2"],'monthName3':c["monthName3"],'monthName4':c["monthName4"],'monthName5':c["monthName5"],'pl1':c["pl1"],'pl2':c["pl2"],'pl3':c["pl3"],'pl4':c["pl4"],'pl5':c["pl5"],'pl_coef':c["pl_coef"],'eps1':c["eps1"],'eps2':c["eps2"],'eps3':c["eps3"],'eps4':c["eps4"],'eps5':c["eps5"],'eps_coef':c["eps_coef"]})
     except:
       print("Error in : " + fListItem)
       pass
