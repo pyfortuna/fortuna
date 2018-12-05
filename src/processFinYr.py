@@ -15,7 +15,7 @@ plListRegex="<tr height=\"22px\"><td colspan=\"1\" class=\"det\" width=\"40%\">N
 plRegex="<td align=\"right\" class=\"det\">(.*?)</td>"
 epsListRegex="<tr height=\"22px\"><td colspan=\"1\" class=\"det\" width=\"40%\">Basic EPS</td>(.*?)</tr>"
 epsRegex="<td align=\"right\" class=\"det\">(.*?)</td>"
-livePriceURLRegex="<a href=\"(.*?)\" title=\".*?\sStock Price \""
+livePriceURLRegex="<a href=\"(.*?)\" title=\".*?\sStock Price \" class=\"bl_12\">"
 
 # Start processing
 
