@@ -26,7 +26,7 @@ with open('/home/ec2-user/plutus/pf.csv', 'w') as csvfile:
 	while i < len(pfList):
 		if re.search(companyNameRegex,str(pfList[i])):
 			m=re.search(companyNameRegex,pfList[i])
-			companyName=m.group(1)
+			companyName=m.group(1).strip()
 		sector=pfList[i+2]
 		l=pfList[i+4].split("\t")
 		livePrice=l[0]
