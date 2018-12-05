@@ -87,3 +87,19 @@ def sendMail(subject,body,attachmentFilename):
         print('Email sent to ' + recipient_address)
     except:
         print('Something went wrong...')
+
+# ------------------------------------------------
+# Read file content into String (remove linefeeds)
+# ------------------------------------------------
+def fileToString(dataFilename):
+  # Read file
+  # http://python-notes.curiousefficiency.org/en/latest/python3/text_file_processing.html
+  dataFile= open(dataFilename,"r", encoding="ascii", errors="surrogateescape")
+  data=""
+  dataLines = dataFile.read().splitlines()
+  dataFile.close()
+  # Remove linefeeds and combine lines
+  for dataLine in dataLines:
+    data+=dataLine.strip()
+  # Return data
+  return data
