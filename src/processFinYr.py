@@ -59,7 +59,9 @@ def parseFinYrFile(iFilename):
   # Live Price URL
   if re.search(livePriceURLRegex, yrFinData):
     m=re.search(livePriceURLRegex, yrFinData)
+    print(m.group(1))
     livePriceURL="https://www.moneycontrol.com" + m.group(1)
+    print(livePriceURL)
 
   if re.search(compdetailsRegex, yrFinData):
     m=re.search(compdetailsRegex, yrFinData)
