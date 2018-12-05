@@ -6,4 +6,5 @@ print(dfPF)
 print(dfFinYr)
 
 res=pd.merge(dfPF, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
+res.sort_values(by='eps_coef', ascending=False)
 print(res)
