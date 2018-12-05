@@ -15,8 +15,10 @@ def printPrice(livePriceURL):
 				m=re.search("<strong>(.*?)</strong>",line)
 				livePrice=m.group(1)
 				#print("livePrice : " + livePrice)
-			elif 'compname_imp' in line:  # look for Company Name
-				m=re.search("value=\"(.*?)\"",line)
+			#elif 'compname_imp' in line:  # look for Company Name
+			elif 'w135 gD_11 TAC brdtop PT10 MT10' in line:  # look for Company Name
+				#m=re.search("value=\"(.*?)\"",line)
+				m=re.search("<strong>(.*?)</strong>",line)
 				companyName=m.group(1)
 				#print("companyName : " + companyName)
 	print(companyName + " : " + livePrice)
