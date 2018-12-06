@@ -9,5 +9,5 @@ print(quandlURL)
 
 with urlopen(quandlURL) as response:
   for line in response:
-    dataLine=str(line.strip()).replace("b","")
+    dataLine=str(line.strip()).replace("b","").replace("'","")
     print(dataLine)
