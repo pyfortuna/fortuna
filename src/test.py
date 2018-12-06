@@ -43,12 +43,12 @@ print(res)
 
 for index, row in res.iterrows():
 	try:
-		print("DEBUG : (a) " + row['companyName'])
-		print("DEBUG : (b) " + str(row['targetPrice']))
-		print("DEBUG : (c) " + row['livePriceURL'])
-		#l=getLivePrice(row['livePriceURL'])
-		#print("DEBUG : (c) " + l['livePrice'])
-		#print("::" + row['companyName'] + ":: P: " + l['livePrice'] + " TP: " + row['targetPrice'])
+		#print("DEBUG : (a) " + row['companyName'])
+		#print("DEBUG : (b) " + str(row['targetPrice']))
+		#print("DEBUG : (c) " + row['livePriceURL'])
+		l=getLivePrice(row['livePriceURL'])
+		print("DEBUG : (d) " + l['livePrice'])
+		print("::" + row['companyName'] + ":: P: " + l['livePrice'] + " TP: " + str(row['targetPrice']))
 	except:
 		print("ERROR")
 		pass
