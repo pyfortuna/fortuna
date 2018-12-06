@@ -13,7 +13,7 @@ def getLivePrice(livePriceURL):
 			line = line.decode('utf-8')  # Decoding the binary data to text.
 			if 'Nse_Prc_tick' in line:  # look for NSE Price
 				m=re.search("<strong>(.*?)</strong>",line)
-				livePrice=m.group(1)
+				livePrice=float(m.group(1))
 				#print("livePrice : " + livePrice)
 			#elif 'compname_imp' in line:  # look for Company Name
 			elif 'w135 gD_11 TAC brdtop PT10 MT10' in line:  # look for Company Name
