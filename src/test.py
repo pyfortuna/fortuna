@@ -57,7 +57,7 @@ for index, row in res.iterrows():
 				reco="[ SELL ]"
 			else:
 				reco="[ WAIT ]"
-		print("(" + row['type'] + ") " + row['companyName'] + " : Price: " + l['livePrice'] + " Target: " + str(row['targetPrice']) + " : " + reco)
+		print("(" + row['type'] + ") " + row['companyName'] + " : Price: " + str(l['livePrice']) + " Target: " + str(row['targetPrice']) + " : " + reco)
 	except Exception as ex:
 		print(ex)
 		#print(row['companyName'] + " : ERROR")
