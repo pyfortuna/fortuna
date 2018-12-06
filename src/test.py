@@ -1,4 +1,5 @@
 import fortunacommon
+from urllib.request import urlopen
 
 pr=fortunacommon.loadAppProperties()
 
