@@ -43,8 +43,8 @@ print(res)
 
 for row in res.iterrows():
 	try:
-		print("DEBUG : (a) " + row['companyName'])
-		print("DEBUG : (b) " + row['livePriceURL'])
+		print("DEBUG : (a) " + row[['companyName']])
+		print("DEBUG : (b) " + row[['livePriceURL']])
 		#l=getLivePrice(row['livePriceURL'])
 		#print("DEBUG : (c) " + l['livePrice'])
 		#print("::" + row['companyName'] + ":: P: " + l['livePrice'] + " TP: " + row['targetPrice'])
