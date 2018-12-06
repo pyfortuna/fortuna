@@ -48,7 +48,17 @@ for index, row in res.iterrows():
 		#print("DEBUG : (c) " + row['livePriceURL'])
 		l=getLivePrice(row['livePriceURL'])
 		#print("DEBUG : (d) " + l['livePrice'])
-		print("(" + row['type'] + ") " + row['companyName'] + " : P: " + l['livePrice'] + " TP: " + str(row['targetPrice']))
+		if row['type'] = "Buy":
+			if l['livePrice'] <= row['targetPrice']:
+				reco="[ BUY ]"
+			else
+				reco="[ WAIT ]"
+		elif row['type'] = "Sell":
+			if l['livePrice'] >= row['targetPrice']:
+				reco="[ SELL ]"
+			else
+				reco="[ WAIT ]"
+		print("(" + row['type'] + ") " + row['companyName'] + " : Price: " + l['livePrice'] + " Target: " + str(row['targetPrice']) + " : " + reco)
 	except:
 		#print(row['companyName'] + " : ERROR")
 		pass
