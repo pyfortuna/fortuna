@@ -1,3 +1,7 @@
-://www.quandl.com/api/v3/datasets/NSE/ASHOKLEY.csv?api_key=JrpSQj92KgSxZJLtsGee
+import fortunacommon
 
-ps://www.quandl.com/api/v3/datasets/NSE/ASHOKLEY.csv?api_key=JrpSQj92KgSxZJLtsGee
+pr=fortunacommon.loadProperties()
+
+quandlURL="https://www.quandl.com/api/v3/datasets/NSE/ASHOKLEY.csv?api_key=" + pr['quandl.api.key']
+
+print(quandlURL)
