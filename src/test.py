@@ -42,6 +42,9 @@ res=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShort
 print(res)
 
 for row in res.iterrows():
+	print("DEBUG : (a) " + row['companyName'])
+	print("DEBUG : (b) " + row['targetPrice'])
+	print("DEBUG : (c) " + row['livePriceURL'])
 	try:
 		print("DEBUG : (a) " + row[['companyName']])
 		print("DEBUG : (b) " + row[['livePriceURL']])
