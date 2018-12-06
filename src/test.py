@@ -39,10 +39,11 @@ dfFinYr = pd.read_csv("/home/ec2-user/plutus/finYr.csv")[['companyShortName','li
 
 res=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
 #res1=res.sort_values(by='eps_coef', ascending=False)
-#print(res1)
+print(res)
 
 for index, row in res.iterrows():
 	try:
+		print("DEBUG : (a) " + row['companyName'])
 		l=getLivePrice(row['livePriceURL'])
 		print(row['companyName'] + ":: P: " + l['livePrice'] + " TP: " + row['targetPrice'])
 	except:
