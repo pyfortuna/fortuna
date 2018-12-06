@@ -15,11 +15,37 @@ with urlopen(quandlURL) as response:
     print(dataLine)
 '''
 
-nseURL="https://www.nseindia.com/products/dynaContent/common/productsSymbolMapping.jsp?symbol=ASHOKLEY&segmentLink=3&symbolCount=1&series=ALL&dateRange=12month&fromDate=&toDate=&dataType=PRICEVOLUMEDELIVERABLE"
+def nse_headers():
+    """
+    Builds right set of headers for requesting http://nseindia.com
+    :return: a dict with http headers
+    """
+    return {'Accept': '*/*',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Host': 'nseindia.com',
+            'Referer': "https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=INFY&illiquid=0&smeFlag=0&itpFlag=0",
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',
+            'X-Requested-With': 'XMLHttpRequest'
+            }
 
-fp = urllib.request.urlopen(nseURL)
-res = fp.read()
+nseURL="https://www.nseindia.com/products/dynaContent/common/productsSymbolMapping.jsp?"
+values = {'symbol' : 'ASHOKLEY',
+          'segmentLink' : '3',
+          'symbolCount' : '1',
+          'series' : 'ALL',
+          'dateRange' : '12month',
+          'fromDate' : '',
+          'toDate' : '',
+          'dataType' : 'PRICEVOLUMEDELIVERABLE' }
+headers = nse_headers()
+data = urllib.parse.urlencode(values)
+data = data.encode('ascii')
+req = urllib.request.Request(nseURL, data, headers)
+with urllib.request.urlopen(req) as response:
+   the_page = response.read()
 
-history_df = pd.read_html(res, header=0, index_col='Date')[0]
+
+
+history_df = pd.read_html(the_page, header=0, index_col='Date')[0]
 
 print(history_df)
