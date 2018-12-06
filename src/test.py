@@ -21,7 +21,7 @@ def getLivePrice(livePriceURL):
 				m=re.search("<strong>(.*?)</strong>",line)
 				companyName=m.group(1)
 				#print("companyName : " + companyName)
-	print(companyName + " : " + livePrice)
+	#print(companyName + " : " + livePrice)
 	liveData = {
 	    "companyName": companyName,
 	    "livePrice": livePrice
@@ -35,18 +35,19 @@ print("*** TEST PROGRAM: VERSION 0.1 ***")
 
 #dfPF = pd.read_csv("/home/ec2-user/plutus/pf.csv")[['companyName','currentValue']]
 dfTarget = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/target.csv")[['type','companyName','targetPrice']]
-print(dfTarget)
 dfFinYr = pd.read_csv("/home/ec2-user/plutus/finYr.csv")[['companyShortName','livePriceURL']]
-print(dfFinYr)
 
 res=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
 #res1=res.sort_values(by='eps_coef', ascending=False)
 print(res)
 
-for index, row in res.iterrows():
+for row in res.iterrows():
 	try:
 		print("DEBUG : (a) " + row['companyName'])
+		print("DEBUG : (b) " + row['livePriceURL'])
 		l=getLivePrice(row['livePriceURL'])
-		print(row['companyName'] + ":: P: " + l['livePrice'] + " TP: " + row['targetPrice'])
+		print("DEBUG : (c) " + l['livePrice']'])
+		print("::" + row['companyName'] + ":: P: " + l['livePrice'] + " TP: " + row['targetPrice'])
 	except:
+		print("ERROR")
 		pass
