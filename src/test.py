@@ -42,13 +42,10 @@ res=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShort
 print(res)
 
 for index, row in res.iterrows():
-	print(row)
-	print("DEBUG : (a) " + row['companyName'])
-	print("DEBUG : (b) " + row['targetPrice'])
-	print("DEBUG : (c) " + row['livePriceURL'])
 	try:
-		print("DEBUG : (a) " + row[['companyName']])
-		print("DEBUG : (b) " + row[['livePriceURL']])
+		print("DEBUG : (a) " + row['companyName'])
+		print("DEBUG : (b) " + str(row['targetPrice']))
+		print("DEBUG : (c) " + row['livePriceURL'])
 		#l=getLivePrice(row['livePriceURL'])
 		#print("DEBUG : (c) " + l['livePrice'])
 		#print("::" + row['companyName'] + ":: P: " + l['livePrice'] + " TP: " + row['targetPrice'])
