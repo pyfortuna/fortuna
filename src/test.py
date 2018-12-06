@@ -51,12 +51,12 @@ for index, row in res.iterrows():
 		if row['type'] == "Buy":
 			if l['livePrice'] <= row['targetPrice']:
 				reco="[ BUY ]"
-			else
+			else:
 				reco="[ WAIT ]"
 		elif row['type'] == "Sell":
 			if l['livePrice'] >= row['targetPrice']:
 				reco="[ SELL ]"
-			else
+			else:
 				reco="[ WAIT ]"
 		print("(" + row['type'] + ") " + row['companyName'] + " : Price: " + l['livePrice'] + " Target: " + str(row['targetPrice']) + " : " + reco)
 	except:
