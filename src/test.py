@@ -41,7 +41,7 @@ res=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShort
 #res1=res.sort_values(by='eps_coef', ascending=False)
 print(res)
 
-for row in res.iterrows():
+for index, row in res.iterrows():
 	print(row)
 	print("DEBUG : (a) " + row['companyName'])
 	print("DEBUG : (b) " + row['targetPrice'])
