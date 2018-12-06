@@ -48,12 +48,12 @@ for index, row in res.iterrows():
 		#print("DEBUG : (c) " + row['livePriceURL'])
 		l=getLivePrice(row['livePriceURL'])
 		#print("DEBUG : (d) " + l['livePrice'])
-		if row['type'] = "Buy":
+		if row['type'] == "Buy":
 			if l['livePrice'] <= row['targetPrice']:
 				reco="[ BUY ]"
 			else
 				reco="[ WAIT ]"
-		elif row['type'] = "Sell":
+		elif row['type'] == "Sell":
 			if l['livePrice'] >= row['targetPrice']:
 				reco="[ SELL ]"
 			else
