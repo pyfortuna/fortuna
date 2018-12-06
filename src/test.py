@@ -6,7 +6,7 @@ from urllib.request import urlopen
 # ---------------------------------------------
 # Function to print Company Name and Live Price
 # ---------------------------------------------
-def printPrice(livePriceURL):
+def getLivePrice(livePriceURL):
 	# https://docs.python.org/dev/tutorial/stdlib.html#internet-access
 	with urlopen(livePriceURL) as response:
 		for line in response:
@@ -22,20 +22,26 @@ def printPrice(livePriceURL):
 				companyName=m.group(1)
 				#print("companyName : " + companyName)
 	print(companyName + " : " + livePrice)
+	liveData = {
+	    "companyName": companyName,
+	    "livePrice": livePrice
+	}
+	return liveData
 
 # ---------------------------------------------
 # Main Program
 # ---------------------------------------------
 dfPF = pd.read_csv("/home/ec2-user/plutus/pf.csv")[['companyName','currentValue']]
+dfTarget = pd.read_csv("/home/ec2-user/fortuna/fortuna/target.csv")[['type','companyName','targetPrice']]
 dfFinYr = pd.read_csv("/home/ec2-user/plutus/finYr.csv")[['companyShortName','livePriceURL','pl_coef','eps_coef']]
 
-res=pd.merge(dfPF, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
-res1=res.sort_values(by='eps_coef', ascending=False)
+res=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
+#res1=res.sort_values(by='eps_coef', ascending=False)
 #print(res1)
 
-urlList=res['livePriceURL']
-for urlListItem in urlList:
+for index, row in res.iterrows():
 	try:
-		printPrice(urlListItem)
+		l=getLivePrice(row['livePriceURL'])
+		print(row['companyName'] + ":: P: " + l['livePrice'] + " TP: " + row['targetPrice'])
 	except:
 		pass
