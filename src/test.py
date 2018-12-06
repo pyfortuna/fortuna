@@ -46,7 +46,7 @@ for row in res.iterrows():
 		print("DEBUG : (a) " + row['companyName'])
 		print("DEBUG : (b) " + row['livePriceURL'])
 		l=getLivePrice(row['livePriceURL'])
-		print("DEBUG : (c) " + l['livePrice']'])
+		print("DEBUG : (c) " + l['livePrice'])
 		print("::" + row['companyName'] + ":: P: " + l['livePrice'] + " TP: " + row['targetPrice'])
 	except:
 		print("ERROR")
