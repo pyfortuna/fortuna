@@ -9,4 +9,4 @@ print(quandlURL)
 
 with urlopen(quandlURL) as response:
   for line in response:
-    print(line)
+    print(line.strip())
