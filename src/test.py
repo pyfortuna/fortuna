@@ -49,7 +49,7 @@ for index, row in res.iterrows():
 		#print("DEBUG : (d) " + l['livePrice'])
 		if row['type'] == "Buy":
 			if l['livePrice'] <= row['targetPrice']:
-				reco="[ BUY ]"
+				reco="[ BUY  ]"
 			else:
 				reco="[ WAIT ]"
 		elif row['type'] == "Sell":
@@ -57,7 +57,7 @@ for index, row in res.iterrows():
 				reco="[ SELL ]"
 			else:
 				reco="[ WAIT ]"
-		print(row['companyName'] + " : Price: " + str(l['livePrice']) + " Target: " + str(row['targetPrice']) + " : " + reco)
+		print(reco + " : " + row['companyName'] + " : P: " + str(l['livePrice']) + " TGT: " + str(row['targetPrice']))
 	except Exception as ex:
 		#print(ex)
 		#print(row['companyName'] + " : ERROR")
