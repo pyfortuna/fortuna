@@ -32,7 +32,7 @@ def getLivePrice(livePriceURL):
 # Main Program
 # ---------------------------------------------
 dfPF = pd.read_csv("/home/ec2-user/plutus/pf.csv")[['companyName','currentValue']]
-dfTarget = pd.read_csv("/home/ec2-user/fortuna/fortuna/target.csv")[['type','companyName','targetPrice']]
+dfTarget = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/target.csv")[['type','companyName','targetPrice']]
 dfFinYr = pd.read_csv("/home/ec2-user/plutus/finYr.csv")[['companyShortName','livePriceURL','pl_coef','eps_coef']]
 
 res=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
