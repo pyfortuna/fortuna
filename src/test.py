@@ -47,7 +47,7 @@ req = urllib.request.Request(nseURL, data, headers)
 with urllib.request.urlopen(req) as response:
    the_page = response.read()
 
-history_df = pd.read_html(the_page, header=0, index_col='Date')[0]
+history_df=pd.read_html(the_page, header=0, index_col='Date')[0]
 history_df.rename(columns={'Open Price':'open',
                             'High Price':'high',
                             'Low Price':'low',
@@ -56,7 +56,9 @@ history_df.rename(columns={'Open Price':'open',
                             'Total Traded Quantity':'qty'}, 
                             inplace=True)
 
-input_df = history_df[['open','high','low','close','vwap','qty']]
+input_df=history_df[['open','high','low','close','vwap','qty']]
+sma_df=input_df.rolling(window=2).mean()
+
 
 print(input_df)
-print(list(input_df))
+print(sma_df)
