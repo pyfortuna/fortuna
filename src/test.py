@@ -14,9 +14,6 @@ pr=fortunacommon.loadAppProperties()
 
 '''
 quandlURL="https://www.quandl.com/api/v3/datasets/NSE/ASHOKLEY.csv?api_key=" + pr['quandl.api.key']
-
-print(quandlURL)
-
 with urlopen(quandlURL) as response:
   for line in response:
     dataLine=str(line.strip()).replace("b","").replace("'","")
@@ -58,7 +55,7 @@ history_df.rename(columns={'Open Price':'open',
                             'Total Traded Quantity':'qty'}, 
                             inplace=True)
 
-input_df=history_df[['open','high','low','close','vwap','qty']]
+input_df=history_df[['open','high','low','close','vwap']]
 #print(input_df)
 
 d_df=input_df.diff()
