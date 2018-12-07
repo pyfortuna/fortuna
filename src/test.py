@@ -64,3 +64,14 @@ print(d_df.query('close == close'))
 sma_df=input_df.rolling(window=30).mean().round(2).diff()
 #print(sma_df.query('close > 0'))
 print(sma_df.query('close == close'))
+
+print(boll_df)
+boll_df=history_df[['close']]
+mavg = boll_df['close'].rolling(20).mean()
+mstd = boll_df['close'].rolling(20).std()
+hband = mavg + 2*mstd
+lband = mavg - 2*mstd
+boll_df['hband']=hband
+boll_df['lband']=lband
+print(boll_df)
+
