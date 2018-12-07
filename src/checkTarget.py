@@ -50,12 +50,12 @@ for index, row in res.iterrows():
 		livePrice=mc.getLivePrice()
 		#print("DEBUG : (d) " + l['livePrice'])
 		if row['type'] == "Buy":
-			if l['livePrice'] <= row['targetPrice']:
+			if livePrice <= row['targetPrice']:
 				reco="[ BUY  ]"
 			else:
 				reco="[ WAIT ]"
 		elif row['type'] == "Sell":
-			if l['livePrice'] >= row['targetPrice']:
+			if livePrice >= row['targetPrice']:
 				reco="[ SELL ]"
 			else:
 				reco="[ WAIT ]"
