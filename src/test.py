@@ -59,9 +59,11 @@ history_df.rename(columns={'Open Price':'open',
                             inplace=True)
 
 input_df=history_df[['open','high','low','close','vwap','qty']]
-sma_df=input_df.rolling(window=30).mean().round(2).diff()
-
-
 #print(input_df)
+
+d_df=input_df.diff()
+print(d_df.query('close == close'))
+
+sma_df=input_df.rolling(window=30).mean().round(2).diff()
 #print(sma_df.query('close > 0'))
 print(sma_df.query('close == close'))
