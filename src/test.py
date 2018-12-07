@@ -56,6 +56,7 @@ history_df.rename(columns={'Open Price':'open',
                             'Total Traded Quantity':'qty'}, 
                             inplace=True)
 
-print(history_df[['open','high','low','close','vwap','qty']])
+input_df = history_df[['open','high','low','close','vwap','qty']]
 
-print(list(history_df))
+print(input_df)
+print(list(input_df))
