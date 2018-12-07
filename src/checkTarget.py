@@ -61,6 +61,6 @@ for index, row in res.iterrows():
 				reco="[ WAIT ]"
 		print(reco + " : " + row['companyName'] + " : P: " + str(l['livePrice']) + " TGT: " + str(row['targetPrice']))
 	except Exception as ex:
-		#print(ex)
+		print(ex)
 		#print(row['companyName'] + " : ERROR")
 		pass
