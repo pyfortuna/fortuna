@@ -48,7 +48,7 @@ for index, row in res.iterrows():
 		print("DEBUG : (c) " + row['livePriceURL'])
 		mc=fortunacommon.Moneycontrol(str(row['livePriceURL']))
 		livePrice=mc.getLivePrice()['livePrice']
-		print("DEBUG : (d) " + livePrice)
+		#print("DEBUG : (d) " + str(livePrice))
 		if row['type'] == "Buy":
 			if livePrice <= row['targetPrice']:
 				reco="[ BUY  ]"
@@ -61,6 +61,6 @@ for index, row in res.iterrows():
 				reco="[ WAIT ]"
 		print(reco + " : " + row['companyName'] + " : P: " + str(livePrice) + " TGT: " + str(row['targetPrice']))
 	except Exception as ex:
-		print(ex)
+		#print(ex)
 		#print(row['companyName'] + " : ERROR")
 		pass
