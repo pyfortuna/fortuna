@@ -35,7 +35,7 @@ values = {'symbol' : 'ASHOKLEY',
           'segmentLink' : '3',
           'symbolCount' : '1',
           'series' : 'ALL',
-          'dateRange' : '12month',
+          'dateRange' : '1month',
           'fromDate' : '',
           'toDate' : '',
           'dataType' : 'PRICEVOLUMEDELIVERABLE' }
