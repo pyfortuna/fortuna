@@ -59,7 +59,7 @@ history_df.rename(columns={'Open Price':'open',
                             inplace=True)
 
 input_df=history_df[['open','high','low','close','vwap','qty']]
-sma_df=input_df.rolling(window=30).mean().round(2)
+sma_df=input_df.rolling(window=30).mean().round(2).diff()
 
 
 #print(input_df)
