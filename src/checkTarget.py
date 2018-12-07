@@ -45,10 +45,10 @@ for index, row in res.iterrows():
 	try:
 		#print("DEBUG : (a) " + row['companyName'])
 		#print("DEBUG : (b) " + str(row['targetPrice']))
-		#print("DEBUG : (c) " + row['livePriceURL'])
+		print("DEBUG : (c) " + row['livePriceURL'])
 		mc=fortunacommon.Moneycontrol(str(row['livePriceURL']))
 		livePrice=mc.getLivePrice()
-		#print("DEBUG : (d) " + l['livePrice'])
+		print("DEBUG : (d) " + livePrice)
 		if row['type'] == "Buy":
 			if livePrice <= row['targetPrice']:
 				reco="[ BUY  ]"
