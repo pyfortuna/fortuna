@@ -50,3 +50,4 @@ with urllib.request.urlopen(req) as response:
 history_df = pd.read_html(the_page, header=0, index_col='Date')[0]
 
 print(history_df)
+print(list(history_df))
