@@ -1,8 +1,9 @@
 # Import Libraries
 import pandas as pd
 import re
+import fortunacommon
 from urllib.request import urlopen
-
+'''
 # ---------------------------------------------
 # Function to print Company Name and Live Price
 # ---------------------------------------------
@@ -27,7 +28,7 @@ def getLivePrice(livePriceURL):
 	    "livePrice": livePrice
 	}
 	return liveData
-
+'''
 # ---------------------------------------------
 # Main Program
 # ---------------------------------------------
@@ -45,7 +46,8 @@ for index, row in res.iterrows():
 		#print("DEBUG : (a) " + row['companyName'])
 		#print("DEBUG : (b) " + str(row['targetPrice']))
 		#print("DEBUG : (c) " + row['livePriceURL'])
-		l=getLivePrice(row['livePriceURL'])
+		mc=fortunacommon.Moneycontrol(row['livePriceURL'])
+		l=mc.getLivePrice()
 		#print("DEBUG : (d) " + l['livePrice'])
 		if row['type'] == "Buy":
 			if l['livePrice'] <= row['targetPrice']:
