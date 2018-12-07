@@ -35,7 +35,7 @@ values = {'symbol' : 'ASHOKLEY',
           'segmentLink' : '3',
           'symbolCount' : '1',
           'series' : 'ALL',
-          'dateRange' : '1month',
+          'dateRange' : '2month',
           'fromDate' : '',
           'toDate' : '',
           'dataType' : 'PRICEVOLUMEDELIVERABLE' }
@@ -57,7 +57,7 @@ history_df.rename(columns={'Open Price':'open',
                             inplace=True)
 
 input_df=history_df[['open','high','low','close','vwap','qty']]
-sma_df=input_df.rolling(window=2).mean()
+sma_df=input_df.rolling(window=10).mean()
 
 
 print(input_df)
