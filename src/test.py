@@ -59,8 +59,8 @@ history_df.rename(columns={'Open Price':'open',
                             inplace=True)
 
 input_df=history_df[['open','high','low','close','vwap','qty']]
-sma_df=input_df.rolling(window=30).mean()
+sma_df=input_df.rolling(window=30).mean().round(2)
 
 
-print(input_df)
+#print(input_df)
 print(sma_df.query('close > 0'))
