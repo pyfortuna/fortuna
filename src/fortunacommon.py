@@ -6,32 +6,66 @@ from os.path import basename
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
+from urllib.request import urlopen
 
 # ----------------------------------
 # Class for parsing Moneycontrol URL
 # ----------------------------------
 class Moneycontrol:
   def __init__(self, url):
-    self.url = url
     regex = r"http[s]{0,1}://www.moneycontrol.com/india/stockpricequote/(.*)/(.*)/(.*)"
     if re.search(regex, url):
       m=re.search(regex, url)
       self.category = m.group(1)
       self.companyname = m.group(2)
       self.companycode = m.group(3)
-  def getURL(self):
+      self.url = "https://www.moneycontrol.com/india/stockpricequote/" + self.category + "/" + self.companyname + "/" + self.companycode
+  
+  # Function get URL for main page of the company
+  def getURL(self):    
     return self.url
+  
+  # Function to get company name
   def getCompanyName(self):
     return self.companyname
+  
+  # Function get URL for Yearly Financial Results page of the company
   def getYrFinURL(self):
     yrFinURL = "https://www.moneycontrol.com/financials/" + self.companyname + "/results/yearly/" + self.companycode
     return yrFinURL
+  
+  # Function get URL for Quarterly Financial Results page of the company
   def getQtrFinURL(self):
     qtrFinURL = "https://www.moneycontrol.com/financials/" + self.companyname + "/results/quarterly-results/" + self.companycode
     return qtrFinURL
+  
+  # Function get URL for Fianancial Ratios page of the company
   def getRatioURL(self):
     ratioURL = "https://www.moneycontrol.com/financials/" + self.companyname + "/ratiosVI/" + self.companycode
     return ratioURL
+  
+  # Function to get company name and live price
+  def getLivePrice(livePriceURL):
+    # https://docs.python.org/dev/tutorial/stdlib.html#internet-access
+    with urlopen(livePriceURL) as response:
+      for line in response:
+        line = line.decode('utf-8')  # Decoding the binary data to text.
+        if 'Nse_Prc_tick' in line:  # look for NSE Price
+          m=re.search("<strong>(.*?)</strong>",line)
+          livePrice=float(m.group(1))
+          #print("livePrice : " + livePrice)
+        #elif 'compname_imp' in line:  # look for Company Name
+        elif 'w135 gD_11 TAC brdtop PT10 MT10' in line:  # look for Company Name
+          #m=re.search("value=\"(.*?)\"",line)
+          m=re.search("<strong>(.*?)</strong>",line)
+          companyName=m.group(1)
+          #print("companyName : " + companyName)
+    #print(companyName + " : " + livePrice)
+    liveData = {
+        "companyName": companyName,
+        "livePrice": livePrice
+    }
+    return liveData
 
 # -----------------------------------------------------------------------------
 # Load property key/values from "fortuna.properties" file in "config" directory
