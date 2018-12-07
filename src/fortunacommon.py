@@ -45,7 +45,7 @@ class Moneycontrol:
     return ratioURL
   
   # Function to get company name and live price
-  def getLivePrice():
+  def getLivePrice(self):
     # https://docs.python.org/dev/tutorial/stdlib.html#internet-access
     with urlopen(self.url) as response:
       for line in response:
