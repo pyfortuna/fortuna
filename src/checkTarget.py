@@ -46,7 +46,7 @@ for index, row in res.iterrows():
 		#print("DEBUG : (a) " + row['companyName'])
 		#print("DEBUG : (b) " + str(row['targetPrice']))
 		#print("DEBUG : (c) " + row['livePriceURL'])
-		mc=fortunacommon.Moneycontrol(row['livePriceURL'])
+		mc=fortunacommon.Moneycontrol(str(row['livePriceURL']))
 		l=mc.getLivePrice()
 		#print("DEBUG : (d) " + l['livePrice'])
 		if row['type'] == "Buy":
