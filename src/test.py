@@ -63,4 +63,4 @@ sma_df=input_df.rolling(window=10).mean()
 
 
 print(input_df)
-print(sma_df)
+print(sma_df.query('close > 0'))
