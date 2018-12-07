@@ -45,9 +45,9 @@ class Moneycontrol:
     return ratioURL
   
   # Function to get company name and live price
-  def getLivePrice(livePriceURL):
+  def getLivePrice():
     # https://docs.python.org/dev/tutorial/stdlib.html#internet-access
-    with urlopen(livePriceURL) as response:
+    with urlopen(self.url) as response:
       for line in response:
         line = line.decode('utf-8')  # Decoding the binary data to text.
         if 'Nse_Prc_tick' in line:  # look for NSE Price
