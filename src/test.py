@@ -63,4 +63,5 @@ sma_df=input_df.rolling(window=30).mean().round(2).diff()
 
 
 #print(input_df)
-print(sma_df.query('close > 0'))
+#print(sma_df.query('close > 0'))
+print(sma_df.query('close != NaN'))
