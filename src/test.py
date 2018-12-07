@@ -48,6 +48,12 @@ with urllib.request.urlopen(req) as response:
    the_page = response.read()
 
 history_df = pd.read_html(the_page, header=0, index_col='Date')[0]
+history_df.rename(columns={'Open Price':'open',
+                            'High Price':'high',
+                            'Low Price':'low',
+                            'Close Price':'close'}, 
+                            inplace=True)
 
-print(history_df[['Open Price','High Price','Low Price','Close Price','VWAP']])
+print(history_df[['open','high','low','close','VWAP']])
+
 print(list(history_df))
