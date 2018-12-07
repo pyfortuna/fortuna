@@ -59,24 +59,24 @@ input_df=history_df[['open','high','low','close','vwap']]
 #print(input_df)
 
 d_df=input_df.diff()
-print(d_df.query('close == close'))
+#print(d_df.query('close == close'))
 
 sma_df=input_df.rolling(window=30).mean().round(2).diff()
 #print(sma_df.query('close > 0'))
-print(sma_df.query('close == close'))
+#print(sma_df.query('close == close'))
 
 # Bollinger Bands
 #  https://en.wikipedia.org/wiki/Bollinger_Bands
 #  https://github.com/bukosabino/ta/blob/5e8e92bd9e41eec559a3dd849d1bfe9143cf84ae/ta/volatility.py
 boll_df=history_df[['close']]
-print(boll_df)
+#print(boll_df)
 
 mavg = boll_df['close'].rolling(20).mean()
 mstd = boll_df['close'].rolling(20).std()
 hband = mavg + 2*mstd
 lband = mavg - 2*mstd
-boll_df['hband']=hband
-boll_df['lband']=lband
+boll_df['hband']=pd.Series(hband, name='hband')
+boll_df['lband']=pd.Series(lband, name='lband')
 
-print(boll_df)
+print(boll_df.round(2))
 
