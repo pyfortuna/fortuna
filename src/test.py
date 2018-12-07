@@ -51,9 +51,11 @@ history_df = pd.read_html(the_page, header=0, index_col='Date')[0]
 history_df.rename(columns={'Open Price':'open',
                             'High Price':'high',
                             'Low Price':'low',
-                            'Close Price':'close'}, 
+                            'Close Price':'close',
+                            'VWAP':'vwap',
+                            'Total Traded Quantity':'qty'}, 
                             inplace=True)
 
-print(history_df[['open','high','low','close','VWAP']])
+print(history_df[['open','high','low','close','vwap','qty']])
 
 print(list(history_df))
