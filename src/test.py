@@ -30,7 +30,7 @@ def nse_headers():
             }
 
 nseURL="https://www.nseindia.com/products/dynaContent/common/productsSymbolMapping.jsp?"
-values = {'symbol' : 'ASHOKLEY',
+values = {'symbol' : 'TCS',
           'segmentLink' : '3',
           'symbolCount' : '1',
           'series' : 'ALL',
