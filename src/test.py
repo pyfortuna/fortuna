@@ -100,7 +100,7 @@ def getBBPos(row):
     elif (row.close > row.hband) :
         return "| AU |"
     else:
-        return "|   |"
+        return "|    |"
 
 boll_df.loc[:, 'bb'] = boll_df.apply(getBBPos, axis = 1)
 
