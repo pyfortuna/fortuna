@@ -30,7 +30,7 @@ def nse_headers():
             }
 
 nseURL="https://www.nseindia.com/products/dynaContent/common/productsSymbolMapping.jsp?"
-values = {'symbol' : 'DABUR',
+values = {'symbol' : 'ASHOKLEY',
           'segmentLink' : '3',
           'symbolCount' : '1',
           'series' : 'ALL',
@@ -149,4 +149,4 @@ boll_df=boll_df.drop(columns=['uptrend'])
 
 print(boll_df.round(2))
 
-
+boll_df.to_csv("/home/ec2-user/plutus/BB_Out.csv")
