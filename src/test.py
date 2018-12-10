@@ -71,15 +71,17 @@ sma_df=input_df.rolling(window=30).mean().round(2).diff()
 boll_df=history_df[['close']]
 #print(boll_df)
 
-mavg = boll_df['close'].rolling(20).mean()
+sma20 = boll_df['close'].rolling(20).mean()
 mstd = boll_df['close'].rolling(20).std()
-hband = mavg + 2*mstd
-lband = mavg - 2*mstd
+hband = sma20 + 2*mstd
+lband = sma20 - 2*mstd
+bbw = round(hband - lband)
 #boll_df['hband']=pd.Series(hband, name='hband')
 #boll_df['lband']=pd.Series(lband, name='lband')
-boll_df=boll_df.assign(sma20=mavg)
+boll_df=boll_df.assign(sma20=sma20)
 boll_df=boll_df.assign(hband=hband)
 boll_df=boll_df.assign(lband=lband)
+boll_df=boll_df.assign(bbw=bbw)
 boll_df=boll_df.assign(bb=None)
 #recoList=boll_df['reco']
 #recoList="-"
