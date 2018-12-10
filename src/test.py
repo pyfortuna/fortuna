@@ -75,12 +75,16 @@ sma20 = boll_df['close'].rolling(20).mean()
 mstd = boll_df['close'].rolling(20).std()
 hband = sma20 + 2*mstd
 lband = sma20 - 2*mstd
+hband_1_20 = sma20 + mstd
+lband_1_20 = sma20 - mstd
 bbw = mstd/sma20*100
 #boll_df['hband']=pd.Series(hband, name='hband')
 #boll_df['lband']=pd.Series(lband, name='lband')
 boll_df=boll_df.assign(sma20=sma20)
 boll_df=boll_df.assign(hband=hband)
 boll_df=boll_df.assign(lband=lband)
+boll_df=boll_df.assign(hband_1_20=hband_1_20)
+boll_df=boll_df.assign(lband_1_20=lband_1_20)
 boll_df=boll_df.assign(bbw=bbw)
 boll_df=boll_df.assign(bb=None)
 #recoList=boll_df['reco']
@@ -105,6 +109,27 @@ def getBBPos(row):
         return "  "
 
 boll_df.loc[:, 'bb'] = boll_df.apply(getBBPos, axis = 1)
+
+
+
+
+def getDoubleBBPos(row):
+    if (row.close < row.lband) :
+        return " BSZ "
+    elif (row.close >= row.lband) and (row.close < row.lband_1_20) :
+        return " *SZ "
+    elif (row.close >= row.lband_1_20) and (row.close < row.sma20) :
+        return " NZ2 "
+    elif (row.close >= row.sma20) and (row.close < row.hband_1_20) :
+        return " NZ1 "
+    elif (row.close >= row.hband_1_20) and (row.close < row.hband) :
+        return " *BZ "
+    elif (row.close >= row.hband) :
+        return " ABZ "
+    else:
+        return "  "
+
+boll_df.loc[:, 'dbb'] = boll_df.apply(getDoubleBBPos, axis = 1)
 
 
 
