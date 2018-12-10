@@ -112,7 +112,7 @@ def getTrend(row):
         return "[ D ]"
 
 boll_df=boll_df.assign(uptrend=None)
-boll_df['uptrend'] = boll_df.close.ge(boll_df.close.shift())
+boll_df['uptrend'] = boll_df.sma20.ge(boll_df.sma20.shift())
 boll_df=boll_df.assign(trend=None)
 boll_df.loc[:, 'trend'] = boll_df.apply(getTrend, axis = 1)
 boll_df=boll_df.drop(columns=['uptrend'])
