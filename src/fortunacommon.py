@@ -137,3 +137,17 @@ def fileToString(dataFilename):
     data+=dataLine.strip()
   # Return data
   return data
+
+# ----------------------------------------------------
+# Read web page content into String (remove linefeeds)
+# ----------------------------------------------------
+def getWebpageData(sourceURL):
+  data=""
+  # https://docs.python.org/dev/tutorial/stdlib.html#internet-access
+  with urlopen(sourceURL) as response:
+    for line in response:
+      dataLine = line.decode('utf-8')  # Decoding the binary data to text.
+      # Remove linefeeds and combine lines
+      data+=dataLine.strip()
+  # Return data
+  return data
