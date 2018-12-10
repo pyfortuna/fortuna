@@ -95,7 +95,7 @@ def getReco(row):
         return "| B |"
     elif (row.close > row.hband) :
         return "|SS |"
-    elif (row.close > row.mavg) :
+    elif (row.close > row.sma20) :
         return "| S |"
     else:
         return "|   |"
