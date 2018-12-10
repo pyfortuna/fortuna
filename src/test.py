@@ -96,7 +96,7 @@ def getReco(row):
 
 boll_df.loc[:, 'reco'] = boll_df.apply(getReco, axis = 1)
 
-boll_df=boll_df.assign(reco=trend)
+boll_df=boll_df.assign(trend=None)
 boll_df['trend'] = boll_df.close.ge(boll_df.close.shift())
 
 
