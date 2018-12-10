@@ -91,11 +91,11 @@ boll_df=boll_df.assign(reco=None)
 
 def getReco(row):
     if (row.close < row.lband) :
-        return "[BUY ]"
+        return "[ BUY  ]"
     elif (row.close > row.hband) :
-        return "[SELL]"
+        return "[ SELL ]"
     else:
-        return "[    ]"
+        return "[      ]"
 
 boll_df.loc[:, 'reco'] = boll_df.apply(getReco, axis = 1)
 
@@ -114,7 +114,7 @@ boll_df=boll_df.assign(uptrend=None)
 boll_df['uptrend'] = boll_df.close.ge(boll_df.close.shift())
 boll_df=boll_df.assign(trend=None)
 boll_df.loc[:, 'trend'] = boll_df.apply(getTrend, axis = 1)
-boll_df.drop(columns=['uptrend'])
+boll_df=boll_df.drop(columns=['uptrend'])
 
 print(boll_df.round(2))
 
