@@ -149,4 +149,4 @@ boll_df=boll_df.drop(columns=['uptrend'])
 
 print(boll_df.round(2))
 
-boll_df.to_csv("/home/ec2-user/plutus/BB_Out.csv")
+boll_df['close','sma20','trend','bb','dbb'].to_csv("/home/ec2-user/plutus/BB_Out.csv")
