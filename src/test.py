@@ -80,7 +80,7 @@ lband = mavg - 2*mstd
 boll_df=boll_df.assign(sma20=mavg)
 boll_df=boll_df.assign(hband=hband)
 boll_df=boll_df.assign(lband=lband)
-boll_df=boll_df.assign(reco=None)
+boll_df=boll_df.assign(bb=None)
 #recoList=boll_df['reco']
 #recoList="-"
 #if boll_df['close'] < lband:
@@ -90,17 +90,19 @@ boll_df=boll_df.assign(reco=None)
 
 
 
-def getReco(row):
+def getBBPos(row):
     if (row.close < row.lband) :
-        return "| B |"
+        return "| BL |"
+    elif (row.close > row.lband) and (row.close < row.sma20) :
+        return "| LB |"
+    elif (row.close > row.sma20) and (row.close < row.hband) :
+        return "| UB |"
     elif (row.close > row.hband) :
-        return "|SS |"
-    elif (row.close > row.sma20) :
-        return "| S |"
+        return "| AU |"
     else:
         return "|   |"
 
-boll_df.loc[:, 'reco'] = boll_df.apply(getReco, axis = 1)
+boll_df.loc[:, 'bb'] = boll_df.apply(getBBPos, axis = 1)
 
 
 
