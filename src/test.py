@@ -84,7 +84,7 @@ boll_df=boll_df.assign(reco=None)
 #recoList="-"
 #if boll_df['close'] < lband:
 #  recoList="BUY"
-boll_df=boll_df.assign(reco=recoList)
+#boll_df=boll_df.assign(reco=recoList)
 
 def getReco(row):
     if (row.close < row.lband) :
