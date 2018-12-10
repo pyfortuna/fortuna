@@ -82,8 +82,9 @@ boll_df=boll_df.assign(lband=lband)
 boll_df=boll_df.assign(reco=None)
 recoList=boll_df['reco']
 recoList="-"
-if boll_df['close'] < lband:
-  recoList="BUY"
+#if boll_df['close'] < lband:
+#  recoList="BUY"
 boll_df=boll_df.assign(reco=recoList)
+boll_df.loc[close<lband,'reco']="BUY"
 print(boll_df.round(2))
 
