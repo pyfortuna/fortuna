@@ -75,7 +75,7 @@ sma20 = boll_df['close'].rolling(20).mean()
 mstd = boll_df['close'].rolling(20).std()
 hband = sma20 + 2*mstd
 lband = sma20 - 2*mstd
-bbw = round(mstd/sma20,2)
+bbw = mstd/sma20
 #boll_df['hband']=pd.Series(hband, name='hband')
 #boll_df['lband']=pd.Series(lband, name='lband')
 boll_df=boll_df.assign(sma20=sma20)
