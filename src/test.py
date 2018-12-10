@@ -77,6 +77,7 @@ hband = mavg + 2*mstd
 lband = mavg - 2*mstd
 #boll_df['hband']=pd.Series(hband, name='hband')
 #boll_df['lband']=pd.Series(lband, name='lband')
+boll_df=boll_df.assign(sma20=mavg)
 boll_df=boll_df.assign(hband=hband)
 boll_df=boll_df.assign(lband=lband)
 boll_df=boll_df.assign(reco=None)
