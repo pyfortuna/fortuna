@@ -79,6 +79,7 @@ lband = mavg - 2*mstd
 #boll_df['lband']=pd.Series(lband, name='lband')
 boll_df=boll_df.assign(hband=hband)
 boll_df=boll_df.assign(lband=lband)
+boll_df=boll_df.assign(reco=None)
 
 print(boll_df.round(2))
 
