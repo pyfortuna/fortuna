@@ -86,6 +86,9 @@ boll_df=boll_df.assign(reco=None)
 #  recoList="BUY"
 #boll_df=boll_df.assign(reco=recoList)
 
+
+
+
 def getReco(row):
     if (row.close < row.lband) :
         return "[BUY ]"
@@ -96,9 +99,22 @@ def getReco(row):
 
 boll_df.loc[:, 'reco'] = boll_df.apply(getReco, axis = 1)
 
-boll_df=boll_df.assign(trend=None)
-boll_df['trend'] = boll_df.close.ge(boll_df.close.shift())
 
+
+
+
+
+def getTrend(row):
+    if (row.uptrend) :
+        return "UP"
+    else:
+        return "DOWN"
+
+boll_df=boll_df.assign(uptrend=None)
+boll_df['uptrend'] = boll_df.close.ge(boll_df.close.shift())
+boll_df=boll_df.assign(trend=None)
+boll_df.loc[:, 'trend'] = boll_df.apply(getTrend, axis = 1)
+boll_df.drop(columns=['uptrend'])
 
 print(boll_df.round(2))
 
