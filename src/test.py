@@ -92,15 +92,15 @@ boll_df=boll_df.assign(bb=None)
 
 def getBBPos(row):
     if (row.close < row.lband) :
-        return "| BL |"
+        return "BL"
     elif (row.close > row.lband) and (row.close < row.sma20) :
-        return "| LB |"
+        return "LB"
     elif (row.close > row.sma20) and (row.close < row.hband) :
-        return "| UB |"
+        return "UB"
     elif (row.close > row.hband) :
-        return "| AU |"
+        return "AU"
     else:
-        return "|    |"
+        return "  "
 
 boll_df.loc[:, 'bb'] = boll_df.apply(getBBPos, axis = 1)
 
@@ -111,9 +111,9 @@ boll_df.loc[:, 'bb'] = boll_df.apply(getBBPos, axis = 1)
 
 def getTrend(row):
     if (row.uptrend) :
-        return "| U |"
+        return "U"
     else:
-        return "| D |"
+        return "D"
 
 boll_df=boll_df.assign(uptrend=None)
 boll_df['uptrend'] = boll_df.sma20.ge(boll_df.sma20.shift())
