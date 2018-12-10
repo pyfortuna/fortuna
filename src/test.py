@@ -92,11 +92,13 @@ boll_df=boll_df.assign(reco=None)
 
 def getReco(row):
     if (row.close < row.lband) :
-        return "[ B ]"
+        return "| B |"
     elif (row.close > row.hband) :
-        return "[ S ]"
+        return "|SS |"
+    elif (row.close > row.mavg) :
+        return "| S |"
     else:
-        return "[   ]"
+        return "|   |"
 
 boll_df.loc[:, 'reco'] = boll_df.apply(getReco, axis = 1)
 
@@ -107,9 +109,9 @@ boll_df.loc[:, 'reco'] = boll_df.apply(getReco, axis = 1)
 
 def getTrend(row):
     if (row.uptrend) :
-        return "[ U ]"
+        return "| U |"
     else:
-        return "[ D ]"
+        return "| D |"
 
 boll_df=boll_df.assign(uptrend=None)
 boll_df['uptrend'] = boll_df.sma20.ge(boll_df.sma20.shift())
