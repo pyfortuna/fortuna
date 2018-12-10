@@ -107,9 +107,9 @@ boll_df.loc[:, 'reco'] = boll_df.apply(getReco, axis = 1)
 
 def getTrend(row):
     if (row.uptrend) :
-        return "UP"
+        return "^"
     else:
-        return "DOWN"
+        return "v"
 
 boll_df=boll_df.assign(uptrend=None)
 boll_df['uptrend'] = boll_df.close.ge(boll_df.close.shift())
