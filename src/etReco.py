@@ -12,7 +12,8 @@ dataRegex="itemprop=\"name\">[\"Buy\"|\"Sell\"|\"Hold\"].*?</a></h3><time class=
 itemRegex="itemprop=\"name\">(Buy|Sell|Hold)\s(.*?), target Rs\s(.*?)\:\s(.*)</a></h3><time class=\"date-format\" data-time=\"(.*?)\">"
 
 # Read file
-etrecoData=fortunacommon.fileToString("/home/ec2-user/plutus/etreco.html")
+#etrecoData=fortunacommon.fileToString("/home/ec2-user/plutus/etreco.html")
+etrecoData=fortunacommon.getWebpageData("https://economictimes.indiatimes.com/markets/stocks/recos")
 
 # Search using regex
 pattern = re.compile(dataRegex)
