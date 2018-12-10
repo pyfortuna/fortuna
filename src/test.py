@@ -80,17 +80,19 @@ lband = mavg - 2*mstd
 boll_df=boll_df.assign(hband=hband)
 boll_df=boll_df.assign(lband=lband)
 boll_df=boll_df.assign(reco=None)
-recoList=boll_df['reco']
-recoList="-"
+#recoList=boll_df['reco']
+#recoList="-"
 #if boll_df['close'] < lband:
 #  recoList="BUY"
 boll_df=boll_df.assign(reco=recoList)
 
 def getReco(row):
     if (row.close < row.lband) :
-        return "BUY"
+        return "[BUY ]"
+    elif (row.close > row.hband) :
+        return "[SELL]"
     else:
-        return "-"
+        return "[    ]"
 
 boll_df.loc[:, 'reco'] = boll_df.apply(getReco, axis = 1)
 print(boll_df.round(2))
