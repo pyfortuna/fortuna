@@ -85,6 +85,13 @@ recoList="-"
 #if boll_df['close'] < lband:
 #  recoList="BUY"
 boll_df=boll_df.assign(reco=recoList)
-boll_df.loc['close'<lband,'reco']="BUY"
+
+def getReco(row):
+    if (row.close < row.lband) :
+        return "BUY"
+    else:
+        return "-"
+
+boll_df.loc[:, 'reco'] = boll_df.apply(getReco, axis = 1)
 print(boll_df.round(2))
 
