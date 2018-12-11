@@ -76,7 +76,7 @@ def get100DayList(start, end):
       datesList.append(dates.copy())
   else:
     dates['start']=start.strftime(NSE_DATE_FMT)
-    dates['end']=curr_end.strftime(NSE_DATE_FMT)
+    dates['end']=end.strftime(NSE_DATE_FMT)
     datesList.append(dates.copy())
   return datesList
 
