@@ -8,6 +8,7 @@ import time
 
 end=datetime.datetime.now()
 start=end - datetime.timedelta(days=365)
+NSE_DATE_FMT="%d-%m-%Y"
 
 dates={}
 datesList = []
@@ -15,19 +16,18 @@ difference = (end - start).days
 if difference > 100:
   curr_end = start + datetime.timedelta(days=100)
   while curr_end < end:
-    dates['start']=start.strftime("%d-%m-%Y")
-    dates['end']=curr_end.strftime("%d-%m-%Y")
+    dates['start']=start.strftime(NSE_DATE_FMT)
+    dates['end']=curr_end.strftime(NSE_DATE_FMT)
     datesList.append(dates.copy())
     start = curr_end + datetime.timedelta(days=1)
     curr_end += datetime.timedelta(days=100)
   if curr_end > end:
-    #start = curr_end + datetime.timedelta(days=1)
-    dates['start']=start.strftime("%d-%m-%Y")
-    dates['end']=curr_end.strftime("%d-%m-%Y")
+    dates['start']=start.strftime(NSE_DATE_FMT)
+    dates['end']=end.strftime(NSE_DATE_FMT)
     datesList.append(dates.copy())
 else:
-  dates['start']=start.strftime("%d-%m-%Y")
-  dates['end']=curr_end.strftime("%d-%m-%Y")
+  dates['start']=start.strftime(NSE_DATE_FMT)
+  dates['end']=curr_end.strftime(NSE_DATE_FMT)
   datesList.append(dates.copy())
   
 print(datesList)
