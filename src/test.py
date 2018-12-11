@@ -181,7 +181,9 @@ while i < len(trendList):
 bbwList=list(boll_df['bbw'])
 print(bbwList)
 bbwMin=min(bbwList)
+print("Min : ", bbwMin)
 bbwMax=max(bbwList)
+print("Max", bbwMax)
 bbwRatioList = ['-']*20
 i = 20
 while i < len(bbwList):
