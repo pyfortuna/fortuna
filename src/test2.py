@@ -30,6 +30,6 @@ def get100DayList(start, end):
 
 
 e = datetime.datetime.now()
-s = e - datetime.timedelta(days=365)
+s = e - datetime.timedelta(days=1000)
 x = get100DayList(s,e)
 print(x)
