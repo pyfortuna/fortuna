@@ -36,15 +36,15 @@ def nse_headers():
 # ------------------------
 # Return HTTP Request data
 # ------------------------
-def getRequest(symbol, from, to):
+def getRequest(symbol, fromDt, toDt):
   nseURL="https://www.nseindia.com/products/dynaContent/common/productsSymbolMapping.jsp?"
   values = {'symbol' : symbol,
             'segmentLink' : '3',
             'symbolCount' : '1',
             'series' : 'ALL',
             'dateRange' : '',
-            'fromDate' : from,
-            'toDate' : to,
+            'fromDate' : fromDt,
+            'toDate' : toDt,
             'dataType' : 'PRICEVOLUMEDELIVERABLE' }
   data = urllib.parse.urlencode(values)
   data = data.encode('ascii')
