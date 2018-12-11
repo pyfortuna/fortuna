@@ -177,14 +177,28 @@ while i < len(trendList):
   i += 1
 
 
+# Create Trend List
+bbwList=list(boll_df['bbw'])
+bbwMin=min(bbwList)
+bbwMax=max(bbwList)
+bbwRatioList = ['-']*20
+i = 21
+while i < len(bbwList):
+  bbwRatio = (bbwList[i]-bbwMin)/(bbwMax-bbwMin)*100
+  bbwRatioList.append(bbwRatio)
+  i += 1
+
+
 # Add Trend list and Trend strength list to dataframe
 se1 = pd.Series(trendList)
 boll_df['trend'] = se1.values
 se2 = pd.Series(trendStrengthList)
 boll_df['strength'] = se2.values
+se3 = pd.Series(bbwRatioList)
+boll_df['bbwr'] = se3.values
 
 # Print output
-print(boll_df[['close','trend', 'strength','bb','dbb']].round(2).to_string())
+print(boll_df[['close','trend', 'strength','bb','bbwr']].round(2).to_string())
 
 # Create output file
 #boll_df[['close','trend','bb','dbb']].to_csv("/home/ec2-user/plutus/bb_out.csv")
