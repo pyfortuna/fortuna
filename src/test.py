@@ -89,7 +89,7 @@ dayList = get100DayList(s,e)
 history_df = pd.DataFrame()
 
 for dayRange in dayList:
-  req=getRequest('ASHOKLEY',dayRange['start'],dayRange['end'])
+  req=getRequest('DABUR',dayRange['start'],dayRange['end'])
   with urllib.request.urlopen(req) as response:
      the_page = response.read()
   history_df=history_df.append(pd.read_html(the_page, header=0, index_col='Date')[0])
@@ -197,8 +197,8 @@ boll_df.loc[:, 'trend'] = boll_df.apply(getTrend, axis = 1)
 
 boll_df=boll_df.assign(strength=None)
 #boll_df.loc[:, 'strength'] = boll_df.groupby('uptrend').cumsum()+1
-print(boll_df[['uptrend']])
-print(boll_df.groupby('uptrend')[['uptrend']])
+#print(boll_df[['uptrend']])
+#print(boll_df.groupby('uptrend')[['uptrend']])
 
 boll_df=boll_df.drop(columns=['uptrend'])
 
