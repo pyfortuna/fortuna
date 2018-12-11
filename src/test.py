@@ -20,6 +20,9 @@ with urlopen(quandlURL) as response:
     print(dataLine)
 '''
 
+# ------------------------------
+# Return header for HTTP Request
+# ------------------------------
 def nse_headers():
     return {'Accept': '*/*',
             'Accept-Language': 'en-US,en;q=0.5',
@@ -29,20 +32,27 @@ def nse_headers():
             'X-Requested-With': 'XMLHttpRequest'
             }
 
-nseURL="https://www.nseindia.com/products/dynaContent/common/productsSymbolMapping.jsp?"
-values = {'symbol' : 'ASHOKLEY',
-          'segmentLink' : '3',
-          'symbolCount' : '1',
-          'series' : 'ALL',
-          'dateRange' : '12month',
-          'fromDate' : '',
-          'toDate' : '',
-          'dataType' : 'PRICEVOLUMEDELIVERABLE' }
 
-headers = nse_headers()
-data = urllib.parse.urlencode(values)
-data = data.encode('ascii')
-req = urllib.request.Request(nseURL, data, headers)
+# ------------------------
+# Return HTTP Request data
+# ------------------------
+def getRequest(symbol, from, to):
+  nseURL="https://www.nseindia.com/products/dynaContent/common/productsSymbolMapping.jsp?"
+  values = {'symbol' : symbol,
+            'segmentLink' : '3',
+            'symbolCount' : '1',
+            'series' : 'ALL',
+            'dateRange' : '',
+            'fromDate' : from,
+            'toDate' : to,
+            'dataType' : 'PRICEVOLUMEDELIVERABLE' }
+  data = urllib.parse.urlencode(values)
+  data = data.encode('ascii')
+  headers = nse_headers()
+  req = urllib.request.Request(nseURL, data, headers)
+  return req
+
+req=getRequest('ASHOKLEY','01-11-2018','10-12-2018')
 with urllib.request.urlopen(req) as response:
    the_page = response.read()
 
