@@ -84,7 +84,7 @@ def get100DayList(start, end):
 # MAIN PROGRAM
 # -----------------------------------------------
 e = datetime.datetime.now()
-s = e - datetime.timedelta(days=60)
+s = e - datetime.timedelta(days=120)
 dayList = get100DayList(s,e)
 history_df = pd.DataFrame()
 
@@ -202,6 +202,6 @@ print(boll_df.groupby('uptrend')[['uptrend']])
 
 boll_df=boll_df.drop(columns=['uptrend'])
 
-print(boll_df[['close','trend', 'strength','bb','dbb']].round(2))
+print(boll_df[['close','trend', 'strength','bb','dbb']].round(2).to_string())
 
-boll_df[['close','trend','bb','dbb']].to_csv("/home/ec2-user/plutus/bb_out.csv")
+#boll_df[['close','trend','bb','dbb']].to_csv("/home/ec2-user/plutus/bb_out.csv")
