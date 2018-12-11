@@ -195,24 +195,24 @@ boll_df['uptrend'] = boll_df.sma20.ge(boll_df.sma20.shift())
 
 sma20List=list(boll_df['sma20'])
 trendList = []
-trendList[0]='-'
+trendList.append('-')
 i = 1
 while i < len(sma20List):
   if i > 0:
     if sma20List[i] > sma20List[i-1]:
-      trendList[i]='U'
+      trendList.append('U')
     else:
-      trendList[i]='D'
+      trendList.append('D')
 
 trendStrengthList = []
-trendStrengthList[0]=0
+trendStrengthList.append(0)
 i = 1
 while i < len(trendList):
   if index > 0:
     if trendList[i] != trendList[i-1]:
-      trendStrengthList[i]=1
+      trendStrengthList.append(1)
     else:
-      trendStrengthList[i]=trendStrengthList[i-1]+1
+      trendStrengthList.append(trendStrengthList[i-1]+1)
 
 se1 = pd.Series(trendList)
 boll_df['trend'] = se1.values
