@@ -185,7 +185,7 @@ bbwMax=max(bbwList)
 bbwRatioList = ['-']*20
 i = 21
 while i < len(bbwList):
-  bbwRatio = round((bbwList[i]-bbwMin)/(bbwMax-bbwMin)*100)
+  bbwRatio = (bbwList[i]-bbwMin)/(bbwMax-bbwMin)*100
   bbwRatioList.append(bbwRatio)
   i += 1
 
@@ -199,7 +199,7 @@ se3 = pd.Series(bbwRatioList)
 boll_df['bbwr'] = se3.values
 
 # Print output
-print(boll_df[['close','trend', 'strength','bb','bbwr']].round(2).to_string())
+print(boll_df[['close','trend', 'strength','bb','bbwr']].round(1).to_string())
 
 # Create output file
 #boll_df[['close','trend','bb','dbb']].to_csv("/home/ec2-user/plutus/bb_out.csv")
