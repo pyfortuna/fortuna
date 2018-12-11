@@ -193,27 +193,30 @@ boll_df=boll_df.assign(uptrend=None)
 boll_df['uptrend'] = boll_df.sma20.ge(boll_df.sma20.shift())
 '''
 
+# Create Trend List
 sma20List=list(boll_df['sma20'])
 trendList = []
 trendList.append('-')
 i = 1
 while i < len(sma20List):
-  if i > 0:
-    if sma20List[i] > sma20List[i-1]:
-      trendList.append('U')
-    else:
-      trendList.append('D')
+  if sma20List[i] > sma20List[i-1]:
+    trendList.append('U')
+  else:
+    trendList.append('D')
+  i += 1
 
+# Create Trend Strength List
 trendStrengthList = []
 trendStrengthList.append(0)
 i = 1
 while i < len(trendList):
-  if index > 0:
-    if trendList[i] != trendList[i-1]:
-      trendStrengthList.append(1)
-    else:
-      trendStrengthList.append(trendStrengthList[i-1]+1)
+  if trendList[i] != trendList[i-1]:
+    trendStrengthList.append(1)
+  else:
+    trendStrengthList.append(trendStrengthList[i-1]+1)
+  i += 1
 
+# Add Trend list and Trend strength list to dataframe
 se1 = pd.Series(trendList)
 boll_df['trend'] = se1.values
 se2 = pd.Series(trendStrengthList)
