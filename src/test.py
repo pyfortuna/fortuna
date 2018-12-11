@@ -84,7 +84,7 @@ def get100DayList(start, end):
 # MAIN PROGRAM
 # -----------------------------------------------
 e = datetime.datetime.now()
-s = e - datetime.timedelta(days=365)
+s = e - datetime.timedelta(days=60)
 dayList = get100DayList(s,e)
 history_df = pd.DataFrame()
 
@@ -196,7 +196,9 @@ boll_df=boll_df.assign(trend=None)
 boll_df.loc[:, 'trend'] = boll_df.apply(getTrend, axis = 1)
 
 boll_df=boll_df.assign(strength=None)
-boll_df.loc[:, 'strength'] = boll_df.groupby('uptrend').cumsum()+1
+#boll_df.loc[:, 'strength'] = boll_df.groupby('uptrend').cumsum()+1
+print(boll_df[['uptrend']])
+print(boll_df.groupby('uptrend')[['uptrend']])
 
 boll_df=boll_df.drop(columns=['uptrend'])
 
