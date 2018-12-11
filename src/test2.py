@@ -2,8 +2,10 @@ import datetime
 
 now = datetime.datetime.now()
 print(now)
-d=datetime.date.today()
-print(d)
+d1 = datetime.date.today()
+print(d1)
+d2 = d1 - timedelta(days=365)
+print(d2)
 
 '''
 start=
