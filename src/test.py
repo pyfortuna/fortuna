@@ -188,10 +188,36 @@ def getTrend(row):
         return "U"
     else:
         return "D"
-
+'''
 boll_df=boll_df.assign(uptrend=None)
 boll_df['uptrend'] = boll_df.sma20.ge(boll_df.sma20.shift())
+'''
 
+sma20List=list(boll_df['sma20'])
+trendList[0]='-'
+i = 1
+while i < len(sma20List):
+  if i > 0:
+    if sma20List[i] > sma20List[i-1]:
+      trendList[i]='U'
+    else:
+      trendList[i]='D'
+
+trendStrengthList[0]=0
+i = 1
+while i < len(trendList):
+  if index > 0:
+    if trendList[i] != trendList[i-1]:
+      trendStrengthList[i]=1
+    else:
+      trendStrengthList[i]=trendStrengthList[i-1]+1
+
+se1 = pd.Series(trendList)
+boll_df['trend'] = se1.values
+se2 = pd.Series(trendStrengthList)
+boll_df['strength'] = se2.values
+
+'''
 boll_df=boll_df.assign(trend=None)
 boll_df.loc[:, 'trend'] = boll_df.apply(getTrend, axis = 1)
 
@@ -201,6 +227,7 @@ boll_df=boll_df.assign(strength=None)
 #print(boll_df.groupby('uptrend')[['uptrend']])
 
 boll_df=boll_df.drop(columns=['uptrend'])
+'''
 
 print(boll_df[['close','trend', 'strength','bb','dbb']].round(2).to_string())
 
