@@ -2,7 +2,7 @@ import datetime
 
 now = datetime.datetime.now()
 print(now)
-d=date.today()
+d=datetime.date.today()
 print(d)
 
 '''
