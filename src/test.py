@@ -191,10 +191,13 @@ def getTrend(row):
 
 boll_df=boll_df.assign(uptrend=None)
 boll_df['uptrend'] = boll_df.sma20.ge(boll_df.sma20.shift())
+
 boll_df=boll_df.assign(trend=None)
 boll_df.loc[:, 'trend'] = boll_df.apply(getTrend, axis = 1)
+
 boll_df=boll_df.assign(strength=None)
-boll_df.loc[:, 'strength'] = boll_df.groupby('trend').cumsum()+1
+boll_df.loc[:, 'strength'] = boll_df.groupby(uptrend).cumsum()+1
+
 boll_df=boll_df.drop(columns=['uptrend'])
 
 print(boll_df[['close','trend', 'strength','bb','dbb']].round(2))
