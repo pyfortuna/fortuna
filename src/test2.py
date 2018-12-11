@@ -18,8 +18,8 @@ difference = (end - start).days
 if difference > 100:
   curr_end = start + datetime.timedelta(days=100)
   while curr_end < end:
-    start_fmt=time.strftime("%d-%m-%Y", start)
-    end_fmt=time.strftime("%d-%m-%Y", curr_end)
+    start_fmt=start.strftime("%d-%m-%Y")
+    end_fmt=curr_end.strftime("%d-%m-%Y")
     print(start_fmt + " to " + end_fmt)
     start = curr_end + datetime.timedelta(days=1)
     curr_end += datetime.timedelta(days=100)
