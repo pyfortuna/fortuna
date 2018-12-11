@@ -12,7 +12,7 @@ def get100DayList(start, end):
   difference = (end - start).days
   if difference > 100:
     curr_end = start + datetime.timedelta(days=100)
-    while curr_end < end:
+    while curr_end <= end:
       dates['start']=start.strftime(NSE_DATE_FMT)
       dates['end']=curr_end.strftime(NSE_DATE_FMT)
       datesList.append(dates.copy())
