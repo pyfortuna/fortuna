@@ -194,6 +194,7 @@ boll_df['uptrend'] = boll_df.sma20.ge(boll_df.sma20.shift())
 '''
 
 sma20List=list(boll_df['sma20'])
+trendList = []
 trendList[0]='-'
 i = 1
 while i < len(sma20List):
@@ -203,6 +204,7 @@ while i < len(sma20List):
     else:
       trendList[i]='D'
 
+trendStrengthList = []
 trendStrengthList[0]=0
 i = 1
 while i < len(trendList):
