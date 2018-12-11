@@ -4,7 +4,8 @@ import time
 
 now = datetime.datetime.now()
 print(now)
-d1 = datetime.date.today()
+#d1 = datetime.date.today())
+d1 = datetime.datetime.now()
 print(d1)
 d2 = d1 - datetime.timedelta(days=365)
 print(d2)
