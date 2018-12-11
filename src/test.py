@@ -13,14 +13,6 @@ import pandas as pd
 
 pr=fortunacommon.loadAppProperties()
 
-'''
-quandlURL="https://www.quandl.com/api/v3/datasets/NSE/ASHOKLEY.csv?api_key=" + pr['quandl.api.key']
-with urlopen(quandlURL) as response:
-  for line in response:
-    dataLine=str(line.strip()).replace("b","").replace("'","")
-    print(dataLine)
-'''
-
 # ------------------------------
 # Return header for HTTP Request
 # ------------------------------
@@ -84,16 +76,15 @@ def get100DayList(start, end):
 # MAIN PROGRAM
 # -----------------------------------------------
 e = datetime.datetime.now()
-s = e - datetime.timedelta(days=120)
+s = e - datetime.timedelta(days=365)
 dayList = get100DayList(s,e)
 history_df = pd.DataFrame()
 
 for dayRange in dayList:
-  req=getRequest('DABUR',dayRange['start'],dayRange['end'])
+  req=getRequest('ASHOKLEY',dayRange['start'],dayRange['end'])
   with urllib.request.urlopen(req) as response:
      the_page = response.read()
   history_df=history_df.append(pd.read_html(the_page, header=0, index_col='Date')[0])
-
 
 history_df.rename(columns={'Open Price':'open',
                             'High Price':'high',
@@ -103,21 +94,14 @@ history_df.rename(columns={'Open Price':'open',
                             'Total Traded Quantity':'qty'}, 
                             inplace=True)
 
-input_df=history_df[['open','high','low','close','vwap']]
-#print(input_df)
+#input_df=history_df[['open','high','low','close','vwap']]
 
-d_df=input_df.diff()
-#print(d_df.query('close == close'))
-
-sma_df=input_df.rolling(window=30).mean().round(2).diff()
-#print(sma_df.query('close > 0'))
-#print(sma_df.query('close == close'))
-
+# ------------------------------------------------------------------------------------------------
 # Bollinger Bands
 #  https://en.wikipedia.org/wiki/Bollinger_Bands
 #  https://github.com/bukosabino/ta/blob/5e8e92bd9e41eec559a3dd849d1bfe9143cf84ae/ta/volatility.py
+# ------------------------------------------------------------------------------------------------
 boll_df=history_df[['close']]
-#print(boll_df)
 
 sma20 = boll_df['close'].rolling(20).mean()
 mstd = boll_df['close'].rolling(20).std()
@@ -126,24 +110,15 @@ lband = sma20 - 2*mstd
 hband_1_20 = sma20 + mstd
 lband_1_20 = sma20 - mstd
 bbw = mstd/sma20*100
-#boll_df['hband']=pd.Series(hband, name='hband')
-#boll_df['lband']=pd.Series(lband, name='lband')
+
 boll_df=boll_df.assign(sma20=sma20)
 boll_df=boll_df.assign(hband=hband)
 boll_df=boll_df.assign(lband=lband)
 boll_df=boll_df.assign(hband_1_20=hband_1_20)
 boll_df=boll_df.assign(lband_1_20=lband_1_20)
 boll_df=boll_df.assign(bbw=bbw)
-boll_df=boll_df.assign(bb=None)
-#recoList=boll_df['reco']
-#recoList="-"
-#if boll_df['close'] < lband:
-#  recoList="BUY"
-#boll_df=boll_df.assign(reco=recoList)
 
-
-
-
+# Find Bollinger Band Position
 def getBBPos(row):
     if (row.close < row.lband) :
         return "BL"
@@ -155,12 +130,10 @@ def getBBPos(row):
         return "AU"
     else:
         return "  "
-
 boll_df.loc[:, 'bb'] = boll_df.apply(getBBPos, axis = 1)
 
 
-
-
+# Find Double Bollinger Band Position
 def getDoubleBBPos(row):
     if (row.close < row.lband) :
         return " BSZ "
@@ -176,22 +149,8 @@ def getDoubleBBPos(row):
         return " ABZ "
     else:
         return "  "
-
 boll_df.loc[:, 'dbb'] = boll_df.apply(getDoubleBBPos, axis = 1)
 
-
-
-
-
-def getTrend(row):
-    if (row.uptrend) :
-        return "U"
-    else:
-        return "D"
-'''
-boll_df=boll_df.assign(uptrend=None)
-boll_df['uptrend'] = boll_df.sma20.ge(boll_df.sma20.shift())
-'''
 
 # Create Trend List
 sma20List=list(boll_df['sma20'])
@@ -205,6 +164,7 @@ while i < len(sma20List):
     trendList.append('D')
   i += 1
 
+  
 # Create Trend Strength List
 trendStrengthList = []
 trendStrengthList.append(0)
@@ -216,24 +176,15 @@ while i < len(trendList):
     trendStrengthList.append(trendStrengthList[i-1]+1)
   i += 1
 
+
 # Add Trend list and Trend strength list to dataframe
 se1 = pd.Series(trendList)
 boll_df['trend'] = se1.values
 se2 = pd.Series(trendStrengthList)
 boll_df['strength'] = se2.values
 
-'''
-boll_df=boll_df.assign(trend=None)
-boll_df.loc[:, 'trend'] = boll_df.apply(getTrend, axis = 1)
-
-boll_df=boll_df.assign(strength=None)
-#boll_df.loc[:, 'strength'] = boll_df.groupby('uptrend').cumsum()+1
-#print(boll_df[['uptrend']])
-#print(boll_df.groupby('uptrend')[['uptrend']])
-
-boll_df=boll_df.drop(columns=['uptrend'])
-'''
-
+# Print output
 print(boll_df[['close','trend', 'strength','bb','dbb']].round(2).to_string())
 
+# Create output file
 #boll_df[['close','trend','bb','dbb']].to_csv("/home/ec2-user/plutus/bb_out.csv")
