@@ -52,11 +52,48 @@ def getRequest(symbol, fromDt, toDt):
   req = urllib.request.Request(nseURL, data, headers)
   return req
 
-req=getRequest('ASHOKLEY','01-11-2018','10-12-2018')
-with urllib.request.urlopen(req) as response:
-   the_page = response.read()
+# -----------------------------------------------
+# Function to split duration to batch of 100 days
+#  - Due to restriction in NSE URL
+# -----------------------------------------------
+def get100DayList(start, end):
+  NSE_DATE_FMT="%d-%m-%Y"
+  dates={}
+  datesList = []
+  difference = (end - start).days
+  if difference > 100:
+    curr_end = start + datetime.timedelta(days=100)
+    while curr_end <= end:
+      dates['start']=start.strftime(NSE_DATE_FMT)
+      dates['end']=curr_end.strftime(NSE_DATE_FMT)
+      datesList.append(dates.copy())
+      start = curr_end + datetime.timedelta(days=1)
+      curr_end += datetime.timedelta(days=100)
+    if start < end:
+      dates['start']=start.strftime(NSE_DATE_FMT)
+      dates['end']=end.strftime(NSE_DATE_FMT)
+      datesList.append(dates.copy())
+  else:
+    dates['start']=start.strftime(NSE_DATE_FMT)
+    dates['end']=curr_end.strftime(NSE_DATE_FMT)
+    datesList.append(dates.copy())
+  return datesList
 
-history_df=pd.read_html(the_page, header=0, index_col='Date')[0]
+# -----------------------------------------------
+# MAIN PROGRAM
+# -----------------------------------------------
+e = datetime.datetime.now()
+s = e - datetime.timedelta(days=365)
+dayList = get100DayList(s,e)
+history_df = pd.DataFrame()
+
+for dayRange in dayList:
+  req=getRequest('ASHOKLEY',dayRange['start'],dayRange['end'])
+  with urllib.request.urlopen(req) as response:
+     the_page = response.read()
+  history_df=history_df.append(pd.read_html(the_page, header=0, index_col='Date')[0])
+
+
 history_df.rename(columns={'Open Price':'open',
                             'High Price':'high',
                             'Low Price':'low',
