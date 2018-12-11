@@ -9,7 +9,7 @@ import time
 end=datetime.datetime.now()
 start=end - datetime.timedelta(days=365)
 
-
+dates={}
 datesList = []
 difference = (end - start).days
 if difference > 100:
