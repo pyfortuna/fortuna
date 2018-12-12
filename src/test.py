@@ -9,6 +9,7 @@ References:
 import datetime
 import fortunacommon
 import urllib.request
+import matplotlib
 import pandas as pd
 
 pr=fortunacommon.loadAppProperties()
