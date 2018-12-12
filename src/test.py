@@ -202,3 +202,10 @@ print(boll_df[['close','trend', 'strength','bb','bbwr']].round(1).to_string())
 
 # Create output file
 #boll_df[['close','trend','bb','dbb']].to_csv("/home/ec2-user/plutus/bb_out.csv")
+
+plot_df=boll_df[['close','sma20', 'hband','lband','hband_1_20','lband_1_20']]
+plot_df=plot_df.dropna()
+plot = plot_df.plot()
+fig = plot.get_figure()
+fig.savefig("/home/ec2-user/plutus/smaplot.png")
+fortunacommon.sendMail("Plot","SMA Plot","/home/ec2-user/plutus/smaplot.png")
