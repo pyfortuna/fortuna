@@ -228,7 +228,7 @@ print(boll_df[['close','trend', 'strength','bb','bbwr']].round(1).to_string())
 
 plot_df=boll_df[['close','sma20', 'hband','lband','hband_1_20','lband_1_20']]
 plot_df=plot_df.dropna()
-plot = plot_df.plot()
+plot = plot_df.plot(color = ['C1','C2','C3','C3','C4','C4'])
 fig = plot.get_figure()
 fig.savefig("/home/ec2-user/plutus/smaplot.png")
-#fortunacommon.sendMail("Plot","SMA Plot","/home/ec2-user/plutus/smaplot.png")
+fortunacommon.sendMail("Plot","SMA Plot","/home/ec2-user/plutus/smaplot.png")
