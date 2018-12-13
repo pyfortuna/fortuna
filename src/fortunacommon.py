@@ -101,7 +101,7 @@ def sendMail(subject,body,attachmentFilename):
         # Message
         msg = MIMEMultipart('alternative')
         msg['Subject'] = subject
-        msg['From'] = gmail_user
+        msg['From'] = 'Fortuna <' + gmail_user + '>'
         content = MIMEText(body, 'plain')
         msg.attach(content)
 
