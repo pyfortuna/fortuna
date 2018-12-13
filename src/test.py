@@ -73,14 +73,35 @@ def get100DayList(start, end):
     datesList.append(dates.copy())
   return datesList
 
+def getHistoricData(companyName, startDate, endDate):
+  dayList = get100DayList(startDate,endDate)
+  history_df = pd.DataFrame()
+  for dayRange in dayList:
+    req=getRequest('ASHOKLEY',dayRange['start'],dayRange['end'])
+    with urllib.request.urlopen(req) as response:
+       the_page = response.read()
+    history_df=history_df.append(pd.read_html(the_page, header=0, index_col='Date')[0])
+
+  history_df.rename(columns={'Open Price':'open',
+                              'High Price':'high',
+                              'Low Price':'low',
+                              'Close Price':'close',
+                              'VWAP':'vwap',
+                              'Total Traded Quantity':'qty'}, 
+                              inplace=True)
+
+  o_df=history_df[['open','high','low','close','vwap']]
+  return o_df
+
 # -----------------------------------------------
 # MAIN PROGRAM
 # -----------------------------------------------
 e = datetime.datetime.now()
 s = e - datetime.timedelta(days=365)
 dayList = get100DayList(s,e)
-history_df = pd.DataFrame()
+history_df = getHistoricData('ASHOKLEY',s,e)
 
+'''
 for dayRange in dayList:
   req=getRequest('ASHOKLEY',dayRange['start'],dayRange['end'])
   with urllib.request.urlopen(req) as response:
@@ -96,6 +117,7 @@ history_df.rename(columns={'Open Price':'open',
                             inplace=True)
 
 #input_df=history_df[['open','high','low','close','vwap']]
+'''
 
 # ------------------------------------------------------------------------------------------------
 # Bollinger Bands
