@@ -185,7 +185,7 @@ bbwMax=max(bbwList[20:])
 bbwRatioList = ['-']*20
 i = 20
 while i < len(bbwList):
-  bbwRatio = (bbwList[i]-bbwMin)/(bbwMax-bbwMin)*100
+  bbwRatio = (bbwList[i]-bbwMin)/(bbwMax-bbwMin)*9+1
   bbwRatioList.append(round(bbwRatio))
   i += 1
 
