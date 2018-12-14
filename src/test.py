@@ -97,9 +97,9 @@ def getHistoricData(companyName, startDate, endDate):
 # MAIN PROGRAM
 # -----------------------------------------------
 e = datetime.datetime.now()
-s = e - datetime.timedelta(days=50)
+s = e - datetime.timedelta(days=90)
 dayList = get100DayList(s,e)
-history_df = getHistoricData('ASHOKLEY',s,e)
+history_df = getHistoricData('DABUR',s,e)
 
 # ------------------------------------------------------------------------------------------------
 # Bollinger Bands
