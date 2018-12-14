@@ -99,7 +99,7 @@ def getHistoricData(companyName, startDate, endDate):
 e = datetime.datetime.now()
 s = e - datetime.timedelta(days=90)
 dayList = get100DayList(s,e)
-history_df = getHistoricData('DABUR',s,e)
+history_df = getHistoricData('ASHOKLEY',s,e)
 
 # ------------------------------------------------------------------------------------------------
 # Bollinger Bands
@@ -218,7 +218,7 @@ boll_df['bbwrt'] = se4.values
 
 # Prediction logic
 def getPrediction(row):
-    if (row.strength >= 10) and (row.bbwrt == "D") and (row.bbwr <= 3):
+    if (row.strength >= 10) and (row.bbwrt == "D") and (row.bbwr < 3):
         return "breakout"
     else:
         return ""
