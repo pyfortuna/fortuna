@@ -187,10 +187,22 @@ bbwList=list(boll_df['bbw'])
 bbwMin=min(bbwList[20:])
 bbwMax=max(bbwList[20:])
 bbwRatioList = ['-']*20
+bbwRatioTrendList = ['-']*20
+
 i = 20
 while i < len(bbwList):
   bbwRatio = (bbwList[i]-bbwMin)/(bbwMax-bbwMin)*9+1
   bbwRatioList.append(round(bbwRatio))
+  if bbwRatioList[i-1] = '-':
+    bbwRatioTrendList[i] = '-'
+  else:
+    if bbwRatioList[i] > bbwRatioList[i-1]:
+      bbwRatioTrendList[i] = 'U'
+    elif bbwRatioList[i] < bbwRatioList[i-1]:
+      bbwRatioTrendList[i] = 'D'
+    else:
+      bbwRatioTrendList[i] = bbwRatioTrendList[i-1]
+  
   i += 1
 
 
@@ -201,13 +213,15 @@ se2 = pd.Series(trendStrengthList)
 boll_df['strength'] = se2.values
 se3 = pd.Series(bbwRatioList)
 boll_df['bbwr'] = se3.values
+se4 = pd.Series(bbwRatioTrendList)
+boll_df['bbwrt'] = se4.values
 
 # Print output
-print(boll_df[['close','trend', 'strength','bb','bbwr']].round(1).to_string())
+print(boll_df[['close','trend', 'strength','bb','bbwr','bbwrt']].round(1).to_string())
 
 # Create output file
-boll_df[['close','trend', 'strength','bb','bbwr']].to_csv("/home/ec2-user/plutus/bbout.csv")
-fortunacommon.sendMail("Data","SMA Data","/home/ec2-user/plutus/bbout.csv")
+boll_df[['close','trend', 'strength','bb','bbwr','bbwrt']].to_csv("/home/ec2-user/plutus/bbout.csv")
+#fortunacommon.sendMail("Data","SMA Data","/home/ec2-user/plutus/bbout.csv")
 
 
 plot_df=boll_df[['close','sma20', 'hband','lband','hband_1_20','lband_1_20']]
