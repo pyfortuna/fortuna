@@ -101,24 +101,6 @@ s = e - datetime.timedelta(days=50)
 dayList = get100DayList(s,e)
 history_df = getHistoricData('ASHOKLEY',s,e)
 
-'''
-for dayRange in dayList:
-  req=getRequest('ASHOKLEY',dayRange['start'],dayRange['end'])
-  with urllib.request.urlopen(req) as response:
-     the_page = response.read()
-  history_df=history_df.append(pd.read_html(the_page, header=0, index_col='Date')[0])
-
-history_df.rename(columns={'Open Price':'open',
-                            'High Price':'high',
-                            'Low Price':'low',
-                            'Close Price':'close',
-                            'VWAP':'vwap',
-                            'Total Traded Quantity':'qty'}, 
-                            inplace=True)
-
-#input_df=history_df[['open','high','low','close','vwap']]
-'''
-
 # ------------------------------------------------------------------------------------------------
 # Bollinger Bands
 #  https://en.wikipedia.org/wiki/Bollinger_Bands
@@ -224,11 +206,14 @@ boll_df['bbwr'] = se3.values
 print(boll_df[['close','trend', 'strength','bb','bbwr']].round(1).to_string())
 
 # Create output file
-#boll_df[['close','trend','bb','dbb']].to_csv("/home/ec2-user/plutus/bb_out.csv")
+boll_df[['close','trend', 'strength','bb','bbwr']].to_csv("/home/ec2-user/plutus/bbout.csv")
+fortunacommon.sendMail("Data","SMA Data","/home/ec2-user/plutus/bbout.csv")
+
 
 plot_df=boll_df[['close','sma20', 'hband','lband','hband_1_20','lband_1_20']]
 plot_df=plot_df.dropna()
 plot = plot_df.plot(color = ['xkcd:darkblue','xkcd:grey','xkcd:grey','xkcd:grey','xkcd:grey','xkcd:grey'], figsize=(12, 8), legend=False)
 fig = plot.get_figure()
 fig.savefig("/home/ec2-user/plutus/smaplot.png")
-fortunacommon.sendMail("Plot","SMA Plot","/home/ec2-user/plutus/smaplot.png")
+#fortunacommon.sendMail("Plot","SMA Plot","/home/ec2-user/plutus/smaplot.png")
+
