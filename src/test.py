@@ -194,14 +194,14 @@ while i < len(bbwList):
   bbwRatio = (bbwList[i]-bbwMin)/(bbwMax-bbwMin)*9+1
   bbwRatioList.append(round(bbwRatio))
   if bbwRatioList[i-1] == '-':
-    bbwRatioTrendList[i] = '-'
+    bbwRatioTrendList.append('-')
   else:
     if bbwRatioList[i] > bbwRatioList[i-1]:
-      bbwRatioTrendList[i] = 'U'
+      bbwRatioTrendList.append('U')
     elif bbwRatioList[i] < bbwRatioList[i-1]:
-      bbwRatioTrendList[i] = 'D'
+      bbwRatioTrendList.append('D')
     else:
-      bbwRatioTrendList[i] = bbwRatioTrendList[i-1]
+      bbwRatioTrendList.append(bbwRatioTrendList[i-1])
   
   i += 1
 
