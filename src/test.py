@@ -216,11 +216,19 @@ boll_df['bbwr'] = se3.values
 se4 = pd.Series(bbwRatioTrendList)
 boll_df['bbwrt'] = se4.values
 
+# Prediction logic
+def getPrediction(row):
+    if (row.strength >= 10) and (row.bbwrt == "D") and (row.bbwr <= 3):
+        return "breakout"
+    else:
+        return ""
+boll_df.loc[:, 'prediction'] = boll_df.apply(getPrediction, axis = 1)
+
 # Print output
-print(boll_df[['close','trend', 'strength','bb','bbwr','bbwrt']].round(1).to_string())
+print(boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','prediction']].round(1).to_string())
 
 # Create output file
-boll_df[['close','trend', 'strength','bb','bbwr','bbwrt']].to_csv("/home/ec2-user/plutus/bbout.csv")
+boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','prediction']].to_csv("/home/ec2-user/plutus/bbout.csv")
 #fortunacommon.sendMail("Data","SMA Data","/home/ec2-user/plutus/bbout.csv")
 
 
