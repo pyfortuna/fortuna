@@ -193,7 +193,7 @@ i = 20
 while i < len(bbwList):
   bbwRatio = (bbwList[i]-bbwMin)/(bbwMax-bbwMin)*9+1
   bbwRatioList.append(round(bbwRatio))
-  if bbwRatioList[i-1] = '-':
+  if bbwRatioList[i-1] == '-':
     bbwRatioTrendList[i] = '-'
   else:
     if bbwRatioList[i] > bbwRatioList[i-1]:
