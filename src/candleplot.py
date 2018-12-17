@@ -11,12 +11,10 @@ import fortunacommon
 def plotCandlestick(df,filename):
   ohlc = []
   for index, row in df.iterrows():
-    rec = date2num(datetime.fromisoformat(row['Date'])), row['AAPL.Open'], row['AAPL.High'], row['AAPL.Low'], row['AAPL.Close']
+    rec = date2num(datetime.fromisoformat(row['date'])), row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
   fig, ax = plt.subplots()
-  #ohlc=zip(date2num(datetime.fromisoformat(df['Date'])),df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close'])
   candlestick_ohlc(ax, ohlc)
-  #candlestick2_ohlc(ax, df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close'])
   ax.autoscale_view()
   ax.xaxis.grid(True, 'major')
   ax.grid(True)
@@ -27,5 +25,11 @@ def plotCandlestick(df,filename):
 # MAIN
 o_file="/home/ec2-user/plutus/candleplot.png"
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+df.rename(columns={ 'Date':'date',
+                    'AAPL.Open':'open',
+                    'AAPL.High':'high',
+                    'AAPL.Low':'low',
+                    'AAPL.Close':'close'}, 
+                    inplace=True)
 plotCandlestick(df,o_file)
 fortunacommon.sendMail("candleplot","candleplot",o_file)
