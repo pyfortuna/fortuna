@@ -18,5 +18,5 @@ def plotCandlestick(df,filename):
 
 o_file="/home/ec2-user/plutus/candleplot.png"
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-plotCandlestick(df,o_file):
+plotCandlestick(df,o_file)
 fortunacommon.sendMail("candleplot","candleplot",o_file)
