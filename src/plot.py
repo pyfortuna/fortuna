@@ -1,8 +1,8 @@
 print("-----")
 import plotly.plotly as py
-from plotly.tools import FigureFactory as FF
+import plotly.graph_objs as go
+import pandas as pd
 from datetime import datetime
-import pandas.io.data as web
 import fortunacommon as fc
 import test as tt
 
@@ -11,8 +11,8 @@ s = e - datetime.timedelta(days=30)
 dayList = tt.get100DayList(s,e)
 history_df = tt.getHistoricData('ASHOKLEY',s,e)
 
-fig = FF.create_candlestick(history_df.ppen, history_df.high, history_df.low, history_df.close, dates=history_df.index)
-
-py.iplot(fig, filename='plutus/plotlytest.png', validate=False)
+trace = go.Ohlc(x=history_df.index, open=history_df.open, high=history_df.high, low=history_df.low, close=history_df.close)
+data = [trace]
+py.iplot(data, filename='plutus/plotlytest.png', validate=False)
 
 fc.sendMail("plotly","plotly","plutus/plotlytest.png")
