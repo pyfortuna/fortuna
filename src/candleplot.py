@@ -9,13 +9,10 @@ from datetime import datetime
 import fortunacommon
 '''
 
-def plotCandlestick(df,filename):
+def plotCandlestick(df,filename,dateFormat):
   ohlc = []
   for index, row in df.iterrows():
-    print(row)
-    #print(row['Date'].to_string())
-    #print(type(row['Date']))
-    nDate=date2num(datetime.strptime(row.name,'%d-%b-%Y'))
+    nDate=date2num(datetime.strptime(row.name,dateFormat))
     rec = nDate, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
   fig, ax = plt.subplots()
