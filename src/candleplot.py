@@ -9,7 +9,9 @@ import datetime
 
 def plotCandlestick(df,filename):
   fig, ax = plt.subplots()
-  #candlestick_ohlc(ax, zip(date2num(datetime.fromisoformat(df['Date']),df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close']))
+  ohlc=zip(date2num(datetime.fromisoformat(df['Date']),df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close'])
+  print(ohlc)
+  #candlestick_ohlc(ax, ohlc)
   candlestick2_ohlc(ax, df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close'])
   #ax.autoscale_view()
   #ax.xaxis.grid(True, 'major')
