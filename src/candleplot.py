@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
-import pandas as pd
+import matplotlib.dates as mdates
 from matplotlib.dates import date2num
 from mpl_finance import candlestick_ohlc
 from mpl_finance import candlestick2_ohlc
-import fortunacommon
+import pandas as pd
 from datetime import datetime
+import fortunacommon
 
 
 def plotCandlestick(df,filename):
@@ -19,6 +20,7 @@ def plotCandlestick(df,filename):
   ax.autoscale_view()
   ax.xaxis.grid(True, 'major')
   ax.grid(True)
+  ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
   fig.autofmt_xdate()
   fig.savefig(filename)
 
