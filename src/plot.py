@@ -7,8 +7,7 @@ import fortunacommon as fc
 import test as tt
 
 e = datetime.now()
-s = e - datetime.timedelta(days=30)
-dayList = tt.get100DayList(s,e)
+s = e - timedelta(days=30)
 history_df = tt.getHistoricData('ASHOKLEY',s,e)
 
 trace = go.Ohlc(x=history_df.index, open=history_df.open, high=history_df.high, low=history_df.low, close=history_df.close)
