@@ -22,7 +22,8 @@ def plotCandlestick(df,filename):
   fig.autofmt_xdate()
   fig.savefig(filename)
 
-# MAIN
+'''
+# TEST PROGRAM
 o_file="/home/ec2-user/plutus/candleplot.png"
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 df.rename(columns={ 'Date':'date',
@@ -33,3 +34,4 @@ df.rename(columns={ 'Date':'date',
                     inplace=True)
 plotCandlestick(df,o_file)
 fortunacommon.sendMail("candleplot","candleplot",o_file)
+'''
