@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-#from matplotlib.dates import (MONDAY, DateFormatter, MonthLocator,WeekdayLocator, date2num)
+from matplotlib.dates import date2num
 from mpl_finance import candlestick_ohlc
 from mpl_finance import candlestick2_ohlc
 import fortunacommon
@@ -8,7 +8,7 @@ import fortunacommon
 
 def plotCandlestick(df,filename):
   fig, ax = plt.subplots()
-  candlestick_ohlc(ax, zip(df['Date'],df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close']))
+  candlestick_ohlc(ax, zip(date2num(df.index.to_pydatetime()),df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close']))
   #candlestick2_ohlc(ax, df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close'])
   ax.autoscale_view()
   ax.xaxis.grid(True, 'major')
