@@ -17,10 +17,10 @@ def plotCandlestick(df,filename):
   print(ohlc)
   candlestick_ohlc(ax, ohlc)
   #candlestick2_ohlc(ax, df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close'])
-  #ax.autoscale_view()
-  #ax.xaxis.grid(True, 'major')
-  #ax.grid(True)
-  #fig.autofmt_xdate()
+  ax.autoscale_view()
+  ax.xaxis.grid(True, 'major')
+  ax.grid(True)
+  fig.autofmt_xdate()
   fig.savefig(filename)
 
 # MAIN
