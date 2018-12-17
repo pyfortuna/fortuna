@@ -29,7 +29,8 @@ print(df)
 fig, ax = plt.subplots()
 
 print("before plot")
-candlestick_ohlc(ax, zip(df['Date'],df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close']))
+#candlestick_ohlc(ax, zip(df['Date'],df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close']))
+candlestick2_ohlc(ax, df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close'])
 print("after plot")
 
 #ax.autoscale_view()
