@@ -254,6 +254,7 @@ fig.savefig("/home/ec2-user/plutus/candle.png")
 # -----------
 bplot_df=history_df[['open','close','high','low']]
 bplot_df=bplot_df.dropna()
+print(bplot_df)
 o_file="/home/ec2-user/plutus/candle.png"
 cplot.plotCandlestick(bplot_df,o_file)
 fortunacommon.sendMail("Candle","Candle",o_file)
