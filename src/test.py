@@ -11,6 +11,7 @@ import fortunacommon
 import urllib.request
 import matplotlib
 import pandas as pd
+import candleplot as cplot
 
 pr=fortunacommon.loadAppProperties()
 
@@ -239,10 +240,20 @@ fig = plot.get_figure()
 fig.savefig("/home/ec2-user/plutus/smaplot.png")
 #fortunacommon.sendMail("Plot","SMA Plot","/home/ec2-user/plutus/smaplot.png")
 
+'''
 bplot_df=history_df[['open','close','high','low']]
 bplot_df=bplot_df.dropna()
 boxplot = bplot_df.boxplot(column=['open','close','high','low'])
 fig = plot.get_figure()
 fig.savefig("/home/ec2-user/plutus/candle.png")
 #fortunacommon.sendMail("Candle","Candle","/home/ec2-user/plutus/candle.png")
+'''
 
+# -----------
+# Candle Plot
+# -----------
+bplot_df=history_df[['open','close','high','low']]
+bplot_df=bplot_df.dropna()
+o_file="/home/ec2-user/plutus/candle.png"
+cplot.plotCandlestick(bplot_df,o_file)
+fortunacommon.sendMail("Candle","Candle",o_file)
