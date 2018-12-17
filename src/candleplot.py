@@ -12,7 +12,6 @@ def plotCandlestick(df,filename):
   for index, row in df.iterrows():
     rec = date2num(datetime.fromisoformat(row['Date'])), row['AAPL.Open'], row['AAPL.High'], row['AAPL.Low'], row['AAPL.Close']
     ohlc.append(rec)
-    x+=1  
   fig, ax = plt.subplots()
   #ohlc=zip(date2num(datetime.fromisoformat(df['Date'])),df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close'])
   print(ohlc)
