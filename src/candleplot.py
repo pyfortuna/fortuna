@@ -12,7 +12,7 @@ import fortunacommon
 def plotCandlestick(df,filename):
   ohlc = []
   for index, row in df.iterrows():
-    print(row['Date'])
+    print(row['Date'].to_string())
     #print(type(row['Date']))
     nDate=date2num(datetime.strptime(row['Date'],'%d-%b-%Y'))
     rec = nDate, row['open'], row['high'], row['low'], row['close']
