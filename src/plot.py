@@ -29,14 +29,14 @@ print(df)
 fig, ax = plt.subplots()
 
 print("before plot")
-plot_day_summary_oclh(ax, zip(df['Date'],df['AAPL.Open'], df['AAPL.Close'],df['AAPL.Low'], df['AAPL.High']))
+candlestick_ohlc(ax, zip(df['Date'],df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close']))
 print("after plot")
 
-ax.autoscale_view()
-ax.xaxis.grid(True, 'major')
-ax.grid(True)
+#ax.autoscale_view()
+#ax.xaxis.grid(True, 'major')
+#ax.grid(True)
 
-fig.autofmt_xdate()
+#fig.autofmt_xdate()
 
 f=plt.get_figure()
 f.savefig("/home/ec2-user/plutus/candleplot.png")
