@@ -239,3 +239,10 @@ fig = plot.get_figure()
 fig.savefig("/home/ec2-user/plutus/smaplot.png")
 #fortunacommon.sendMail("Plot","SMA Plot","/home/ec2-user/plutus/smaplot.png")
 
+bplot_df=history_df[['open','close','high','low']]
+bplot_df=bplot_df.dropna()
+boxplot = bplot_df.boxplot(column=['open','close','high','low'])
+fig = plot.get_figure()
+fig.savefig("/home/ec2-user/plutus/candle.png")
+fortunacommon.sendMail("Candle","Candle","/home/ec2-user/plutus/candle.png")
+
