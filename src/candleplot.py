@@ -4,7 +4,7 @@ from matplotlib.dates import date2num
 from mpl_finance import candlestick_ohlc
 from mpl_finance import candlestick2_ohlc
 import fortunacommon
-import datetime
+from datetime import datetime
 
 
 def plotCandlestick(df,filename):
