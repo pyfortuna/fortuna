@@ -6,7 +6,7 @@ from datetime import datetime
 import fortunacommon as fc
 import test as tt
 
-e = datetime.datetime.now()
+e = datetime.now()
 s = e - datetime.timedelta(days=30)
 dayList = tt.get100DayList(s,e)
 history_df = tt.getHistoricData('ASHOKLEY',s,e)
