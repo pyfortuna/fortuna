@@ -26,7 +26,7 @@ from mpl_finance import plot_day_summary_oclh
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig, ax = plt.subplots()
-plot_day_summary_oclh(ax, zip(df['Date'],df['AAPL.Open'], df['AAPL.Close'],df['AAPL.Low'], df['AAPL.High']),ticksize=3)
+plot_day_summary_oclh(ax, zip(df['Date'],df['AAPL.Open'], df['AAPL.Close'],df['AAPL.Low'], df['AAPL.High']))
 
 ax.autoscale_view()
 ax.xaxis.grid(True, 'major')
