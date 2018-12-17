@@ -5,8 +5,9 @@ from mpl_finance import candlestick_ohlc
 from mpl_finance import candlestick2_ohlc
 import pandas as pd
 from datetime import datetime
+'''
 import fortunacommon
-
+'''
 
 def plotCandlestick(df,filename):
   ohlc = []
