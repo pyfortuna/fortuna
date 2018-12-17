@@ -20,7 +20,7 @@ import pandas as pd
 from matplotlib.dates import (MONDAY, DateFormatter, MonthLocator,
                               WeekdayLocator, date2num)
 
-from mpl_finance import plot_day_summary_oclh
+from mpl_finance import candlestick2_ohlc
 
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
@@ -39,6 +39,6 @@ print("after plot")
 
 #fig.autofmt_xdate()
 
-f=plt.get_figure()
-f.savefig("/home/ec2-user/plutus/candleplot.png")
+#f=plt.get_figure()
+fig.savefig("/home/ec2-user/plutus/candleplot.png")
 fortunacommon.sendMail("candleplot","candleplot","/home/ec2-user/plutus/candleplot.png")
