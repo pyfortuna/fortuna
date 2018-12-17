@@ -244,5 +244,5 @@ bplot_df=bplot_df.dropna()
 boxplot = bplot_df.boxplot(column=['open','close','high','low'])
 fig = plot.get_figure()
 fig.savefig("/home/ec2-user/plutus/candle.png")
-fortunacommon.sendMail("Candle","Candle","/home/ec2-user/plutus/candle.png")
+#fortunacommon.sendMail("Candle","Candle","/home/ec2-user/plutus/candle.png")
 
