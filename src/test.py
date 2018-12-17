@@ -256,5 +256,5 @@ bplot_df=history_df[['open','close','high','low']]
 bplot_df=bplot_df.dropna()
 print(bplot_df)
 o_file="/home/ec2-user/plutus/candle.png"
-cplot.plotCandlestick(bplot_df,o_file)
+cplot.plotCandlestick(bplot_df,o_file,'%d-%b-%Y')
 fortunacommon.sendMail("Candle","Candle",o_file)
