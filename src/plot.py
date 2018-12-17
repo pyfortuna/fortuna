@@ -21,7 +21,7 @@ from matplotlib.dates import (MONDAY, DateFormatter, MonthLocator,
                               WeekdayLocator, date2num)
 
 from mpl_finance import candlestick2_ohlc
-
+import fortunacommon
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 print(df)
