@@ -14,7 +14,6 @@ def plotCandlestick(df,filename):
     ohlc.append(rec)
   fig, ax = plt.subplots()
   #ohlc=zip(date2num(datetime.fromisoformat(df['Date'])),df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close'])
-  print(ohlc)
   candlestick_ohlc(ax, ohlc)
   #candlestick2_ohlc(ax, df['AAPL.Open'], df['AAPL.High'],df['AAPL.Low'], df['AAPL.Close'])
   ax.autoscale_view()
