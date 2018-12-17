@@ -14,7 +14,7 @@ def plotCandlestick(df,filename):
   #ax.autoscale_view()
   #ax.xaxis.grid(True, 'major')
   #ax.grid(True)
-  fig.autofmt_xdate()
+  #fig.autofmt_xdate()
   fig.savefig(filename)
 
 o_file="/home/ec2-user/plutus/candleplot.png"
