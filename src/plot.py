@@ -1,17 +1,17 @@
-print("-----")
 import plotly.plotly as py
 import plotly.graph_objs as go
+
 import pandas as pd
-import datetime
-import fortunacommon as fc
-import test as tt
+from datetime import datetime
 
-e = datetime.datetime.now()
-s = e - datetime.timedelta(days=30)
-history_df = tt.getHistoricData('ASHOKLEY',s,e)
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
-trace = go.Ohlc(x=history_df.index, open=history_df.open, high=history_df.high, low=history_df.low, close=history_df.close)
+trace = go.Ohlc(x=df['Date'],
+                open=df['AAPL.Open'],
+                high=df['AAPL.High'],
+                low=df['AAPL.Low'],
+                close=df['AAPL.Close'])
 data = [trace]
-py.iplot(data, filename='plutus/plotlytest.png', validate=False)
+py.iplot(data, filename='plutus/plotlytest.png')
 
 fc.sendMail("plotly","plotly","plutus/plotlytest.png")
