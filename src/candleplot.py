@@ -15,7 +15,7 @@ def plotCandlestick(df,filename):
     print(row)
     #print(row['Date'].to_string())
     #print(type(row['Date']))
-    nDate=date2num(datetime.strptime(row['Date'],'%d-%b-%Y'))
+    nDate=date2num(datetime.strptime(row.name,'%d-%b-%Y'))
     rec = nDate, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
   fig, ax = plt.subplots()
