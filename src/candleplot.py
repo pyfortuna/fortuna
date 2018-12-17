@@ -14,7 +14,7 @@ def plotCandlestick(df,filename):
     rec = date2num(datetime.fromisoformat(row['date'])), row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
   fig, ax = plt.subplots()
-  candlestick_ohlc(ax, ohlc)
+  candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#db3f3f')
   ax.autoscale_view()
   ax.xaxis.grid(True, 'major')
   ax.grid(True)
