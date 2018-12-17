@@ -97,7 +97,7 @@ def getHistoricData(companyName, startDate, endDate):
 # MAIN PROGRAM
 # -----------------------------------------------
 e = datetime.datetime.now()
-s = e - datetime.timedelta(days=365)
+s = e - datetime.timedelta(days=90)
 dayList = get100DayList(s,e)
 history_df = getHistoricData('ASHOKLEY',s,e)
 
