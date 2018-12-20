@@ -9,99 +9,17 @@ References:
 import datetime
 import nseUtil as nu
 import fortunacommon
-import urllib.request
+#import urllib.request
 import matplotlib
 import pandas as pd
 import candleplot as cplot
 
-'''
-pr=fortunacommon.loadAppProperties()
 
-# ------------------------------
-# Return header for HTTP Request
-# ------------------------------
-def nse_headers():
-    return {'Accept': '*/*',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Host': 'nseindia.com',
-            'Referer': "https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=INFY&illiquid=0&smeFlag=0&itpFlag=0",
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',
-            'X-Requested-With': 'XMLHttpRequest'
-            }
-
-
-# ------------------------
-# Return HTTP Request data
-# ------------------------
-def getRequest(symbol, fromDt, toDt):
-  nseURL="https://www.nseindia.com/products/dynaContent/common/productsSymbolMapping.jsp?"
-  values = {'symbol' : symbol,
-            'segmentLink' : '3',
-            'symbolCount' : '1',
-            'series' : 'ALL',
-            'dateRange' : '',
-            'fromDate' : fromDt,
-            'toDate' : toDt,
-            'dataType' : 'PRICEVOLUMEDELIVERABLE' }
-  data = urllib.parse.urlencode(values)
-  data = data.encode('ascii')
-  headers = nse_headers()
-  req = urllib.request.Request(nseURL, data, headers)
-  return req
-
-# -----------------------------------------------
-# Function to split duration to batch of 100 days
-#  - Due to restriction in NSE URL
-# -----------------------------------------------
-def get100DayList(start, end):
-  NSE_DATE_FMT="%d-%m-%Y"
-  dates={}
-  datesList = []
-  difference = (end - start).days
-  if difference > 100:
-    curr_end = start + datetime.timedelta(days=100)
-    while curr_end <= end:
-      dates['start']=start.strftime(NSE_DATE_FMT)
-      dates['end']=curr_end.strftime(NSE_DATE_FMT)
-      datesList.append(dates.copy())
-      start = curr_end + datetime.timedelta(days=1)
-      curr_end += datetime.timedelta(days=100)
-    if start < end:
-      dates['start']=start.strftime(NSE_DATE_FMT)
-      dates['end']=end.strftime(NSE_DATE_FMT)
-      datesList.append(dates.copy())
-  else:
-    dates['start']=start.strftime(NSE_DATE_FMT)
-    dates['end']=end.strftime(NSE_DATE_FMT)
-    datesList.append(dates.copy())
-  return datesList
-
-def getHistoricData(companyName, startDate, endDate):
-  dayList = get100DayList(startDate,endDate)
-  history_df = pd.DataFrame()
-  for dayRange in dayList:
-    req=getRequest('ASHOKLEY',dayRange['start'],dayRange['end'])
-    with urllib.request.urlopen(req) as response:
-       the_page = response.read()
-    history_df=history_df.append(pd.read_html(the_page, header=0, index_col='Date')[0])
-
-  history_df.rename(columns={'Open Price':'open',
-                              'High Price':'high',
-                              'Low Price':'low',
-                              'Close Price':'close',
-                              'VWAP':'vwap',
-                              'Total Traded Quantity':'qty'}, 
-                              inplace=True)
-
-  o_df=history_df[['open','high','low','close','vwap']]
-  return o_df
-'''
 # -----------------------------------------------
 # MAIN PROGRAM
 # -----------------------------------------------
 e = datetime.datetime.now()
 s = e - datetime.timedelta(days=60)
-#dayList = get100DayList(s,e)
 history_df = nu.getHistoricPrice('ASHOKLEY',s,e)
 
 # ------------------------------------------------------------------------------------------------
@@ -234,7 +152,9 @@ print(boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','prediction']].ro
 boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','prediction']].to_csv("/home/ec2-user/plutus/bbout.csv")
 #fortunacommon.sendMail("Data","SMA Data","/home/ec2-user/plutus/bbout.csv")
 
-
+# -----------
+# SMA Plot
+# -----------
 plot_df=boll_df[['close','sma20', 'hband','lband','hband_1_20','lband_1_20']]
 plot_df=plot_df.dropna()
 plot = plot_df.plot(color = ['xkcd:darkblue','xkcd:grey','xkcd:grey','xkcd:grey','xkcd:grey','xkcd:grey'], figsize=(12, 8), legend=False)
@@ -242,14 +162,6 @@ fig = plot.get_figure()
 fig.savefig("/home/ec2-user/plutus/smaplot.png")
 #fortunacommon.sendMail("Plot","SMA Plot","/home/ec2-user/plutus/smaplot.png")
 
-'''
-bplot_df=history_df[['open','close','high','low']]
-bplot_df=bplot_df.dropna()
-boxplot = bplot_df.boxplot(column=['open','close','high','low'])
-fig = plot.get_figure()
-fig.savefig("/home/ec2-user/plutus/candle.png")
-#fortunacommon.sendMail("Candle","Candle","/home/ec2-user/plutus/candle.png")
-'''
 
 # -----------
 # Candle Plot
