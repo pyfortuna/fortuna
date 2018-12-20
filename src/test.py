@@ -101,7 +101,7 @@ def getHistoricData(companyName, startDate, endDate):
 # -----------------------------------------------
 e = datetime.datetime.now()
 s = e - datetime.timedelta(days=60)
-dayList = get100DayList(s,e)
+#dayList = get100DayList(s,e)
 history_df = nu.getHistoricPrice('ASHOKLEY',s,e)
 
 # ------------------------------------------------------------------------------------------------
