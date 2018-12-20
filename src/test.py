@@ -7,12 +7,14 @@ References:
 '''
 
 import datetime
+import nseUtil as nu
 import fortunacommon
 import urllib.request
 import matplotlib
 import pandas as pd
 import candleplot as cplot
 
+'''
 pr=fortunacommon.loadAppProperties()
 
 # ------------------------------
@@ -93,14 +95,14 @@ def getHistoricData(companyName, startDate, endDate):
 
   o_df=history_df[['open','high','low','close','vwap']]
   return o_df
-
+'''
 # -----------------------------------------------
 # MAIN PROGRAM
 # -----------------------------------------------
 e = datetime.datetime.now()
 s = e - datetime.timedelta(days=60)
 dayList = get100DayList(s,e)
-history_df = getHistoricData('ASHOKLEY',s,e)
+history_df = nu.getHistoricPrice('ASHOKLEY',s,e)
 
 # ------------------------------------------------------------------------------------------------
 # Bollinger Bands
