@@ -7,11 +7,10 @@ References:
 '''
 
 import datetime
-import fortunacommon
 import urllib.request
-import matplotlib
+#import matplotlib
 import pandas as pd
-import candleplot as cplot
+#import candleplot as cplot
 
 # ------------------------------
 # Return header for HTTP Request
