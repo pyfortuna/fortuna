@@ -33,6 +33,7 @@ def processBB(companyCode):
   hband_1_20 = sma20 + mstd
   lband_1_20 = sma20 - mstd
   bbw = mstd/sma20*100
+  bbpos = round((sma20-lband)/(hband-lband)*9)+1
 
   boll_df=boll_df.assign(sma20=sma20)
   boll_df=boll_df.assign(hband=hband)
@@ -40,6 +41,7 @@ def processBB(companyCode):
   boll_df=boll_df.assign(hband_1_20=hband_1_20)
   boll_df=boll_df.assign(lband_1_20=lband_1_20)
   boll_df=boll_df.assign(bbw=bbw)
+  boll_df=boll_df.assign(bbpos=bbpos)
 
   # Find Bollinger Band Position
   def getBBPos(row):
