@@ -33,7 +33,7 @@ def getRequest(symbol, fromDt, toDt):
   values = {'symbol' : symbol,
             'segmentLink' : '3',
             'symbolCount' : '1',
-            'series' : 'ALL',
+            'series' : 'EQ', #2018/12/27: Changed ALL to EQ
             'dateRange' : '',
             'fromDate' : fromDt,
             'toDate' : toDt,
