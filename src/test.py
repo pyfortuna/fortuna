@@ -19,19 +19,19 @@ import bollingerUtil as bu
 # MAIN PROGRAM
 # -----------------------------------------------
 def process(companyCode):
-  print('='*20)
+  print('-'*40)
   print(companyCode)
   boll_df = bu.processBB(companyCode)
   # Print output
   print(boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','bbpos','prediction']].tail(10).round(1).to_string())
-  print('='*20)
-
   # Create output file
   boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','prediction']].to_csv("/home/ec2-user/plutus/bbout.csv")
   #fortunacommon.sendMail("Data","SMA Data","/home/ec2-user/plutus/bbout.csv")
 
 process('ASHOKLEY')
 process('SUPRAJIT')
+process('IBULHSGFIN')
+process('TATAMOTORS')
 '''
 # -----------
 # SMA Plot
