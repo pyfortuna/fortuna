@@ -18,15 +18,21 @@ import bollingerUtil as bu
 # -----------------------------------------------
 # MAIN PROGRAM
 # -----------------------------------------------
-boll_df = bu.processBB('ASHOKLEY')
+def process(companyCode):
+  print('='*20)
+  print(companyCode)
+  boll_df = bu.processBB(companyCode)
+  # Print output
+  print(boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','bbpos','prediction']].tail(10).round(1).to_string())
+  print('='*20)
 
-# Print output
-print(boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','bbpos','prediction']].tail(10).round(1).to_string())
+  # Create output file
+  boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','prediction']].to_csv("/home/ec2-user/plutus/bbout.csv")
+  #fortunacommon.sendMail("Data","SMA Data","/home/ec2-user/plutus/bbout.csv")
 
-# Create output file
-boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','prediction']].to_csv("/home/ec2-user/plutus/bbout.csv")
-#fortunacommon.sendMail("Data","SMA Data","/home/ec2-user/plutus/bbout.csv")
-
+process('ASHOKLEY')
+process('SUPRAJIT')
+'''
 # -----------
 # SMA Plot
 # -----------
@@ -41,7 +47,6 @@ fig.savefig("/home/ec2-user/plutus/smaplot.png")
 # -----------
 # Candle Plot
 # -----------
-'''
 bplot_df=history_df[['open','close','high','low']]
 bplot_df=bplot_df.dropna()
 print(bplot_df)
