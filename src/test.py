@@ -13,8 +13,9 @@ import fortunacommon
 import matplotlib
 import pandas as pd
 import candleplot as cplot
+import bollingerUtil as bu
 
-
+'''
 # -----------------------------------------------
 # MAIN PROGRAM
 # -----------------------------------------------
@@ -144,6 +145,9 @@ def getPrediction(row):
     else:
         return ""
 boll_df.loc[:, 'prediction'] = boll_df.apply(getPrediction, axis = 1)
+'''
+
+boll_df = bu.processBB('ASHOKLEY')
 
 # Print output
 print(boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','prediction']].round(1).to_string())
@@ -171,4 +175,4 @@ bplot_df=bplot_df.dropna()
 print(bplot_df)
 o_file="/home/ec2-user/plutus/candle.png"
 cplot.plotCandlestick(bplot_df,o_file,'%d-%b-%Y')
-fortunacommon.sendMail("Candle","Candle",o_file)
+#fortunacommon.sendMail("Candle","Candle",o_file)
