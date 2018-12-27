@@ -7,7 +7,7 @@ References:
 '''
 
 import datetime
-import nseUtil as nu
+#import nseUtil as nu
 import fortunacommon
 #import urllib.request
 import matplotlib
@@ -21,7 +21,7 @@ import bollingerUtil as bu
 boll_df = bu.processBB('ASHOKLEY')
 
 # Print output
-print(boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','prediction']].round(1).to_string())
+print(boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','bbpos','prediction']].round(1).to_string())
 
 # Create output file
 boll_df[['close','trend', 'strength','bb','bbwr','bbwrt','prediction']].to_csv("/home/ec2-user/plutus/bbout.csv")
