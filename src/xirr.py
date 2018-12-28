@@ -63,6 +63,6 @@ for companyName in companyList:
 		}
 	xirrList.append(xirrData)
 xirrDF=pd.DataFrame(xirrList)
-xirrDF=xirrDF.setIndex("companyName")
+xirrDF=xirrDF.set_index("companyName")
 print(xirrDF)
 print(xirrDF.sort_values(by=['companyName']))
