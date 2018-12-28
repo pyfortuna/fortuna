@@ -32,62 +32,33 @@ def getDataFromFile(filePath):
 def getCashFlowData(df):
 	currentDate = datetime.datetime.now() #.strftime("%d-%b-%y")
 	xirrList=[]
-	dateList=[]
-	cfList=[]
 	for index, row in df.iterrows():
 		buy=row['unitPrice'] * row['qty'] * -1
 		sell=row['cmp'] * row['qty']
-		'''
-		xirrBuyData = {
-			"date": datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"),
-			"value": buy
-		}
-		xirrSellData = {
-			"date": currentDate,
-			"value": sell
-		}
-		xirrList.append(xirrBuyData)
-		xirrList.append(xirrSellData)
-		'''
-		#dateList.append(datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"))
-		#cfList.append(buy)
-		#dateList.append(currentDate)
-		#cfList.append(sell)
 		xirrList.append(tuple((datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"), buy)))
 		xirrList.append(tuple((currentDate, sell)))
-	#print(dateList)
-	#print(cfList)	
-	#xirrList=zip(dateList,cfList)
-	#dfCashFlow=pd.DataFrame(xirrList)
 	return xirrList
 
 # ------------
 # MAIN PROGRAM
 # ------------
 
-
+'''
 cftest = [(datetime.datetime.strptime("25-Sep-17","%d-%b-%y"), -10001), (datetime.datetime.strptime("27-Dec-18","%d-%b-%y"), 11140)]
 print(cftest)
 print(xirr(cftest))
+'''
 
-
-# Read portfolio data from file
 df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
-# Use only required columns, and drop unwanted columns
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
-# Get Unique list of companies
 companyList=df2.company.unique().tolist()
-companyList=['TCS']
-# Iterate for each company
 for companyName in companyList:
-	# Filter rows for specific company
 	df3=df2[df2.company==companyName]
-	print("===== ",companyName," =====")
-	print(df3)
-	# Convert PF data to cash flow data
+	#print("===== ",companyName," =====")
+	#print(df3)
 	cashflows=getCashFlowData(df3)
-	print(cashflows)
+	#print(cashflows)
 	x=xirr(cashflows)
-	print("XIRR : ",round(x*100,2))
+	print(companyName," : ",round(x*100,2))
 	
     
