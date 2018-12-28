@@ -38,4 +38,4 @@ print(xirr(cftest))
 '''
 
 df=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
-print(df.company.unique())
+print(df.company.unique().tolist())
