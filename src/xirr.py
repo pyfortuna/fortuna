@@ -37,15 +37,21 @@ print(xirr(cftest))
 
 def getData(df):
 	currentDate = datetime.datetime.now().strftime("%d-%b-%y")
+	xirrList=[]
 	for index, row in df.iterrows():
-		print("DEBUG : (a) ", row['buyDate'])
-		print("DEBUG : (b) ", row['unitPrice'])
-		print("DEBUG : (c) ", row['qty'])
-		print("DEBUG : (d) ", row['cmp'])
-		print("DEBUG : (e) ", currentDate)
 		buy=row['unitPrice'] * row['qty'] * -1
 		sell=row['cmp'] * row['qty']
-		print("B: ", buy, " S: ", sell)
+		xirrBuyData = {
+			"date": row['buyDate'],
+			"value": buy
+		}
+		xirrSellData = {
+			"date": currentDate,
+			"value": sell
+		}
+		xirrList.append(xirrBuyData)
+		xirrList.append(xirrSellData)
+	return xirrList
 
 # ------------
 # MAIN PROGRAM
@@ -57,5 +63,6 @@ for companyName in companyList:
 	df3=df2[df2.company==companyName]
 	print("===== ",companyName," =====")
 	print(df3)
-	getData(df3)
+	xirrList=getData(df3)
+	print(xirrList)
     
