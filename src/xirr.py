@@ -1,5 +1,4 @@
 # https://codereview.stackexchange.com/questions/179099/user-defined-xirr-function-exception-handling
-
 import datetime
 from scipy import optimize
 import pandas as pd
@@ -31,13 +30,13 @@ def getDataFromFile(filePath):
 
 def getCashFlowData(df):
 	currentDate = datetime.datetime.now() #.strftime("%d-%b-%y")
-	xirrList=[]
+	cfList=[]
 	for index, row in df.iterrows():
 		buy=row['unitPrice'] * row['qty'] * -1
 		sell=row['cmp'] * row['qty']
-		xirrList.append(tuple((datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"), buy)))
-		xirrList.append(tuple((currentDate, sell)))
-	return xirrList
+		cfList.append(tuple((datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"), buy)))
+		cfList.append(tuple((currentDate, sell)))
+	return cfList
 
 def processPF(df):
 	companyList=df.company.unique().tolist()
@@ -45,7 +44,7 @@ def processPF(df):
 	for companyName in companyList:
 		dfCF=df[df.company==companyName]
 		cashflows=getCashFlowData(dfCF)
-		x=int(xirr(cashflows)*100.0)
+		x=xirr(cashflows)
 		xirrData = {
 			"companyName": companyName,
 			"xirr": x
