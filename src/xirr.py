@@ -37,5 +37,5 @@ print(cftest)
 print(xirr(cftest))
 '''
 
-df=getDataFromFile(/home/ec2-user/fortuna/fortuna/data/pfdata.tsv)
+df=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
 print(df.head())
