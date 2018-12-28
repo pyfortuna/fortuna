@@ -25,7 +25,7 @@ def xirr(cashflows,guess=0.1):
             return float("NaN")
 
 #cftest = [(datetime.date(2001, 12, 5), -2000), (datetime.date(2007, 12, 5), -10), (datetime.date(2017, 12, 5), 20)]
-cftest = [(datetime.strptime("25-Sep-2017","%d-%b-%Y"), -10001), (datetime.strptime("27-Dec-2018","%d-%b-%Y"), 11140)]
+cftest = [(datetime.datetime.strptime("25-Sep-2017","%d-%b-%Y"), -10001), (datetime.datetime.strptime("27-Dec-2018","%d-%b-%Y"), 11140)]
 #cftest = [(datetime.date(2001, 12, 5), -2000), (datetime.date(2007, 12, 5), -1000), (datetime.date(2017, 12, 5), 20)]
 print(cftest)
 print(xirr(cftest))
