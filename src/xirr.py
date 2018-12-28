@@ -36,13 +36,23 @@ cftest = [(datetime.datetime.strptime("25-Sep-2017","%d-%b-%Y"), -10001), (datet
 print(cftest)
 print(xirr(cftest))
 '''
+def getData(df):
+    currentDate = datetime.datetime.now().strftime("%d-%b-%y")
+    for index, row in df.iterrows():
+	try:
+		print("DEBUG : (a) " + row['buyDate'])
+		print("DEBUG : (b) " + row['unitPrice'])
+		print("DEBUG : (c) " + row['qty'])
+		print("DEBUG : (d) " + row['cmp'])
+		print("DEBUG : (d) " + row['currentDate'])
+    buy=row['unitPrice'] * row['qty'] * -1
+    sell=row['cmp'] * row['qty']
 
 df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
-print(df1.company.unique().tolist())
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
-print(df2)
 companyList=df2.company.unique().tolist()
 for companyName in companyList:
     df3=df2[df2.company==companyName]
     print("===== ",companyName," =====")
     print(df3)
+    
