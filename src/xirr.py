@@ -73,7 +73,8 @@ df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
 # Get Unique list of companies
 companyList=df2.company.unique().tolist()
-# Iterate for eac company
+companyList=['TCS']
+# Iterate for each company
 for companyName in companyList:
 	# Filter rows for specific company
 	df3=df2[df2.company==companyName]
@@ -81,7 +82,7 @@ for companyName in companyList:
 	print(df3)
 	# Convert PF data to cash flow data
 	cashflows=getCashFlowData(df3)
-	#print(cashflows)
+	print(cashflows)
 	x=xirr(cashflows)
 	print("XIRR : ",round(x*100,2))
 	
