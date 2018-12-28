@@ -53,6 +53,8 @@ def getCashFlowData(df):
 		cfList.append(buy)
 		dateList.append(currentDate)
 		cfList.append(sell)
+	print(dateList)
+	print(cfList)	
 	xirrList=zip(dateList,cfList)
 	#dfCashFlow=pd.DataFrame(xirrList)
 	return xirrList
