@@ -37,5 +37,7 @@ print(cftest)
 print(xirr(cftest))
 '''
 
-df=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
-print(df.company.unique().tolist())
+df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
+print(df1.company.unique().tolist())
+df2=df1[['company','buyDate','unitPrice','qty','cmp']]
+print(df2)
