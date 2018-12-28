@@ -61,11 +61,12 @@ def getCashFlowData(df):
 # MAIN PROGRAM
 # ------------
 
-'''
-cftest = [(datetime.datetime.strptime("25-Sep-2017","%d-%b-%Y"), -10001), (datetime.datetime.strptime("27-Dec-2018","%d-%b-%Y"), 11140)]
+
+cftest = [(datetime.datetime.strptime("25-Sep-17","%d-%b-%Y"), -10001), (datetime.datetime.strptime("27-Dec-18","%d-%b-%Y"), 11140)]
 print(cftest)
 print(xirr(cftest))
-'''
+
+
 # Read portfolio data from file
 df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
 # Use only required columns, and drop unwanted columns
@@ -80,7 +81,8 @@ for companyName in companyList:
 	print(df3)
 	# Convert PF data to cash flow data
 	cashflows=getCashFlowData(df3)
-	print(cashflows)
-	print(xirr(cashflows))
+	#print(cashflows)
+	x=xirr(cashflows)
+	print("XIRR : ",round(x*100,2))
 	
     
