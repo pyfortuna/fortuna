@@ -51,7 +51,8 @@ def getData(df):
 		}
 		xirrList.append(xirrBuyData)
 		xirrList.append(xirrSellData)
-	return xirrList
+	dfOut=pd.DataFrame(xirrList)
+	return dfOut
 
 # ------------
 # MAIN PROGRAM
