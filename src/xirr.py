@@ -40,7 +40,7 @@ def getCashFlowData(df):
 
 def processPF(df):
 	companyList=df.company.unique().tolist()
-	companyList=['Reliance','TCS','KRBL']
+	#companyList=['Reliance','TCS','KRBL']
 	xirrList=[]
 	for companyName in companyList:
 		dfCF=df[df.company==companyName]
