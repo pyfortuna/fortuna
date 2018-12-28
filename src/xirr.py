@@ -36,7 +36,7 @@ def getCashFlowData(df):
 		buy=row['unitPrice'] * row['qty'] * -1
 		sell=row['cmp'] * row['qty']
 		xirrBuyData = {
-			"date": datetime.datetime.strptime(row['buyDate'],"%d-%b-%Y"),
+			"date": datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"),
 			"value": buy
 		}
 		xirrSellData = {
