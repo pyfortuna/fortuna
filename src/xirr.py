@@ -42,7 +42,7 @@ print(df1.company.unique().tolist())
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
 print(df2)
 companyList=df2.company.unique().tolist()
-for(companyName in companyList):
+for companyName in companyList:
     df3=df2[df2.company==companyName]
     print("===== ",companyName," =====")
     print df3
