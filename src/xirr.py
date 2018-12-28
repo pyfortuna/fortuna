@@ -42,7 +42,7 @@ def getData(df):
 		print("DEBUG : (b) ", row['unitPrice'])
 		print("DEBUG : (c) ", row['qty'])
 		print("DEBUG : (d) ", row['cmp'])
-		print("DEBUG : (d) ", row['currentDate'])
+		print("DEBUG : (e) ", currentDate)
 		buy=row['unitPrice'] * row['qty'] * -1
 		sell=row['cmp'] * row['qty']
 		print("B: ", buy, " S: ", sell)
