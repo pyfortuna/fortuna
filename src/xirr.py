@@ -32,7 +32,7 @@ def getCashFlowData(df):
 	currentDate = datetime.datetime.now() #.strftime("%d-%b-%y")
 	cfList=[]
 	for index, row in df.iterrows():
-		buy=round(row['unitPrice'] * row['qty'] * -1,2)
+		buy=round(-1 * row['unitPrice'] * row['qty'],2)
 		sell=round(row['cmp'] * row['qty'],2)
 		cfList.append(tuple((datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"), buy)))
 		cfList.append(tuple((currentDate, sell)))
@@ -64,4 +64,4 @@ df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
 xirrDF=processPF(df2)
 pd.options.display.float_format = '{:,.2f}'.format
-print(xirrDF.sort_values(by=['xirr'], ascending=False))
+print(xirrDF.sort_values(by=['xirr'],ascending=False))
