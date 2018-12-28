@@ -45,7 +45,7 @@ def processPF(df):
 	for companyName in companyList:
 		dfCF=df[df.company==companyName]
 		cashflows=getCashFlowData(dfCF)
-		x=round(xirr(cashflows)*100,2)
+		x=xirr(cashflows)*100
 		xirrData = {
 			"companyName": companyName,
 			"xirr": x
@@ -54,16 +54,10 @@ def processPF(df):
 	xirrDF=pd.DataFrame(xirrList)
 	xirrDF=xirrDF.set_index("companyName")
 	return xirrDF
+
 # ------------
 # MAIN PROGRAM
 # ------------
-
-'''
-cftest = [(datetime.datetime.strptime("25-Sep-17","%d-%b-%y"), -10001), (datetime.datetime.strptime("27-Dec-18","%d-%b-%y"), 11140)]
-print(cftest)
-print(xirr(cftest))
-'''
-
 df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
 xirrDF=processPF(df2)
