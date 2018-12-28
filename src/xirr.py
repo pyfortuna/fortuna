@@ -45,4 +45,4 @@ companyList=df2.company.unique().tolist()
 for companyName in companyList:
     df3=df2[df2.company==companyName]
     print("===== ",companyName," =====")
-    print df3
+    print(df3)
