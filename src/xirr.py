@@ -45,7 +45,7 @@ def processPF(df):
 	for companyName in companyList:
 		dfCF=df[df.company==companyName]
 		cashflows=getCashFlowData(dfCF)
-		x=xirr(cashflows)*100
+		x=round(xirr(cashflows)*100.0,2)
 		xirrData = {
 			"companyName": companyName,
 			"xirr": x
