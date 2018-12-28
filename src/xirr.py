@@ -62,5 +62,6 @@ for companyName in companyList:
 		"xirr": x
 		}
 	xirrList.append(xirrData)
-xirrDF=pd.DataFrame(xirrList)
+xirrDF=pd.DataFrame(xirrList, index="companyName")
 print(xirrDF)
+print(xirrDF.sort_values(by=['companyName']))
