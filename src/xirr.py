@@ -81,7 +81,6 @@ for companyName in companyList:
 	# Convert PF data to cash flow data
 	cashflows=getCashFlowData(df3)
 	print(cashflows)
-	for (date,value) in cashflows:
-		print("DATE: ",date," VAL: ",value)
+	print(xirr(cashflows))
 	
     
