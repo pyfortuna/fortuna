@@ -62,5 +62,5 @@ for companyName in companyList:
 		"xirr": x
 		}
 	xirrList.append(xirrData)
-	xirrDF=pd.DataFrame(xirrList)
-	print(xirrDF)
+xirrDF=pd.DataFrame(xirrList)
+print(xirrDF)
