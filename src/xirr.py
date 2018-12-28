@@ -28,28 +28,28 @@ def xirr(cashflows,guess=0.1):
 def getDataFromFile(filePath):
     df=pd.read_table(filePath)
     return df
-# ------------
-# MAIN PROGRAM
-# ------------
+
 '''
 cftest = [(datetime.datetime.strptime("25-Sep-2017","%d-%b-%Y"), -10001), (datetime.datetime.strptime("27-Dec-2018","%d-%b-%Y"), 11140)]
 print(cftest)
 print(xirr(cftest))
 '''
+
 def getData(df):
 	currentDate = datetime.datetime.now().strftime("%d-%b-%y")
 	for index, row in df.iterrows():
-		try:
-			print("DEBUG : (a) " + row['buyDate'])
-			print("DEBUG : (b) " + row['unitPrice'])
-			print("DEBUG : (c) " + row['qty'])
-			print("DEBUG : (d) " + row['cmp'])
-			print("DEBUG : (d) " + row['currentDate'])
-			buy=row['unitPrice'] * row['qty'] * -1
-			sell=row['cmp'] * row['qty']
-			print("B: ", buy, " S: ", sell)
+		print("DEBUG : (a) " + row['buyDate'])
+		print("DEBUG : (b) " + row['unitPrice'])
+		print("DEBUG : (c) " + row['qty'])
+		print("DEBUG : (d) " + row['cmp'])
+		print("DEBUG : (d) " + row['currentDate'])
+		buy=row['unitPrice'] * row['qty'] * -1
+		sell=row['cmp'] * row['qty']
+		print("B: ", buy, " S: ", sell)
 
-
+# ------------
+# MAIN PROGRAM
+# ------------
 df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
 companyList=df2.company.unique().tolist()
