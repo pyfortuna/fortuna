@@ -32,8 +32,8 @@ def getCashFlowData(df):
 	currentDate = datetime.datetime.now() #.strftime("%d-%b-%y")
 	cfList=[]
 	for index, row in df.iterrows():
-		buy=row['unitPrice'] * row['qty'] * -1
-		sell=row['cmp'] * row['qty']
+		buy=round(row['unitPrice'] * row['qty'] * -1,2)
+		sell=round(row['cmp'] * row['qty'],2)
 		cfList.append(tuple((datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"), buy)))
 		cfList.append(tuple((currentDate, sell)))
 	return cfList
