@@ -2,6 +2,7 @@
 
 import datetime
 from scipy import optimize
+import pandas as pd
 
 def xnpv(rate, cashflows):
     t0 = min(cashflows, key = lambda t: t[0])[0]
@@ -24,8 +25,17 @@ def xirr(cashflows,guess=0.1):
         except (RuntimeError, OverflowError):
             return float("NaN")
 
-#cftest = [(datetime.date(2001, 12, 5), -2000), (datetime.date(2007, 12, 5), -10), (datetime.date(2017, 12, 5), 20)]
+def getDataFromFile(filePath):
+    df=pd.read_table(filePath)
+    return df
+# ------------
+# MAIN PROGRAM
+# ------------
+'''
 cftest = [(datetime.datetime.strptime("25-Sep-2017","%d-%b-%Y"), -10001), (datetime.datetime.strptime("27-Dec-2018","%d-%b-%Y"), 11140)]
-#cftest = [(datetime.date(2001, 12, 5), -2000), (datetime.date(2007, 12, 5), -1000), (datetime.date(2017, 12, 5), 20)]
 print(cftest)
 print(xirr(cftest))
+'''
+
+df=getDataFromFile(/home/ec2-user/fortuna/fortuna/data/pfdata.tsv)
+print(df.head())
