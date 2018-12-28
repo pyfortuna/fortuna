@@ -55,16 +55,12 @@ companyList=df2.company.unique().tolist()
 xirrList=[]
 for companyName in companyList:
 	df3=df2[df2.company==companyName]
-	#print("===== ",companyName," =====")
-	#print(df3)
 	cashflows=getCashFlowData(df3)
-	#print(cashflows)
 	x=round(xirr(cashflows)*100,2)
-	#print(companyName," : ",round(x*100,2))
 	xirrData = {
 		"companyName": companyName,
 		"xirr": x
-	}
+		}
 	xirrList.append(xirrData)
-    	xirrDF=pd.dataFrame(xirrList)
+	xirrDF=pd.DataFrame(xirrList)
 	print(xirrDF)
