@@ -1,3 +1,4 @@
+broker	fund	buyDate	active	company	sector	unitPrice	qty	totalPrice	brokerage	totalInvestment	currentInvestment	brokeragePct	portfolioShare	mkt	targetPrice	targetReturn	targetReturnPct	cmp
 ZR	TT	9-Feb-18	Y	Sun TV Network	Media	970.00	2	1940.00	2.28	1942.28	1942.28	0.12	0.70	NSE	1020.00	100.00	5.15	603.20
 ZR	TT	15-Feb-18	Y	KRBL	Food & Beverage	630.00	4	2520.00	3.36	2523.36	2523.36	0.13	0.91	NSE	675.00	180.00	7.14	285.90
 ZR	TT	16-Feb-18	Y	Sun TV Network	Media	945.00	2	1890.00	2.23	1892.23	1892.23	0.12	0.68	NSE	1020.00	150.00	7.94	603.20
