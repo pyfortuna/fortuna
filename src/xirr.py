@@ -62,7 +62,7 @@ def getCashFlowData(df):
 # ------------
 
 
-cftest = [(datetime.datetime.strptime("25-Sep-17","%d-%b-%Y"), -10001), (datetime.datetime.strptime("27-Dec-18","%d-%b-%Y"), 11140)]
+cftest = [(datetime.datetime.strptime("25-Sep-17","%d-%b-%y"), -10001), (datetime.datetime.strptime("27-Dec-18","%d-%b-%y"), 11140)]
 print(cftest)
 print(xirr(cftest))
 
