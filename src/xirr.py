@@ -32,21 +32,21 @@ def getCashFlowData(df):
 	currentDate = datetime.datetime.now() #.strftime("%d-%b-%y")
 	cfList=[]
 	for index, row in df.iterrows():
-		buy=round(-1 * row['unitPrice'] * row['qty'],2)
-		sell=round(row['cmp'] * row['qty'],2)
+		buy=row['unitPrice'] * row['qty'] * -1.0
+		sell=row['cmp'] * row['qty'] * 1.0
 		cfList.append(tuple((datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"), buy)))
 		cfList.append(tuple((currentDate, sell)))
 	return cfList
 
 def processPF(df):
 	companyList=df.company.unique().tolist()
-	companyList=['Reliance','TCS','Vakrangee']
+	#companyList=['Reliance','TCS','Vakrangee']
 	xirrList=[]
 	for companyName in companyList:
 		dfCF=df[df.company==companyName]
-		print(dfCF)
+		#print(dfCF)
 		cashflows=getCashFlowData(dfCF)
-		print(cashflows)
+		#print(cashflows)
 		x=xirr(cashflows)*100
 		xirrData = {
 			"companyName": companyName,
