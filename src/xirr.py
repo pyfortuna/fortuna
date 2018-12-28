@@ -61,5 +61,5 @@ def processPF(df):
 df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
 xirrDF=processPF(df2)
-pd.options.display.float_format = '${:,.2f}'.format
+pd.options.display.float_format = '.2f'.format
 print(xirrDF.sort_values(by=['xirr'], ascending=False))
