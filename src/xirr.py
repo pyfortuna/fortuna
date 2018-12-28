@@ -45,14 +45,17 @@ def getData(df):
 		print("DEBUG : (c) " + row['qty'])
 		print("DEBUG : (d) " + row['cmp'])
 		print("DEBUG : (d) " + row['currentDate'])
-    buy=row['unitPrice'] * row['qty'] * -1
-    sell=row['cmp'] * row['qty']
+		buy=row['unitPrice'] * row['qty'] * -1
+		sell=row['cmp'] * row['qty']
+		print("B: ", buy, " S: ", sell)
+
 
 df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
 companyList=df2.company.unique().tolist()
 for companyName in companyList:
-    df3=df2[df2.company==companyName]
-    print("===== ",companyName," =====")
-    print(df3)
+	df3=df2[df2.company==companyName]
+	print("===== ",companyName," =====")
+	print(df3)
+	getData(df3)
     
