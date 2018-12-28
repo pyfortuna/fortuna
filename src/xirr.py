@@ -2,6 +2,7 @@
 import datetime
 from scipy import optimize
 import pandas as pd
+import fortunacommon
 
 def xnpv(rate, cashflows):
     t0 = min(cashflows, key = lambda t: t[0])[0]
@@ -65,3 +66,5 @@ df2=df1[['company','buyDate','unitPrice','qty','cmp']]
 xirrDF=processPF(df2)
 pd.options.display.float_format = '{:,.2f}'.format
 print(xirrDF.sort_values(by=['xirr'],ascending=False))
+xirrDF.to_csv("/home/ec2-user/plutus/xirr.csv")
+fortunacommon.sendMail("XIRR","XIRR","/home/ec2-user/plutus/xirr.csv")
