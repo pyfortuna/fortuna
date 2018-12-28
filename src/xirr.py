@@ -39,6 +39,21 @@ def getCashFlowData(df):
 		xirrList.append(tuple((currentDate, sell)))
 	return xirrList
 
+def processPF(df):
+	companyList=df.company.unique().tolist()
+	xirrList=[]
+	for companyName in companyList:
+		dfCF=df[df.company==companyName]
+		cashflows=getCashFlowData(dfCF)
+		x=round(xirr(cashflows)*100,2)
+		xirrData = {
+			"companyName": companyName,
+			"xirr": x
+			}
+		xirrList.append(xirrData)
+	xirrDF=pd.DataFrame(xirrList)
+	xirrDF=xirrDF.set_index("companyName")
+	return xirrDF
 # ------------
 # MAIN PROGRAM
 # ------------
@@ -51,18 +66,5 @@ print(xirr(cftest))
 
 df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
-companyList=df2.company.unique().tolist()
-xirrList=[]
-for companyName in companyList:
-	df3=df2[df2.company==companyName]
-	cashflows=getCashFlowData(df3)
-	x=round(xirr(cashflows)*100,2)
-	xirrData = {
-		"companyName": companyName,
-		"xirr": x
-		}
-	xirrList.append(xirrData)
-xirrDF=pd.DataFrame(xirrList)
-xirrDF=xirrDF.set_index("companyName")
-print(xirrDF)
-print(xirrDF.sort_values(by=['companyName']))
+xirrDF=processPF(df2)
+print(xirrDF.sort_values(by=['companyName'], ascending=False))
