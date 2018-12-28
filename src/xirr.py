@@ -31,7 +31,7 @@ def getDataFromFile(filePath):
 
 def getCashFlowData(df):
 	currentDate = datetime.datetime.now() #.strftime("%d-%b-%y")
-	#xirrList=[]
+	xirrList=[]
 	dateList=[]
 	cfList=[]
 	for index, row in df.iterrows():
@@ -49,13 +49,15 @@ def getCashFlowData(df):
 		xirrList.append(xirrBuyData)
 		xirrList.append(xirrSellData)
 		'''
-		dateList.append(datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"))
-		cfList.append(buy)
-		dateList.append(currentDate)
-		cfList.append(sell)
-	print(dateList)
-	print(cfList)	
-	xirrList=zip(dateList,cfList)
+		#dateList.append(datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"))
+		#cfList.append(buy)
+		#dateList.append(currentDate)
+		#cfList.append(sell)
+		xirrList.append(tuple((datetime.datetime.strptime(row['buyDate'],"%d-%b-%y"), buy)))
+		xirrList.append(tuple((currentDate, sell)))
+	#print(dateList)
+	#print(cfList)	
+	#xirrList=zip(dateList,cfList)
 	#dfCashFlow=pd.DataFrame(xirrList)
 	return xirrList
 
