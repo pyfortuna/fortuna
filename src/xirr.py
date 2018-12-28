@@ -67,4 +67,4 @@ print(xirr(cftest))
 df1=getDataFromFile("/home/ec2-user/fortuna/fortuna/data/pfdata.tsv")
 df2=df1[['company','buyDate','unitPrice','qty','cmp']]
 xirrDF=processPF(df2)
-print(xirrDF.sort_values(by=['companyName'], ascending=False))
+print(xirrDF.sort_values(by=['xirr'], ascending=False))
