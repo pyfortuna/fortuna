@@ -38,11 +38,11 @@ print(xirr(cftest))
 def getData(df):
 	currentDate = datetime.datetime.now().strftime("%d-%b-%y")
 	for index, row in df.iterrows():
-		print("DEBUG : (a) " + row['buyDate'])
-		print("DEBUG : (b) " + row['unitPrice'])
-		print("DEBUG : (c) " + row['qty'])
-		print("DEBUG : (d) " + row['cmp'])
-		print("DEBUG : (d) " + row['currentDate'])
+		print("DEBUG : (a) ", row['buyDate'])
+		print("DEBUG : (b) ", row['unitPrice'])
+		print("DEBUG : (c) ", row['qty'])
+		print("DEBUG : (d) ", row['cmp'])
+		print("DEBUG : (d) ", row['currentDate'])
 		buy=row['unitPrice'] * row['qty'] * -1
 		sell=row['cmp'] * row['qty']
 		print("B: ", buy, " S: ", sell)
