@@ -18,8 +18,8 @@ history_df=history_df.assign(sma200=sma200)
 history_df=history_df.dropna()
 
 # Plot chart
-plt.plot( 'Date', 'sma200', data=history_df, marker='', markerfacecolor='blue', markersize=12, color='skyblue', linewidth=4)
-plt.plot( 'Date', 'close', data=history_df, marker='', color='olive', linewidth=2)
+plt.plot( y='sma200', data=history_df, color='skyblue', linewidth=4)
+plt.plot( y='close', data=history_df, color='olive', linewidth=2)
 plt.savefig('/home/ec2-user/plutus/plotsample001.png', dpi=96, bbox_inches='tight')
 
 # Send mail
