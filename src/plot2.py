@@ -26,4 +26,4 @@ plt.plot(kind='line',x=history_df.index.values,y=history_df['close'])
 plt.savefig('/home/ec2-user/plutus/plotsample001.png', dpi=96, bbox_inches='tight')
 
 # Send mail
-fc.sendmail('Plot','Plot','/home/ec2-user/plutus/plotsample001.png')
+fc.sendMail('Plot','Plot','/home/ec2-user/plutus/plotsample001.png')
