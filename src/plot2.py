@@ -16,7 +16,12 @@ boll_df=history_df[['close']]
 sma200 = history_df['close'].rolling(200).mean()
 history_df=history_df.assign(sma200=sma200)
 history_df=history_df.dropna()
-print(history_df)
+print(history_df.head())
+print(history_df.tail())
+history_df = history_df.reset_index()
+history_df = history_df['sma200','close']
+print(history_df.head())
+print(history_df.tail())
 
 # Plot chart
 #plt.plot( y='sma200', data=history_df, color='skyblue', linewidth=4)
