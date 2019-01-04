@@ -21,9 +21,8 @@ print(history_df)
 # Plot chart
 #plt.plot( y='sma200', data=history_df, color='skyblue', linewidth=4)
 #plt.plot( y='close', data=history_df, color='olive', linewidth=2)
-ax = plt.gca()
-history_df.plot(kind='line',x='Date',y='sma200',ax=ax)
-history_df.plot(kind='line',x='Date',y='close', color='red', ax=ax)
+plt.plot(kind='line',x=history_df.index.values,y=history_df['sma200'])
+plt.plot(kind='line',x=history_df.index.values,y=history_df['close'])
 plt.savefig('/home/ec2-user/plutus/plotsample001.png', dpi=96, bbox_inches='tight')
 
 # Send mail
