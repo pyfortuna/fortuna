@@ -19,7 +19,7 @@ history_df=history_df.dropna()
 print(history_df.head())
 print(history_df.tail())
 history_df = history_df.reset_index()
-history_df = history_df['sma200','close']
+history_df = history_df[['sma200','close']]
 print(history_df.head())
 print(history_df.tail())
 
