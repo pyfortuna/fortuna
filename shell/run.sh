@@ -1,4 +1,4 @@
 cd ~/fortuna/fortuna/src
-python3 xirr.py
+python3 plot2.py
 
 exit
