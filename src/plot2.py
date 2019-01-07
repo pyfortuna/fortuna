@@ -4,13 +4,19 @@ import nseUtil as nu
 import fortunacommon as fc
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np #test
+
 
 # Configure parameters
+'''
 companyCode='ASHOKLEY'
 e = datetime.datetime.now()
 s = e - datetime.timedelta(days=365)
+'''
+
 
 # Data preparation
+'''
 history_df = nu.getHistoricPrice(companyCode,s,e)
 boll_df=history_df[['close']]
 sma200 = history_df['close'].rolling(200).mean()
@@ -22,13 +28,22 @@ history_df = history_df.reset_index()
 history_df = history_df[['sma200','close']]
 print(history_df.head())
 print(history_df.tail())
+'''
+x=np.linspace(0,10,100)
+
 
 # Plot chart
+'''
 #plt.plot( y='sma200', data=history_df, color='skyblue', linewidth=4)
 #plt.plot( y='close', data=history_df, color='olive', linewidth=2)
 plt.plot(kind='line',x=history_df.index.values,y=history_df['sma200'])
 plt.plot(kind='line',x=history_df.index.values,y=history_df['close'])
 plt.savefig('/home/ec2-user/plutus/plotsample001.png', dpi=96, bbox_inches='tight')
+'''
+plt.plot(x,np.sin(x))
+plt.plot(x,np.cos(x))
+plt.savefig('/home/ec2-user/plutus/study001.png')
+
 
 # Send mail
-fc.sendMail('Plot','Plot','/home/ec2-user/plutus/plotsample001.png')
+fc.sendMail('Plot','Plot','/home/ec2-user/plutus/study001.png')
