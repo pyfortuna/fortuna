@@ -30,8 +30,8 @@ print(history_df.tail())
 # Plot chart
 #plt.plot( y='sma200', data=history_df, color='skyblue', linewidth=4)
 #plt.plot( y='close', data=history_df, color='olive', linewidth=2)
-plt.plot(history_df.index.values,history_df['sma200'].values)
-plt.plot(history_df.index.values,history_df['close'].values)
+plt.plot(history_df.index.values,history_df['sma200'].values, color='skyblue', label='SMA/200')
+plt.plot(history_df.index.values,history_df['close'].values, color='olive', label=companyCode)
 plt.savefig('/home/ec2-user/plutus/plotsample001.png')
 '''
 plt.plot(x,np.sin(x))
