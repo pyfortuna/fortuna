@@ -35,8 +35,11 @@ ax.plot(df.index.values,df['sma200'].values, color='skyblue', label='SMA/200')
 ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
 fig.autofmt_xdate()
 '''
-plt.plot_date(df.index.values,df['sma200'].values, color='skyblue', label='SMA/200')
-plt.plot_date(df.index.values,df['close'].values, color='olive', label=companyCode)
+fig, ax = plt.subplots()
+ax.plot_date(df.index.values,df['sma200'].values, color='skyblue', label='SMA/200')
+ax.plot_date(df.index.values,df['close'].values, color='olive', label=companyCode)
+fig.autofmt_xdate()
+ax.fmt_xdata = mdates.DateFormatter('%Y-%m')
 plt.savefig('/home/ec2-user/plutus/plotsample002.png')
 
 # Send mail
