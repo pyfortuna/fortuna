@@ -36,6 +36,7 @@ ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
 fig.autofmt_xdate()
 '''
 plt.plot_date(df.index.values,df['sma200'].values, color='skyblue', label='SMA/200')
+plt.plot_date(df.index.values,df['close'].values, color='olive', label=companyCode)
 plt.savefig('/home/ec2-user/plutus/plotsample002.png')
 
 # Send mail
