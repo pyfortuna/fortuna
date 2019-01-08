@@ -41,8 +41,9 @@ ax.xaxis.set_minor_locator(months)
 ax.plot(history_df.index.values,history_df['sma200'].values, color='skyblue', label='SMA/200')
 ax.plot(history_df.index.values,history_df['close'].values, color='olive', label=companyCode)
 ax.legend()
+ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
 fig.autofmt_xdate()
-fig.savefig('/home/ec2-user/plutus/plotsample001.png')
+fig.savefig('/home/ec2-user/plutus/plotsample002.png')
 '''
 plt.plot(x,np.sin(x))
 plt.plot(x,np.cos(x))
@@ -50,4 +51,4 @@ plt.savefig('/home/ec2-user/plutus/study001.png')
 '''
 
 # Send mail
-fc.sendMail('Plot','Plot','/home/ec2-user/plutus/plotsample001.png')
+fc.sendMail('Plot','Plot','/home/ec2-user/plutus/plotsample002.png')
