@@ -9,7 +9,7 @@ import matplotlib.dates as mdates
 # Configure parameters
 companyCode='ASHOKLEY'
 e = datetime.datetime.now()
-s = e - datetime.timedelta(days=300)
+s = e - datetime.timedelta(days=310)
 
 # Data preparation
 df = nu.getHistoricPrice(companyCode,s,e)
@@ -36,8 +36,8 @@ ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
 fig.autofmt_xdate()
 '''
 fig, ax = plt.subplots()
-ax.plot_date(df.index.values,df['sma200'].values, color='skyblue', label='SMA/200')
-ax.plot_date(df.index.values,df['close'].values, color='olive', label=companyCode)
+ax.plot(df.index.values,df['sma200'].values, color='skyblue', label='SMA/200')
+ax.plot(df.index.values,df['close'].values, color='olive', label=companyCode)
 fig.autofmt_xdate()
 ax.fmt_xdata = mdates.DateFormatter('%Y-%m')
 plt.savefig('/home/ec2-user/plutus/plotsample002.png')
