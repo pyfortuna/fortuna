@@ -5,7 +5,7 @@ import fortunacommon as fc
 import matplotlib.pyplot as plt
 import pandas as pd
 #import numpy as np #test
-
+import matplotlib.dates as mdates
 
 # Configure parameters
 companyCode='ASHOKLEY'
@@ -28,11 +28,19 @@ print(history_df.tail())
 
 
 # Plot chart
+# format the ticks
+fig, ax = plt.subplots()
+years = mdates.YearLocator()   # every year
+months = mdates.MonthLocator()  # every month
+yearsFmt = mdates.DateFormatter('%Y')
+ax.xaxis.set_major_locator(years)
+ax.xaxis.set_major_formatter(yearsFmt)
+ax.xaxis.set_minor_locator(months)
 #plt.plot( y='sma200', data=history_df, color='skyblue', linewidth=4)
 #plt.plot( y='close', data=history_df, color='olive', linewidth=2)
-plt.plot(history_df.index.values,history_df['sma200'].values, color='skyblue', label='SMA/200')
-plt.plot(history_df.index.values,history_df['close'].values, color='olive', label=companyCode)
-plt.legend()
+ax.plot(history_df.index.values,history_df['sma200'].values, color='skyblue', label='SMA/200')
+ax.plot(history_df.index.values,history_df['close'].values, color='olive', label=companyCode)
+ax.legend()
 plt.savefig('/home/ec2-user/plutus/plotsample001.png')
 '''
 plt.plot(x,np.sin(x))
