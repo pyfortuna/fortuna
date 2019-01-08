@@ -9,7 +9,7 @@ import matplotlib.dates as mdates
 # Configure parameters
 companyCode='ASHOKLEY'
 e = datetime.datetime.now()
-s = e - datetime.timedelta(days=600)
+s = e - datetime.timedelta(days=220)
 
 # Data preparation
 df = nu.getHistoricPrice(companyCode,s,e)
