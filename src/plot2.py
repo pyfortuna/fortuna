@@ -10,7 +10,7 @@ import matplotlib.dates as mdates
 # Configure parameters
 companyCode='ASHOKLEY'
 e = datetime.datetime.now()
-s = e - datetime.timedelta(days=500)
+s = e - datetime.timedelta(days=600)
 
 
 # Data preparation
@@ -39,7 +39,7 @@ ax.xaxis.set_minor_locator(months)
 #plt.plot( y='sma200', data=history_df, color='skyblue', linewidth=4)
 #plt.plot( y='close', data=history_df, color='olive', linewidth=2)
 ax.plot(history_df.index.values,history_df['sma200'].values, color='skyblue', label='SMA/200')
-ax.plot(history_df.index.values,history_df['close'].values, color='olive', label=companyCode)
+#ax.plot(history_df.index.values,history_df['close'].values, color='olive', label=companyCode)
 ax.legend()
 ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
 fig.autofmt_xdate()
