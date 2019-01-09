@@ -11,36 +11,20 @@ import fortunacommon
 
 #def plotCandlestick(df,filename,dateFormat):
 def plotCandlestick(df,filename):
-  print(df)
   ohlc = []
   for index, row in df.iterrows():
     #nDate=date2num(datetime.strptime(row.name,dateFormat))
-    print(row.name)
-    print(type(row.name))
-    print(row.name.to_pydatetime())
-    print(type(row.name.to_pydatetime()))
     nDate=date2num(row.name.to_pydatetime())
-    print(nDate)
-    print(type(nDate))
-    print(row['open'])
-    print(type(row['open']))
-    print(row['high'])
-    print(type(row['high']))
-    print(row['low'])
-    print(type(row['low']))
-    print(row['close'])
-    print(type(row['close']))
     rec = nDate, row['open'], row['high'], row['low'], row['close']
-    print(rec)
     ohlc.append(rec)
-    print(ohlc)
-  fig, ax = plt.subplots(figsize=(20, 15))
+  #fig, ax = plt.subplots(figsize=(20, 15))
+  fig, ax = plt.subplots()
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#db3f3f')
   ax.autoscale_view()
   ax.xaxis.grid(True, 'major')
   ax.grid(True)
-  ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-  fig.autofmt_xdate()
+  ax.xaxis.set_major_formatter(mdates.DateFormatter('%d-%b-%Y'))
+  #fig.autofmt_xdate()
   fig.savefig(filename, dpi=300)
 
 '''
