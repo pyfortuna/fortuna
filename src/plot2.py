@@ -40,7 +40,8 @@ ax.xaxis.set_major_formatter(mdates.DateFormatter('%b\n%Y'))
 plt.savefig(smaFilename, dpi=300)
 
 df1=df.tail(10)
-cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
+#cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
+cp.plotCandlestick(df1,candleFilename)
 
 
 # Send mail
