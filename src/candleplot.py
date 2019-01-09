@@ -20,8 +20,12 @@ def plotCandlestick(df,filename):
     print(row.name.to_pydatetime())
     print(type(row.name.to_pydatetime()))
     nDate=date2num(row.name.to_pydatetime())
+    print(nDate)
+    print(type(nDate))
     rec = nDate, row['open'], row['high'], row['low'], row['close']
+    print(rec)
     ohlc.append(rec)
+    print(ohlc)
   fig, ax = plt.subplots(figsize=(20, 15))
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#db3f3f')
   ax.autoscale_view()
