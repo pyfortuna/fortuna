@@ -24,6 +24,7 @@ def plotCandlestick(df,filename):
   ax.autoscale_view()
   #ax.xaxis.grid(True, 'major')
   #ax.grid(True)
+  ax.fill_between(df.index.values, df['hband'].values, df['lband'].values, color='blue', alpha=0.2)
   ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=[0,2,4])) #test001
   ax.xaxis.set_major_formatter(mdates.DateFormatter('%d\n%b'))
   #fig.autofmt_xdate()
