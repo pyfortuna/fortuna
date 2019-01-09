@@ -10,10 +10,12 @@ import candleplot as cp
 # Configure parameters
 companyCode='ASHOKLEY'
 numDays=700
-e = datetime.datetime.now()
-s = e - datetime.timedelta(days=numDays)
+candleFilename='/home/ec2-user/plutus/candleplot003.png'
+smaFilename='/home/ec2-user/plutus/smaplot003.png'
 
 # Data preparation
+e = datetime.datetime.now()
+s = e - datetime.timedelta(days=numDays)
 df = nu.getHistoricPrice(companyCode,s,e)
 sma200 = df['close'].rolling(200).mean()
 sma20 = df['close'].rolling(20).mean()
@@ -35,13 +37,12 @@ ax.legend(frameon=False)
 ax.xaxis_date()
 ax.xaxis.set_major_locator(mdates.MonthLocator(bymonth=[3,6,9,12]))
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%b\n%Y'))
-plt.savefig('/home/ec2-user/plutus/plotsample003.png', dpi=300)
+plt.savefig(smaFilename, dpi=300)
 
 df1=df.tail(10)
-candleFilename='/home/ec2-user/plutus/candleplot003.png'
-cp.plotCandlestick(df1,filename,'%Y-%m-%d')
+cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
 
 
 # Send mail
-fc.sendMail('SMA','','/home/ec2-user/plutus/plotsample003.png')
+fc.sendMail('SMA','',smaFilename)
 fc.sendMail('Candle','',candleFilename)
