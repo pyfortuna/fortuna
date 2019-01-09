@@ -22,7 +22,7 @@ def plotCandlestick(df,filename,dateFormat):
   ax.grid(True)
   ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
   fig.autofmt_xdate()
-  fig.savefig(filename)
+  fig.savefig(filename, dpi=300)
 
 '''
 # TEST PROGRAM
