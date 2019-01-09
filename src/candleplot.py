@@ -24,7 +24,7 @@ def plotCandlestick(df,filename):
   ax.autoscale_view()
   #ax.xaxis.grid(True, 'major')
   #ax.grid(True)
-  ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=[MO,WE,FR])) #test001
+  ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=[0,2,4])) #test001
   ax.xaxis.set_major_formatter(mdates.DateFormatter('%d-%b-%Y'))
   #fig.autofmt_xdate()
   fig.savefig(filename, dpi=300)
