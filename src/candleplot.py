@@ -21,7 +21,7 @@ def plotCandlestick(df,filename):
   #fig, ax = plt.subplots(figsize=(20, 15))
   fig, ax = plt.subplots()
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#db3f3f')
-  ax.plot_date(df.index.values, df['sma20'].values, color='blue',marker=',')
+  ax.plot_date(df.index.values, df['sma20'].values, color='b', linestyle='solid', marker=',', linewidth=1)
   ax.autoscale_view()
   #ax.xaxis.grid(True, 'major')
   #ax.grid(True)
