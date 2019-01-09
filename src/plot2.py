@@ -23,21 +23,9 @@ print(df.head())
 print(df.tail())
 
 # Plot chart
-'''
 fig, ax = plt.subplots()
-ax.xaxis.set_major_locator(mdates.YearLocator())
-ax.xaxis.set_minor_locator(mdates.MonthLocator())
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
-#plt.plot( y='sma200', data=df, color='skyblue', linewidth=4)
-ax.plot(df.index.values,df['sma200'].values, color='skyblue', label='SMA/200')
-#ax.plot(df.index.values,df['close'].values, color='olive', label=companyCode)
-#ax.legend()
-ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
-fig.autofmt_xdate()
-'''
-fig, ax = plt.subplots()
-ax.plot(df.index.values,df['sma200'].values, color='skyblue', label='SMA/200')
-ax.plot(df.index.values,df['close'].values, color='olive', label=companyCode)
+ax.plot_date(df.index.values,df['sma200'].values, fmt='r-', label='SMA/200')
+ax.plot_date(df.index.values,df['close'].values, fmt='v-', label=companyCode)
 plt.savefig('/home/ec2-user/plutus/plotsample002.png')
 
 # Send mail
