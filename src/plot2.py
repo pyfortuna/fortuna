@@ -24,8 +24,10 @@ print(df.tail())
 
 # Plot chart
 fig, ax = plt.subplots()
-ax.plot_date(df.index.values,df['sma200'].values, fmt='r-', label='SMA/200')
-ax.plot_date(df.index.values,df['close'].values, fmt='v-', label=companyCode)
+ax.plot_date(df.index.values,df['sma200'].values, fmt='b-', label='SMA/200')
+ax.plot_date(df.index.values,df['close'].values, fmt='r-', label=companyCode)
+ax.xaxis.set_major_locator(dates.MonthLocator())
+ax.xaxis.set_major_formatter(dates.DateFormatter('\n%b\n%Y'))
 plt.savefig('/home/ec2-user/plutus/plotsample002.png')
 
 # Send mail
