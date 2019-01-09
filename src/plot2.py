@@ -20,10 +20,15 @@ dfHist = nu.getHistoricPrice(companyCode,s,e)
 df=dfHist[['close']]
 sma200 = df['close'].rolling(200).mean()
 sma20 = df['close'].rolling(20).mean()
+mstd = df['close'].rolling(20).std()
+hband = sma20 + 2*mstd
+lband = sma20 - 2*mstd
 df=df.assign(sma200=sma200)
 df=df.assign(sma20=sma20)
+df=df.assign(hband=hband)
+df=df.assign(lband=lband)
 df=df.dropna()
-df = df[['sma200','sma20','close']]
+#df = df[['sma200','sma20','close']]
 #df['date'] = pd.to_datetime(df.index, format="%d-%b-%Y")
 #df=df.set_index('date')
 print(df.head())
