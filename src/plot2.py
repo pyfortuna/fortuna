@@ -39,7 +39,7 @@ fig, ax = plt.subplots()
 ax.plot(df.index.values,df['sma200'].values, color='skyblue', label='SMA/200')
 ax.plot(df.index.values,df['close'].values, color='olive', label=companyCode)
 ax.xaxis.set_major_locator(mdates.MonthLocator())
-ax.set_xticklabels(df.index.values, rotation = 45, zorder=100)
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
 plt.savefig('/home/ec2-user/plutus/plotsample002.png')
 
 # Send mail
