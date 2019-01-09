@@ -18,7 +18,7 @@ def plotCandlestick(df,filename):
     print(row.name)
     print(type(row.name))
     print(row.name.to_pydatetime())
-    print(type(row.name.to_pydatetime())
+    print(type(row.name.to_pydatetime()))
     nDate=date2num(row.name.to_pydatetime())
     rec = nDate, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
