@@ -90,6 +90,8 @@ def getHistoricPrice(companyName, startDate, endDate):
                               'VWAP':'vwap',
                               'Total Traded Quantity':'qty'}, 
                               inplace=True)
+  history_df['date'] = pd.to_datetime(history_df.index, format="%d-%b-%Y")
+  history_df=history_df.set_index('date')
 
   o_df=history_df[['open','high','low','close','vwap']]
   return o_df
