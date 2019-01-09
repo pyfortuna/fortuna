@@ -15,8 +15,8 @@ def plotCandlestick(df,filename):
   ohlc = []
   for index, row in df.iterrows():
     #nDate=date2num(datetime.strptime(row.name,dateFormat))
-    print(df.name)
-    print(type(df.name))
+    print(row.name)
+    print(type(row.name))
     nDate=date2num(row.name)
     rec = nDate, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
