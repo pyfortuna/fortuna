@@ -27,9 +27,9 @@ print(df.head())
 
 # Plot chart
 fig, ax = plt.subplots()
-ax.plot_date(df.index.values,df['sma200'].values, fmt='b-', label='SMA/200')
-ax.plot_date(df.index.values,df['sma20'].values, fmt='g-', label='SMA/20')
-ax.plot_date(df.index.values,df['close'].values, fmt='r-', label=companyCode)
+ax.plot_date(df.index.values, df['sma200'].values, fmt='b-', linewidth=1, label='SMA/200')
+ax.plot_date(df.index.values, df['sma20'].values, fmt='g-', linewidth=1, label='SMA/20')
+ax.plot_date(df.index.values, df['close'].values, fmt='r-', linewidth=1, label=companyCode)
 ax.legend()
 ax.xaxis_date()
 ax.xaxis.set_major_locator(mdates.MonthLocator(bymonth=[3,6,9,12]))
