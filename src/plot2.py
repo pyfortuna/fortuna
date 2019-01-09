@@ -19,6 +19,9 @@ df=df.assign(sma200=sma200)
 df=df.dropna()
 #df = df.reset_index()
 df = df[['sma200','close']]
+df['date'] = pd.to_datetime(df.index, format="%d-%b-%Y")
+df=df.set_index('date')
+
 print(df.head())
 print(df.tail())
 
