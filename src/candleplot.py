@@ -5,6 +5,7 @@ from mpl_finance import candlestick_ohlc
 from mpl_finance import candlestick2_ohlc
 import pandas as pd
 from datetime import datetime
+from dateutil.rrule import rrule #test001
 '''
 import fortunacommon
 '''
@@ -21,8 +22,9 @@ def plotCandlestick(df,filename):
   fig, ax = plt.subplots()
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#db3f3f')
   ax.autoscale_view()
-  ax.xaxis.grid(True, 'major')
-  ax.grid(True)
+  #ax.xaxis.grid(True, 'major')
+  #ax.grid(True)
+  ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=[MO,WE,FR])) #test001
   ax.xaxis.set_major_formatter(mdates.DateFormatter('%d-%b-%Y'))
   #fig.autofmt_xdate()
   fig.savefig(filename, dpi=300)
