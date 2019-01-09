@@ -9,7 +9,7 @@ import matplotlib.dates as mdates
 # Configure parameters
 companyCode='ASHOKLEY'
 e = datetime.datetime.now()
-s = e - datetime.timedelta(days=500)
+s = e - datetime.timedelta(days=600)
 
 # Data preparation
 df = nu.getHistoricPrice(companyCode,s,e)
@@ -27,6 +27,7 @@ fig, ax = plt.subplots()
 ax.plot_date(df.index.values,df['sma200'].values, fmt='b-', label='SMA/200')
 ax.plot_date(df.index.values,df['close'].values, fmt='r-', label=companyCode)
 ax.xaxis.set_major_locator(plt.MaxNLocator(3))
+ax.xaxis.set_major_formatter(dates.DateFormatter('\n%b\n%Y'))
 plt.savefig('/home/ec2-user/plutus/plotsample002.png')
 
 # Send mail
