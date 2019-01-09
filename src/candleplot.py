@@ -21,10 +21,11 @@ def plotCandlestick(df,filename):
   #fig, ax = plt.subplots(figsize=(20, 15))
   fig, ax = plt.subplots()
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#db3f3f')
+  ax.plot_date(df.index.values, df['sma20'].values, color='blue')
   ax.autoscale_view()
   #ax.xaxis.grid(True, 'major')
   #ax.grid(True)
-  ax.fill_between(df.index.values, df['hband'].values, df['lband'].values, color='blue', alpha=0.2)
+  ax.fill_between(df.index.values, df['hband'].values, df['lband'].values, color='blue', alpha=0.1)
   #ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=[0,2,4])) #test001
   ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=0)) #test001
   ax.xaxis.set_major_formatter(mdates.DateFormatter('%d\n%b'))
