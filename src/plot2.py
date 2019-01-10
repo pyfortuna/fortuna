@@ -63,4 +63,4 @@ for index, row in dfPDFData.iterrows():
 pdf.output('/home/ec2-user/plutus/testpdf.pdf')
 
 # Send Mail
-fc.sendMail('PDF','test pdf','/home/ec2-user/plutus/testpdf.pdf')
+fc.sendMail('Fortuna: Analysis Report','Analysis Report','/home/ec2-user/plutus/testpdf.pdf')
