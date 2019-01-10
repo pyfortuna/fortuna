@@ -44,6 +44,18 @@ def processCompany(companyCode):
   }
   return plotData
 
+# ------------------------------
+# MAIN PROGRAM
+# ------------------------------
+dfTarget = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/target.csv")[['type','companyName','targetPrice']]
+dfFinYr = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/finYr.csv")[['companyShortName','nseID']]
+dfMerge=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
+nseList=dfMerge['nseID'].values
+print(nseList)
+
+for nseItem in nseList:
+  print(nseItem)
+  
 cList=[]
 c=processCompany('ASHOKLEY')
 cList.append(c)
