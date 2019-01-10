@@ -34,7 +34,7 @@ print(df.head())
 #print(df.tail())
 
 # Plot chart
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(6.69,4.33)) # 170 x 110 mm = 6.69 x 4.33 in
 ax.plot_date(df.index.values, df['sma200'].values, color='b', linestyle='solid', marker=',', linewidth=1, label='SMA/200')
 ax.plot_date(df.index.values, df['sma20'].values, color='g', linestyle='solid', marker=',', linewidth=1, label='SMA/20')
 ax.plot_date(df.index.values, df['close'].values, color='r', linestyle='solid', marker=',', linewidth=1, label=companyCode)
