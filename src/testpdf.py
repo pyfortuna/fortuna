@@ -6,13 +6,9 @@ import fortunacommon as fc
 pdf = FPDF()
 pdf.add_page()
 pdf.set_font("Arial", size=12)
-pdf.write(5, 'Ashok Leyland')
-lMargin=10
-imgW=pdf.w - (2*lMargin)
-img1Y=20
-img2Y=250
-pdf.image('/home/ec2-user/plutus/smaplot003.png', x=lMargin, y=img1Y, w=imgW)
-pdf.image('/home/ec2-user/plutus/candleplot003.png', x=lMargin, y=img2Y, w=imgW)
+pdf.cell(10, 10, 'Ashok Leyland')
+pdf.image('/home/ec2-user/plutus/smaplot003.png', x=10, y=30, w=190, h=120)
+pdf.image('/home/ec2-user/plutus/candleplot003.png', x=10, y=160, w=190, h=120)
 pdf.output('/home/ec2-user/plutus/testpdf.pdf')
 
 # Send Mail
