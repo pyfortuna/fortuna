@@ -51,5 +51,5 @@ cp.plotCandlestick(df1,candleFilename)
 
 
 # Send mail
-fc.sendMail('SMA','',smaFilename)
-fc.sendMail('Candle','',candleFilename)
+#fc.sendMail('SMA','',smaFilename)
+#fc.sendMail('Candle','',candleFilename)
