@@ -50,12 +50,13 @@ def processCompany(companyCode):
 dfTarget = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/target.csv")[['type','companyName','targetPrice']]
 dfFinYr = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/finYr.csv")[['companyShortName','nseId']]
 dfMerge=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
-nseList=dfMerge['nseId'].values
+nseList=dfMerge['nseId'].unique()
 print(nseList)
 
 for nseItem in nseList:
   print(nseItem)
-  
+
+'''
 cList=[]
 c=processCompany('ASHOKLEY')
 cList.append(c)
@@ -76,3 +77,4 @@ pdf.output('/home/ec2-user/plutus/testpdf.pdf')
 
 # Send Mail
 fc.sendMail('Fortuna: Analysis Report','Analysis Report','/home/ec2-user/plutus/testpdf.pdf')
+'''
