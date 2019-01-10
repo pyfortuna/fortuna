@@ -48,8 +48,9 @@ def processCompany(companyCode):
 # MAIN PROGRAM
 # ------------------------------
 dfTarget = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/target.csv")[['type','companyName','targetPrice']]
-dfFinYr = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/finYr.csv")[['companyShortName','nseID']]
+dfFinYr = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/finYr.csv") #[['companyShortName','nseID']]
 dfMerge=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
+print(dfMerge)
 nseList=dfMerge['nseID'].values
 print(nseList)
 
