@@ -50,7 +50,8 @@ def processCompany(companyCode):
 dfTarget = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/target.csv")[['type','companyName','targetPrice']]
 dfFinYr = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/finYr.csv")[['companyShortName','nseId']]
 dfMerge=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
-nseList=dfMerge['nseId'].sort_values(by=['nseId']).unique()
+dfMerge=dfMerge[['nseId']].sort_values(by='nseId')
+nseList=dfMerge['nseId'].unique()
 print(nseList)
 
 for nseItem in nseList:
