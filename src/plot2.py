@@ -51,6 +51,7 @@ dfTarget = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/target.csv")[['type'
 dfFinYr = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/finYr.csv") #[['companyShortName','nseID']]
 dfMerge=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
 print(dfMerge)
+print(list(dfMerge))
 nseList=dfMerge[['nseID']]
 print(nseList)
 
