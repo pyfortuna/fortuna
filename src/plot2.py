@@ -7,6 +7,7 @@ import pandas as pd
 import matplotlib.dates as mdates
 import candleplot as cp
 import smaplot as sp
+from fpdf import FPDF
 
 # Configure parameters
 numDays=700
@@ -50,3 +51,16 @@ c=processCompany('DABUR')
 cList.append(c)
 dfPDFData = pd.DataFrame(cList)
 print(dfPDFData)
+
+# Create PDF
+pdf = FPDF()
+for index, row in dfPDFData.iterrows():
+  pdf.add_page()
+  pdf.set_font("Arial", size=18)
+  pdf.cell(20, 20, row['companyCode'])
+  pdf.image( row['smaFilename'], x=20, y=40, w=170, h=110)
+  pdf.image( row['candleFilename'], x=20, y=160, w=170, h=110)
+pdf.output('/home/ec2-user/plutus/testpdf.pdf')
+
+# Send Mail
+fc.sendMail('PDF','test pdf','/home/ec2-user/plutus/testpdf.pdf')
