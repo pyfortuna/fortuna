@@ -53,18 +53,14 @@ dfMerge=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyS
 dfMerge=dfMerge[['nseId']].sort_values(by='nseId')
 nseList=dfMerge['nseId'].unique()
 print(nseList)
-
+cList=[]
 for nseItem in nseList:
   print(nseItem)
+  c=processCompany('ASHOKLEY')
+  cList.append(c)
 
-'''
-cList=[]
-c=processCompany('ASHOKLEY')
-cList.append(c)
-c=processCompany('DABUR')
-cList.append(c)
 dfPDFData = pd.DataFrame(cList)
-print(dfPDFData)
+#print(dfPDFData)
 
 # Create PDF
 pdf = FPDF()
@@ -78,4 +74,4 @@ pdf.output('/home/ec2-user/plutus/testpdf.pdf')
 
 # Send Mail
 fc.sendMail('Fortuna: Analysis Report','Analysis Report','/home/ec2-user/plutus/testpdf.pdf')
-'''
+
