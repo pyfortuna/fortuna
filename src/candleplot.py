@@ -17,7 +17,7 @@ def plotCandlestick(df,filename):
     nDate=date2num(row.name.to_pydatetime())
     rec = nDate, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
-  fig, ax = plt.subplots()
+  fig, ax = plt.subplots(figsize=(6.69,4.33)) # 170 x 110 mm = 6.69 x 4.33 in
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#db3f3f')
   ax.plot_date(df.index.values, df['sma20'].values, color='b', linestyle='solid', marker=',', linewidth=1)
   ax.autoscale_view()
