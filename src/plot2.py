@@ -58,11 +58,13 @@ def processData(nseList, outputFilename):
   cList=[]
   for nseItem in nseList:
     print('PROCESSING : %s' % nseItem)
-    try:
+    '''try:
       c=processCompany(nseItem)
       cList.append(c)
     except:
-       print('ERROR : %s' % nseItem)
+       print('ERROR : %s' % nseItem)'''
+    c=processCompany(nseItem)
+    cList.append(c)
 
   dfPDFData = pd.DataFrame(cList)
   #print(dfPDFData)
