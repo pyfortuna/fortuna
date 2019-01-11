@@ -29,9 +29,18 @@ def processCompany(companyCode):
   df=df.assign(sma20=sma20)
   df=df.assign(hband=hband)
   df=df.assign(lband=lband)
+  
+  
+  df['ema26'] = pd.ewma(df['close'], span=26)
+  df['ema12'] = pd.ewma(df['close'], span=12)
+  df['macd'] = (df['ema12'] - df['ema26'])
+  print(df[['macd']].head())
+  
   df=df.dropna()
   #print(df.head())
   sp.plotSMA(df,smaFilename)
+  
+
 
   dfCandle=df.tail(30)
   #cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
@@ -52,6 +61,7 @@ dfFinYr = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/finYr.csv")[['company
 dfMerge=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
 dfMerge=dfMerge[['nseId']].sort_values(by='nseId')
 nseList=dfMerge['nseId'].unique()
+nseList=['ASHOKLEY'] # TODO: Remove this
 print(nseList)
 cList=[]
 for nseItem in nseList:
