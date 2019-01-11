@@ -18,10 +18,10 @@ def plotCandlestick(df,filename,w,h):
     rec = nDate, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
   fig, ax = plt.subplots(figsize=(w,h))
-  candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#db3f3f')
+  candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#B72015')
   ax.plot_date(df.index.values, df['sma20'].values, color='b', linestyle='solid', marker=',', linewidth=1)
   ax.autoscale_view()
-  ax.fill_between(df.index.values, df['hband'].values, df['lband'].values, color='blue', alpha=0.1)
+  ax.fill_between(df.index.values, df['hband'].values, df['lband'].values, color='#CEEEFA', alpha=0.1)
   ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=0)) #test001
   ax.xaxis.set_major_formatter(mdates.DateFormatter('%d\n%b'))
   fig.savefig(filename, dpi=300, bbox_inches='tight', pad_inches=0)
