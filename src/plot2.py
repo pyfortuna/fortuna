@@ -34,12 +34,11 @@ def processCompany(companyCode):
   df['ema26'] = pd.ewma(df['close'], span=26)
   df['ema12'] = pd.ewma(df['close'], span=12)
   df['macd'] = (df['ema12'] - df['ema26'])
-  print(df[['macd']].head())
+  print(df[['macd']].tail())
   
   df=df.dropna()
-  #print(df.head())
-  sp.plotSMA(df,smaFilename)
-  
+  print(df.head())
+  sp.plotSMA(df,smaFilename)  
 
 
   dfCandle=df.tail(30)
@@ -53,38 +52,44 @@ def processCompany(companyCode):
   }
   return plotData
 
+def processData(nseList, outputFilename):
+  print(nseList)
+  cList=[]
+  for nseItem in nseList:
+    print('PROCESSING : %s' % nseItem)
+    try:
+      c=processCompany(nseItem)
+      cList.append(c)
+    except:
+       print('ERROR : %s' % nseItem)
+
+  dfPDFData = pd.DataFrame(cList)
+  #print(dfPDFData)
+
+  # Create PDF
+  pdf = FPDF()
+  for index, row in dfPDFData.iterrows():
+    pdf.add_page()
+    pdf.set_font("Arial", size=18)
+    pdf.cell(20, 20, row['companyCode'])
+    pdf.image( row['smaFilename'], x=20, y=40, w=170, h=110)
+    pdf.image( row['candleFilename'], x=20, y=160, w=170, h=110)
+  pdf.output(outputFilename)
+
 # ------------------------------
 # MAIN PROGRAM
 # ------------------------------
+outputFilename = '/home/ec2-user/plutus/reco.pdf'
 dfTarget = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/target.csv")[['type','companyName','targetPrice']]
 dfFinYr = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/finYr.csv")[['companyShortName','nseId']]
 dfMerge=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
 dfMerge=dfMerge[['nseId']].sort_values(by='nseId')
 nseList=dfMerge['nseId'].unique()
-nseList=['ASHOKLEY'] # TODO: Remove this
-print(nseList)
-cList=[]
-for nseItem in nseList:
-  print('PROCESSING : %s' % nseItem)
-  try:
-    c=processCompany(nseItem)
-    cList.append(c)
-  except:
-     print('ERROR : %s' % nseItem)
 
-dfPDFData = pd.DataFrame(cList)
-#print(dfPDFData)
+nseList=['BIOCON'] # TODO: Remove this
 
-# Create PDF
-pdf = FPDF()
-for index, row in dfPDFData.iterrows():
-  pdf.add_page()
-  pdf.set_font("Arial", size=18)
-  pdf.cell(20, 20, row['companyCode'])
-  pdf.image( row['smaFilename'], x=20, y=40, w=170, h=110)
-  pdf.image( row['candleFilename'], x=20, y=160, w=170, h=110)
-pdf.output('/home/ec2-user/plutus/testpdf.pdf')
+processData(nseList, outputFilename)
 
 # Send Mail
-fc.sendMail('Fortuna: Analysis Report','Analysis Report','/home/ec2-user/plutus/testpdf.pdf')
+fc.sendMail('Fortuna: Analysis Report','Analysis Report',outputFilename)
 
