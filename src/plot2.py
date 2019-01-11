@@ -33,8 +33,8 @@ def processCompany(companyCode):
   df=df.assign(lband=lband)  
   
   print('DEBUG : Calculating MACD for %s' % companyCode)
-  df['ema26'] = pd.ewma(df['close'], span=26)
-  df['ema12'] = pd.ewma(df['close'], span=12)
+  df['ema26'] = df['close'].ewm(span=26,min_periods=0,adjust=False,ignore_na=False).mean()
+  df['ema12'] = df['close'].ewm(span=12,min_periods=0,adjust=False,ignore_na=False).mean()
   df['macd'] = (df['ema12'] - df['ema26'])
   print(df[['macd']].tail())
   
