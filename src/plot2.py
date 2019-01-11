@@ -19,7 +19,9 @@ def processCompany(companyCode):
   # Data preparation
   e = datetime.datetime.now()
   s = e - datetime.timedelta(days=numDays)
+  print('DEBUG : Downloading NSE data for %s' % companyCode)
   df = nu.getHistoricPrice(companyCode,s,e)
+  print('DEBUG : Calculating SMA for %s' % companyCode)
   sma200 = df['close'].rolling(200).mean()
   sma20 = df['close'].rolling(20).mean()
   mstd = df['close'].rolling(20).std()
@@ -28,9 +30,9 @@ def processCompany(companyCode):
   df=df.assign(sma200=sma200)
   df=df.assign(sma20=sma20)
   df=df.assign(hband=hband)
-  df=df.assign(lband=lband)
+  df=df.assign(lband=lband)  
   
-  
+  print('DEBUG : Calculating MACD for %s' % companyCode)
   df['ema26'] = pd.ewma(df['close'], span=26)
   df['ema12'] = pd.ewma(df['close'], span=12)
   df['macd'] = (df['ema12'] - df['ema26'])
@@ -38,8 +40,7 @@ def processCompany(companyCode):
   
   df=df.dropna()
   print(df.head())
-  sp.plotSMA(df,smaFilename)  
-
+  sp.plotSMA(df,smaFilename)
 
   dfCandle=df.tail(30)
   #cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
