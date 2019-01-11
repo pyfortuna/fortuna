@@ -15,6 +15,7 @@ numDays=700
 def processCompany(companyCode):
   candleFilename='/home/ec2-user/plutus/CDL_%s.png' % companyCode
   smaFilename='/home/ec2-user/plutus/SMA_%s.png' % companyCode
+  macdFilename='/home/ec2-user/plutus/MACD_%s.png' % companyCode
 
   # Data preparation
   e = datetime.datetime.now()
@@ -40,16 +41,18 @@ def processCompany(companyCode):
   
   df=df.dropna()
   print(df.head())
-  sp.plotSMA(df,smaFilename)
+  sp.plotSMA(df,smaFilename,6.69,2.76) # 170 x 70 mm = 6.69 x 4.33 in
+  sp.plotMACD(df,macdFilename,6.69,2.76)
 
   dfCandle=df.tail(30)
   #cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
-  cp.plotCandlestick(dfCandle,candleFilename)
+  cp.plotCandlestick(dfCandle,candleFilename,6.69,2.76)
   
   plotData = {
     "companyCode": companyCode,
     "smaFilename": smaFilename,
-    "candleFilename": candleFilename
+    "candleFilename": candleFilename,
+    "macdFilename": macdFilename
   }
   return plotData
 
@@ -75,8 +78,9 @@ def processData(nseList, outputFilename):
     pdf.add_page()
     pdf.set_font("Arial", size=18)
     pdf.cell(20, 20, row['companyCode'])
-    pdf.image( row['smaFilename'], x=20, y=40, w=170, h=110)
-    pdf.image( row['candleFilename'], x=20, y=160, w=170, h=110)
+    pdf.image( row['smaFilename'], x=20, y=40, w=170, h=70)
+    pdf.image( row['candleFilename'], x=20, y=120, w=170, h=70)
+    pdf.image( row['macdFilename'], x=20, y=200, w=170, h=70)
   pdf.output(outputFilename)
 
 # ------------------------------
