@@ -61,13 +61,11 @@ def processData(nseList, outputFilename):
   cList=[]
   for nseItem in nseList:
     print('PROCESSING : %s' % nseItem)
-    '''try:
+    try:
       c=processCompany(nseItem)
       cList.append(c)
     except:
-       print('ERROR : %s' % nseItem)'''
-    c=processCompany(nseItem)
-    cList.append(c)
+       print('ERROR : %s' % nseItem)
 
   dfPDFData = pd.DataFrame(cList)
   #print(dfPDFData)
@@ -79,8 +77,8 @@ def processData(nseList, outputFilename):
     pdf.set_font("Arial", size=18)
     pdf.cell(20, 20, row['companyCode'])
     pdf.image( row['smaFilename'], x=20, y=40, w=170, h=70)
-    pdf.image( row['candleFilename'], x=20, y=120, w=170, h=70)
-    pdf.image( row['macdFilename'], x=20, y=200, w=170, h=70)
+    pdf.image( row['macdFilename'], x=20, y=130, w=170, h=70)
+    pdf.image( row['candleFilename'], x=20, y=220, w=170, h=70)
   pdf.output(outputFilename)
 
 # ------------------------------
