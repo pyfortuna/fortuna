@@ -82,8 +82,8 @@ def processData(nseList, outputFilename):
     imgHmm=80
     imgWmm=170
     pdf.image( row['smaFilename'], x=20, y=30, w=imgWmm, h=imgHmm)
-    pdf.image( row['macdFilename'], x=20, y=120, w=imgWmm, h=imgHmm)
-    pdf.image( row['candleFilename'], x=20, y=200, w=imgWmm, h=imgHmm)
+    pdf.image( row['macdFilename'], x=20, y=115, w=imgWmm, h=imgHmm)
+    pdf.image( row['candleFilename'], x=20, y=205, w=imgWmm, h=imgHmm)
   pdf.output(outputFilename)
 
 # ------------------------------
