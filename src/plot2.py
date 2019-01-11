@@ -37,10 +37,10 @@ def processCompany(companyCode):
   df['ema26'] = df['close'].ewm(span=26,min_periods=0,adjust=False,ignore_na=False).mean()
   df['ema12'] = df['close'].ewm(span=12,min_periods=0,adjust=False,ignore_na=False).mean()
   df['macd'] = (df['ema12'] - df['ema26'])
-  print(df[['macd']].tail())
+  #print(df[['macd']].tail())
   
   df=df.dropna()
-  print(df.head())
+  #print(df.head())
   imgWin=6.69 # 170 x 80 mm = 6.69 x 3.15 in
   imgHin=3.15
   sp.plotSMA(df,smaFilename,imgWin,imgHin) 
