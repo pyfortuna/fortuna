@@ -42,8 +42,8 @@ def processCompany(companyCode):
   #print(df.head())
   
   print('DEBUG : Creating charts for %s' % companyCode)
-  imgWin=6.69 # 170 x 85 mm = 6.69 x 3.35 in
-  imgHin=3.35
+  imgWin=6.69 # 170 x 80 mm = 6.69 x 3.15 in
+  imgHin=3.15
   sp.plotSMA(df,smaFilename,imgWin,imgHin) 
   sp.plotMACD(df,macdFilename,imgWin,imgHin)
   dfCandle=df.tail(30)
@@ -79,7 +79,7 @@ def processData(nseList, outputFilename):
     pdf.add_page()
     pdf.set_font("Arial", size=18)
     pdf.cell(20, 20, row['companyCode'])
-    imgHmm=85
+    imgHmm=80
     imgWmm=170
     pdf.image( row['smaFilename'], x=20, y=30, w=imgWmm, h=imgHmm)
     pdf.image( row['macdFilename'], x=20, y=120, w=imgWmm, h=imgHmm)
