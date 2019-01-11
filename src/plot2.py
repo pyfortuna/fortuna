@@ -37,15 +37,15 @@ def processCompany(companyCode):
   df['ema26'] = df['close'].ewm(span=26,min_periods=0,adjust=False,ignore_na=False).mean()
   df['ema12'] = df['close'].ewm(span=12,min_periods=0,adjust=False,ignore_na=False).mean()
   df['macd'] = (df['ema12'] - df['ema26'])
-  #print(df[['macd']].tail())
-  
+  #print(df[['macd']].tail())  
   df=df.dropna()
   #print(df.head())
+  
+  print('DEBUG : Creating charts for %s' % companyCode)
   imgWin=6.69 # 170 x 90 mm = 6.69 x 3.54 in
   imgHin=3.54
   sp.plotSMA(df,smaFilename,imgWin,imgHin) 
   sp.plotMACD(df,macdFilename,imgWin,imgHin)
-
   dfCandle=df.tail(30)
   #cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
   cp.plotCandlestick(dfCandle,candleFilename,imgWin,imgHin)
@@ -73,6 +73,7 @@ def processData(nseList, outputFilename):
   #print(dfPDFData)
 
   # Create PDF
+  print('DEBUG : Creating PDF')
   pdf = FPDF()
   for index, row in dfPDFData.iterrows():
     pdf.add_page()
@@ -100,5 +101,6 @@ nseList=['DABUR','ASHOKLEY'] # TODO: Remove this
 processData(nseList, outputFilename)
 
 # Send Mail
+print('DEBUG : Sending Email')
 fc.sendMail('Fortuna: Analysis Report','Analysis Report',outputFilename)
 
