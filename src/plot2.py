@@ -41,12 +41,14 @@ def processCompany(companyCode):
   
   df=df.dropna()
   print(df.head())
-  sp.plotSMA(df,smaFilename,6.69,2.76) # 170 x 70 mm = 6.69 x 4.33 in
-  sp.plotMACD(df,macdFilename,6.69,2.76)
+  imgWin=6.69 # 170 x 60 mm = 6.69 x 2.36 in
+  imgHin=2.36
+  sp.plotSMA(df,smaFilename,imgWin,imgHin) 
+  sp.plotMACD(df,macdFilename,imgWin,imgHin)
 
   dfCandle=df.tail(30)
   #cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
-  cp.plotCandlestick(dfCandle,candleFilename,6.69,2.76)
+  cp.plotCandlestick(dfCandle,candleFilename,imgWin,imgHin)
   
   plotData = {
     "companyCode": companyCode,
@@ -76,9 +78,11 @@ def processData(nseList, outputFilename):
     pdf.add_page()
     pdf.set_font("Arial", size=18)
     pdf.cell(20, 20, row['companyCode'])
-    pdf.image( row['smaFilename'], x=20, y=30, w=170, h=60)
-    pdf.image( row['macdFilename'], x=20, y=120, w=170, h=60)
-    pdf.image( row['candleFilename'], x=20, y=210, w=170, h=60)
+    imgHmm=60
+    imgWmm=170
+    pdf.image( row['smaFilename'], x=20, y=40, w=imgWmm, h=imgHmm)
+    pdf.image( row['macdFilename'], x=20, y=120, w=imgWmm, h=imgHmm)
+    pdf.image( row['candleFilename'], x=20, y=200, w=imgWmm, h=imgHmm)
   pdf.output(outputFilename)
 
 # ------------------------------
