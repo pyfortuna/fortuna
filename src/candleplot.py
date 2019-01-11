@@ -24,7 +24,7 @@ def plotCandlestick(df,filename,w,h):
   ax.fill_between(df.index.values, df['hband'].values, df['lband'].values, color='blue', alpha=0.1)
   ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=0)) #test001
   ax.xaxis.set_major_formatter(mdates.DateFormatter('%d\n%b'))
-  fig.savefig(filename, dpi=300)
+  fig.savefig(filename, dpi=300, bbox_inches='tight', pad_inches=0)
 
 '''
 # TEST PROGRAM
