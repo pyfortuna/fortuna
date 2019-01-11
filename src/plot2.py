@@ -95,8 +95,7 @@ dfFinYr = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/finYr.csv")[['company
 dfMerge=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
 dfMerge=dfMerge[['nseId']].sort_values(by='nseId')
 nseList=dfMerge['nseId'].unique()
-
-nseList=['DABUR','ASHOKLEY'] # TODO: Remove this
+#nseList=['DABUR','ASHOKLEY'] # TODO: Remove this
 
 processData(nseList, outputFilename)
 
