@@ -76,9 +76,9 @@ def processData(nseList, outputFilename):
     pdf.add_page()
     pdf.set_font("Arial", size=18)
     pdf.cell(20, 20, row['companyCode'])
-    pdf.image( row['smaFilename'], x=20, y=40, w=170, h=70)
-    pdf.image( row['macdFilename'], x=20, y=130, w=170, h=70)
-    pdf.image( row['candleFilename'], x=20, y=220, w=170, h=70)
+    pdf.image( row['smaFilename'], x=20, y=30, w=170, h=60)
+    pdf.image( row['macdFilename'], x=20, y=120, w=170, h=60)
+    pdf.image( row['candleFilename'], x=20, y=210, w=170, h=60)
   pdf.output(outputFilename)
 
 # ------------------------------
