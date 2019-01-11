@@ -41,8 +41,8 @@ def processCompany(companyCode):
   
   df=df.dropna()
   #print(df.head())
-  imgWin=6.69 # 170 x 80 mm = 6.69 x 3.15 in
-  imgHin=3.15
+  imgWin=6.69 # 170 x 90 mm = 6.69 x 3.54 in
+  imgHin=3.54
   sp.plotSMA(df,smaFilename,imgWin,imgHin) 
   sp.plotMACD(df,macdFilename,imgWin,imgHin)
 
@@ -78,11 +78,11 @@ def processData(nseList, outputFilename):
     pdf.add_page()
     pdf.set_font("Arial", size=18)
     pdf.cell(20, 20, row['companyCode'])
-    imgHmm=80
+    imgHmm=90
     imgWmm=170
-    pdf.image( row['smaFilename'], x=20, y=30, w=imgWmm, h=imgHmm)
-    pdf.image( row['macdFilename'], x=20, y=110, w=imgWmm, h=imgHmm)
-    pdf.image( row['candleFilename'], x=20, y=190, w=imgWmm, h=imgHmm)
+    pdf.image( row['smaFilename'], x=20, y=20, w=imgWmm, h=imgHmm)
+    pdf.image( row['macdFilename'], x=20, y=100, w=imgWmm, h=imgHmm)
+    pdf.image( row['candleFilename'], x=20, y=180, w=imgWmm, h=imgHmm)
   pdf.output(outputFilename)
 
 # ------------------------------
