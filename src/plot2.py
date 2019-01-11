@@ -30,7 +30,7 @@ def processCompany(companyCode):
   df=df.assign(hband=hband)
   df=df.assign(lband=lband)
   df=df.dropna()
-  print(df.head())
+  #print(df.head())
   sp.plotSMA(df,smaFilename)
 
   dfCandle=df.tail(30)
@@ -55,9 +55,12 @@ nseList=dfMerge['nseId'].unique()
 print(nseList)
 cList=[]
 for nseItem in nseList:
-  print(nseItem)
-  c=processCompany('ASHOKLEY')
-  cList.append(c)
+  print('PROCESSING : %s' % nseItem)
+  try:
+    c=processCompany(nseItem)
+    cList.append(c)
+  except:
+     print('ERROR : %s' % nseItem)
 
 dfPDFData = pd.DataFrame(cList)
 #print(dfPDFData)
