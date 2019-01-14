@@ -37,6 +37,7 @@ def processCompany(companyCode):
   df['ema26'] = df['close'].ewm(span=26,min_periods=0,adjust=False,ignore_na=False).mean()
   df['ema12'] = df['close'].ewm(span=12,min_periods=0,adjust=False,ignore_na=False).mean()
   df['macd'] = (df['ema12'] - df['ema26'])
+  df['signal'] = df['macd'].ewm(span=9,min_periods=0,adjust=False,ignore_na=False).mean()
   #print(df[['macd']].tail())  
   df=df.dropna()
   #print(df.head())
