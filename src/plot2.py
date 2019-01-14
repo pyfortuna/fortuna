@@ -39,7 +39,7 @@ def processCompany(companyCode):
   df['macd'] = (df['ema12'] - df['ema26'])
   df['signal'] = df['macd'].ewm(span=9,min_periods=0,adjust=False,ignore_na=False).mean()
   df['macdhisto'] = (df['macd'] - df['signal'])
-  df['macdhistocolor'] = sample['macdhisto'].apply(lambda x: '#FF0000' if x < 0 else '#00FF00')
+  df['macdhistocolor'] = df['macdhisto'].apply(lambda x: '#FF0000' if x < 0 else '#00FF00')
 
   #print(df[['macd']].tail())  
   df=df.dropna()
