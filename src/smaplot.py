@@ -17,6 +17,7 @@ def plotMACD(df,macdFilename,w,h):
   fig, ax = plt.subplots(figsize=(w,h))
   ax.plot_date(df.index.values, df['macd'].values, color='#000000', linestyle='solid', marker=',', linewidth=1, label='MACD')
   ax.plot_date(df.index.values, df['signal'].values, color='#FF0000', linestyle='solid', marker=',', linewidth=1, label='Signal')
+  ax.bar(df.index.values, df['macdhisto'].values, color=df['macdhistocolor'].values)
   ax.legend(frameon=False)
   ax.xaxis_date()
   ax.xaxis.set_major_locator(mdates.MonthLocator(bymonth=[3,6,9,12]))
