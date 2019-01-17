@@ -41,8 +41,11 @@ def processCompany(companyCode):
   df['macdhisto'] = (df['macd'] - df['signal'])
   df['macdhistodiff'] = df['macdhisto']
   print(df[['macdhistodiff']].tail())
+  print('before loop')
   for i in range(1, len(df)):
-    df.loc[i, 'macdhistodiff'] = df.loc[i, 'macdhisto'] - df.loc[i-1, 'macdhisto']
+    df.loc[i, 'macdhistodiff'] = (df.loc[i, 'macdhisto'] - df.loc[i-1, 'macdhisto'])
+  print('after loop')
+  print(df[['macdhistodiff']].tail())
   df['macdhistocolor'] = df['macdhistodiff'].apply(lambda x: '#FF0000' if x < 0 else '#00FF00')
   print(df[['macdhistocolor']].tail())
 
