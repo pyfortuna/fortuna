@@ -39,19 +39,21 @@ def processCompany(companyCode):
   df['ema12'] = df['close'].ewm(span=12,min_periods=0,adjust=False,ignore_na=False).mean()
   df['macd'] = (df['ema12'] - df['ema26'])
   df['signal'] = df['macd'].ewm(span=9,min_periods=0,adjust=False,ignore_na=False).mean()
-  df['macdhisto'] = (df['macd'] - df['signal'])
   
-  # Calculate histogram colour
-  #  - If larger that previous value, then GREEN, else RED
-  valList=list(boll_df['macdhisto'])
+  # Calculate MACD histogram
+  df['macdhisto'] = (df['macd'] - df['signal'])
+  valList=list(df['macdhisto'])
   diffList = []
   diffList.append(0) # First item: Cannot calculate difference
   i = 1
   while i < len(valList):
-    trendList.append(valList[i] - valList[i-1])
+    trendList.append(valList[i] - valList[i-1]) # Calculate difference with previous row
     i += 1
   seHistoDiff = pd.Series(diffList)
-  boll_df['macdhistodiff'] = seHistoDiff.values
+  df['macdhistodiff'] = seHistoDiff.values
+  
+  # Calculate histogram colour
+  #  - If larger that previous value, then GREEN, else RED
   df['macdhistocolor'] = df['macdhistodiff'].apply(lambda x: '#FF0000' if x < 0 else '#00FF00')
   print(df[['macdhisto','macdhistocolor']].tail())
 
