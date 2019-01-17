@@ -40,9 +40,11 @@ def processCompany(companyCode):
   df['signal'] = df['macd'].ewm(span=9,min_periods=0,adjust=False,ignore_na=False).mean()
   df['macdhisto'] = (df['macd'] - df['signal'])
   df['macdhistodiff'] = df['macdhisto']
+  print(df[['macdhistodiff']].tail())
   for i in range(1, len(df)):
     df.loc[i, 'macdhistodiff'] = df.loc[i, 'macdhisto'] - df.loc[i-1, 'macdhisto']
   df['macdhistocolor'] = df['macdhistodiff'].apply(lambda x: '#FF0000' if x < 0 else '#00FF00')
+  print(df[['macdhistocolor']].tail())
 
   #print(df[['macd']].tail())  
   df=df.dropna()
@@ -102,7 +104,7 @@ dfFinYr = pd.read_csv("/home/ec2-user/fortuna/fortuna/data/finYr.csv")[['company
 dfMerge=pd.merge(dfTarget, dfFinYr, left_on=['companyName'], right_on=['companyShortName'])
 dfMerge=dfMerge[['nseId']].sort_values(by='nseId')
 nseList=dfMerge['nseId'].unique()
-nseList=['DMART','BIOCON'] # TODO: Remove this
+nseList=['ASHOKLEY','DABUR'] # TODO: Remove this
 
 processData(nseList, outputFilename)
 
