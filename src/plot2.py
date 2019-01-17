@@ -47,7 +47,7 @@ def processCompany(companyCode):
   diffList.append(0) # First item: Cannot calculate difference
   i = 1
   while i < len(valList):
-    trendList.append(valList[i] - valList[i-1]) # Calculate difference with previous row
+    diffList.append(valList[i] - valList[i-1]) # Calculate difference with previous row
     i += 1
   seHistoDiff = pd.Series(diffList)
   df['macdhistodiff'] = seHistoDiff.values
@@ -55,7 +55,7 @@ def processCompany(companyCode):
   # Calculate histogram colour
   #  - If larger that previous value, then GREEN, else RED
   df['macdhistocolor'] = df['macdhistodiff'].apply(lambda x: '#FF0000' if x < 0 else '#00FF00')
-  print(df[['macdhisto','macdhistocolor']].tail())
+  print(df[['macdhisto','macdhistodiff','macdhistocolor']].tail())
 
   #print(df[['macd']].tail())  
   df=df.dropna()
