@@ -55,12 +55,12 @@ def processCompany(companyCode):
   # Calculate histogram colour
   #  - If larger that previous value, then GREEN, else RED
   df['macdhistocolor'] = df['macdhistodiff'].apply(lambda x: '#FF0000' if x < 0 else '#00FF00')
-  print(df[['macdhisto','macdhistodiff','macdhistocolor']].tail())
 
   #print(df[['macd']].tail())  
   df=df.dropna()
   #print(df.head())
   
+  # Create charts
   print('DEBUG : Creating charts for %s' % companyCode)
   imgWin=6.69 # 170 x 80 mm = 6.69 x 3.15 in
   imgHin=3.15
