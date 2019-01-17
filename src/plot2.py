@@ -33,13 +33,14 @@ def processCompany(companyCode):
   df=df.assign(hband=hband)
   df=df.assign(lband=lband)  
   
+  # Calculate MACD
   print('DEBUG : Calculating MACD for %s' % companyCode)
   df['ema26'] = df['close'].ewm(span=26,min_periods=0,adjust=False,ignore_na=False).mean()
   df['ema12'] = df['close'].ewm(span=12,min_periods=0,adjust=False,ignore_na=False).mean()
   df['macd'] = (df['ema12'] - df['ema26'])
   df['signal'] = df['macd'].ewm(span=9,min_periods=0,adjust=False,ignore_na=False).mean()
   df['macdhisto'] = (df['macd'] - df['signal'])
-  df['macdhistodiff'] = df['macdhisto']
+  
   # Calculate histogram colour
   #  - If larger that previous value, then GREEN, else RED
   valList=list(boll_df['macdhisto'])
@@ -48,7 +49,7 @@ def processCompany(companyCode):
   i = 1
   while i < len(valList):
     trendList.append(valList[i] - valList[i-1])
-    i += 
+    i += 1
   seHistoDiff = pd.Series(diffList)
   boll_df['macdhistodiff'] = seHistoDiff.values
   df['macdhistocolor'] = df['macdhistodiff'].apply(lambda x: '#FF0000' if x < 0 else '#00FF00')
