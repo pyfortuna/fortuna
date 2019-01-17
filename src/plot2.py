@@ -40,14 +40,19 @@ def processCompany(companyCode):
   df['signal'] = df['macd'].ewm(span=9,min_periods=0,adjust=False,ignore_na=False).mean()
   df['macdhisto'] = (df['macd'] - df['signal'])
   df['macdhistodiff'] = df['macdhisto']
-  print(df[['macdhistodiff']].tail())
-  print('before loop')
-  for i in range(1, len(df)):
-    df.loc[i, 'macdhistodiff'] = (df.loc[i, 'macdhisto'] - df.loc[i-1, 'macdhisto'])
-  print('after loop')
-  print(df[['macdhistodiff']].tail())
+  # Calculate histogram colour
+  #  - If larger that previous value, then GREEN, else RED
+  valList=list(boll_df['macdhisto'])
+  diffList = []
+  diffList.append(0) # First item: Cannot calculate difference
+  i = 1
+  while i < len(valList):
+    trendList.append(valList[i] - valList[i-1])
+    i += 
+  seHistoDiff = pd.Series(diffList)
+  boll_df['macdhistodiff'] = seHistoDiff.values
   df['macdhistocolor'] = df['macdhistodiff'].apply(lambda x: '#FF0000' if x < 0 else '#00FF00')
-  print(df[['macdhistocolor']].tail())
+  print(df[['macdhisto','macdhistocolor']].tail())
 
   #print(df[['macd']].tail())  
   df=df.dropna()
