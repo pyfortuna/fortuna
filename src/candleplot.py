@@ -46,11 +46,11 @@ def plotCandlestick(df,filename,w,h):
 
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#b72015')
   #ax.plot_date(df.index.values, df['sma20'].values, color='b', linestyle='solid', marker=',', linewidth=1) #test002
-  ax.plot(indexList, df['sma20'].values, color='b', linestyle='solid', marker=',', linewidth=1)
-  ax.autoscale_view()
-  ax.fill_between(indexList, df['hband'].values, df['lband'].values, color='#88ccee', alpha=0.15) #test002
-  #ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=0)) #test001 #test002
-  #ax.xaxis.set_major_formatter(mdates.DateFormatter('%d\n%b'))  #test002
+  #ax.plot(indexList, df['sma20'].values, color='b', linestyle='solid', marker=',', linewidth=1)
+  #ax.autoscale_view()
+  #ax.fill_between(indexList, df['hband'].values, df['lband'].values, color='#88ccee', alpha=0.15) #test002
+  #xxx- ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=0)) #test001 #test002
+  #xxx- ax.xaxis.set_major_formatter(mdates.DateFormatter('%d\n%b'))  #test002
   fig.savefig(filename, dpi=300, bbox_inches='tight', pad_inches=0)
 
 '''
