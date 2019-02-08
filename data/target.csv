@@ -1,11 +1,5 @@
 type,companyName,targetPrice,active
-Buy,Hester Bio,1100,Y
-Buy,IG Petro,390,Y
-Buy,Meghmani Organi,55,Y
-Buy,NOCIL,160,Y
-Buy,Visaka Ind,375,Y
 Sell,Tata Motors,205,Y
-Sell,TCS,2050,Y
 Sell,Ashok Leyland,125,Y
 Sell,Indiabulls Hsg,925,Y
 Sell,ABB India,1350,Y
@@ -35,4 +29,3 @@ Sell,Yes Bank,190,Y
 Sell,Zee Learn,36,Y
 Sell,NOCIL,220,Y
 Sell,Rane Holdings,1450,Y
-Sell,Hester Bio,1700,Y
