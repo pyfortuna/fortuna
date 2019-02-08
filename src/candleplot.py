@@ -29,7 +29,8 @@ def plotCandlestick(df,filename,w,h):
   for index, row in df.iterrows():
     #nDate=date2num(datetime.strptime(row.name,dateFormat))
     nDate=date2num(row.name.to_pydatetime())
-    rec = nDate, row['open'], row['high'], row['low'], row['close']
+    #rec = nDate, row['open'], row['high'], row['low'], row['close']
+    rec = i, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
     dateNumList.append(nDate) #test002
     indexList.append(i) #test002
