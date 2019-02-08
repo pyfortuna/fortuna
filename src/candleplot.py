@@ -16,7 +16,7 @@ class MyFormatter(Formatter): #test002
     self.fmt = fmt
     self.dateNumList = dateNumList
   def __call__(self, x, pos=0):
-    return self.dateNumList[x].strftime(self.fmt)
+    return self.dateNumList[int(x)].strftime(self.fmt)
       
 #def plotCandlestick(df,filename,dateFormat):
 def plotCandlestick(df,filename,w,h):
