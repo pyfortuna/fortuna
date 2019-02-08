@@ -44,9 +44,8 @@ def plotCandlestick(df,filename,w,h):
     indexList.append(i)
     i+=1
   
-  dateList=df.index.values
   fig, ax = plt.subplots(figsize=(w,h))
-  formatter = MyFormatter(dateList)
+  formatter = MyFormatter(df.index.values)
   ax.xaxis.set_major_formatter(formatter)
 
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#b72015')
@@ -81,11 +80,15 @@ MACD plot
 '''
 def plotMACD(df,macdFilename,w,h):
   fig, ax = plt.subplots(figsize=(w,h))
-  ax.plot_date(df.index.values, df['macd'].values, color='#000000', linestyle='solid', marker=',', linewidth=1, label='MACD')
-  ax.plot_date(df.index.values, df['signal'].values, color='#FF0000', linestyle='solid', marker=',', linewidth=1, label='Signal')
-  ax.bar(df.index.values, df['macdhisto'].values, color=df['macdhistocolor'].values)
+  formatter = MyFormatter(df.index.values)
+  ax.xaxis.set_major_formatter(formatter)
+  indexList=np.arrange(len(df.index.values)).tolist()
+  print(indexList)
+  ax.plot(indexList, df['macd'].values, color='#000000', linestyle='solid', marker=',', linewidth=1, label='MACD')
+  ax.plot(indexList, df['signal'].values, color='#FF0000', linestyle='solid', marker=',', linewidth=1, label='Signal')
+  ax.bar(indexList, df['macdhisto'].values, color=df['macdhistocolor'].values)
   ax.legend(frameon=False)
-  ax.xaxis_date()
-  ax.xaxis.set_major_locator(mdates.MonthLocator(bymonth=[3,6,9,12]))
-  ax.xaxis.set_major_formatter(mdates.DateFormatter('%b\n%Y'))
+  #ax.xaxis_date()
+  #ax.xaxis.set_major_locator(mdates.MonthLocator(bymonth=[3,6,9,12]))
+  #ax.xaxis.set_major_formatter(mdates.DateFormatter('%b\n%Y'))
   plt.savefig(macdFilename, dpi=300, bbox_inches='tight', pad_inches=0)
