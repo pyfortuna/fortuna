@@ -18,7 +18,7 @@ class MyFormatter(Formatter): #test002
     if idx < 0:
       return num2date(self.dateNumList[0]+idx).strftime(self.fmt)
     elif idx >= len(self.dateNumList):
-      return num2date(self.dateNumList[-1]+idx).strftime(self.fmt)
+      return num2date(self.dateNumList[-1]+(idx-len(self.dateNumList)-1)).strftime(self.fmt)
     else:
       return num2date(self.dateNumList[idx]).strftime(self.fmt)
       
