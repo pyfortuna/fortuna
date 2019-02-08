@@ -8,21 +8,18 @@ from mpl_finance import candlestick2_ohlc
 import pandas as pd
 import numpy as np
 from datetime import datetime
-'''
-import fortunacommon
-'''
+
 class MyFormatter(Formatter): #test002
   def __init__(self, dateNumList, fmt='%d\n%b'):
     self.fmt = fmt
     self.dateNumList = dateNumList
   def __call__(self, x, pos=0):
-    print('x = ',x)
+    ind=int(x)
     #return self.dateNumList[int(x)].strftime(self.fmt)
-    if ind >= len(self.dates) or ind < 0:
+    if ind >= len(self.dateNumList) or ind < 0:
       return ''
-    return self.dateNumList[int(x)].strftime(self.fmt)
+    return self.dateNumList[ind].strftime(self.fmt)
       
-#def plotCandlestick(df,filename,dateFormat):
 def plotCandlestick(df,filename,w,h):
   ohlc = []
   dateNumList = [] #test002
@@ -56,15 +53,3 @@ def plotCandlestick(df,filename,w,h):
   #xxx- ax.xaxis.set_major_formatter(mdates.DateFormatter('%d\n%b'))  #test002
   fig.savefig(filename, dpi=300, bbox_inches='tight', pad_inches=0)
 
-'''
-# TEST PROGRAM
-o_file="/home/ec2-user/plutus/candleplot.png"
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-df.rename(columns={ 'AAPL.Open':'open',
-                    'AAPL.High':'high',
-                    'AAPL.Low':'low',
-                    'AAPL.Close':'close'}, 
-                    inplace=True)
-plotCandlestick(df,o_file)
-fortunacommon.sendMail("candleplot","candleplot",o_file)
-'''
