@@ -16,6 +16,7 @@ class MyFormatter(Formatter): #test002
     self.fmt = fmt
     self.dateNumList = dateNumList
   def __call__(self, x, pos=0):
+    print(x)
     return self.dateNumList[int(x)].strftime(self.fmt)
       
 #def plotCandlestick(df,filename,dateFormat):
@@ -30,6 +31,12 @@ def plotCandlestick(df,filename,w,h):
     ohlc.append(rec)
     dateNumList.append(nDate) #test002
     indexList.append(index) #test002
+  
+  print('DEBUG: [dateNumList]')
+  print(dateNumList)
+  print('DEBUG: [indexList]')
+  print(indexList)
+  
   fig, ax = plt.subplots(figsize=(w,h))
   formatter = MyFormatter(dateNumList)  #test002
 
