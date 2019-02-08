@@ -5,6 +5,7 @@ from matplotlib.ticker import Formatter
 from mpl_finance import candlestick_ohlc
 from mpl_finance import candlestick2_ohlc
 import pandas as pd
+import numpy as np
 from datetime import datetime
 '''
 import fortunacommon
