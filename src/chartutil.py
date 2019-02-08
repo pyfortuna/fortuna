@@ -24,7 +24,7 @@ class MyFormatter(Formatter):
     if idx >= len(self.dateList) or idx < 0:
       return ''
     else:
-      return self.dateList[idx].strftime(self.fmt)
+      return pd.to_datetime(self.dateList[idx]).strftime(self.fmt)
 
 '''
 ============================================================================================================
