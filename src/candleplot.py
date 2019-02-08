@@ -9,6 +9,12 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
+'''
+============================================================================================================
+Class for formatting X axis date labels
+ - This is created to avoid the gap occuring for weekends and holidays
+============================================================================================================
+'''
 class MyFormatter(Formatter): #test002
   def __init__(self, dateNumList, fmt='%d\n%b'):
     self.fmt = fmt
@@ -21,7 +27,12 @@ class MyFormatter(Formatter): #test002
       return num2date(self.dateNumList[-1]+(idx-len(self.dateNumList)-1)).strftime(self.fmt)
     else:
       return num2date(self.dateNumList[idx]).strftime(self.fmt)
-      
+
+'''
+============================================================================================================
+Candlestick plot
+============================================================================================================
+'''
 def plotCandlestick(df,filename,w,h):
   ohlc = []
   dateNumList = [] #test002
@@ -47,3 +58,35 @@ def plotCandlestick(df,filename,w,h):
   ax.fill_between(indexList, df['hband'].values, df['lband'].values, color='#88ccee', alpha=0.15) #test002
   fig.savefig(filename, dpi=300, bbox_inches='tight', pad_inches=0)
 
+'''
+============================================================================================================
+SMA plot
+============================================================================================================
+'''
+def plotSMA(df,smaFilename,w,h):
+  fig, ax = plt.subplots(figsize=(w,h))
+  ax.plot_date(df.index.values, df['sma200'].values, color='b', linestyle='solid', marker=',', linewidth=1, label='SMA/200')
+  ax.plot_date(df.index.values, df['sma20'].values, color='g', linestyle='solid', marker=',', linewidth=1, label='SMA/20')
+  ax.plot_date(df.index.values, df['close'].values, color='#B72015', linestyle='solid', marker=',', linewidth=1, label='Price')
+  #ax.fill_between(df.index.values, df['hband'].values, df['lband'].values, color='blue', alpha=0.3)
+  ax.legend(frameon=False)
+  ax.xaxis_date()
+  ax.xaxis.set_major_locator(mdates.MonthLocator(bymonth=[3,6,9,12]))
+  ax.xaxis.set_major_formatter(mdates.DateFormatter('%b\n%Y'))
+  plt.savefig(smaFilename, dpi=300, bbox_inches='tight', pad_inches=0)
+
+'''
+============================================================================================================
+MACD plot
+============================================================================================================
+'''
+def plotMACD(df,macdFilename,w,h):
+  fig, ax = plt.subplots(figsize=(w,h))
+  ax.plot_date(df.index.values, df['macd'].values, color='#000000', linestyle='solid', marker=',', linewidth=1, label='MACD')
+  ax.plot_date(df.index.values, df['signal'].values, color='#FF0000', linestyle='solid', marker=',', linewidth=1, label='Signal')
+  ax.bar(df.index.values, df['macdhisto'].values, color=df['macdhistocolor'].values)
+  ax.legend(frameon=False)
+  ax.xaxis_date()
+  ax.xaxis.set_major_locator(mdates.MonthLocator(bymonth=[3,6,9,12]))
+  ax.xaxis.set_major_formatter(mdates.DateFormatter('%b\n%Y'))
+  plt.savefig(macdFilename, dpi=300, bbox_inches='tight', pad_inches=0)
