@@ -18,7 +18,9 @@ class MyFormatter(Formatter): #test002
   def __call__(self, x, pos=0):
     print('x = ',x)
     #return self.dateNumList[int(x)].strftime(self.fmt)
-    return 'x'
+    if ind >= len(self.dates) or ind < 0:
+      return ''
+    return self.dateNumList[int(x)].strftime(self.fmt)
       
 #def plotCandlestick(df,filename,dateFormat):
 def plotCandlestick(df,filename,w,h):
