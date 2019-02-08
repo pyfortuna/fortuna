@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from matplotlib.dates import date2num
-from matplotlib.dates import num2date
+#from matplotlib.dates import date2num
+#from matplotlib.dates import num2date
 from matplotlib.ticker import Formatter
 from mpl_finance import candlestick_ohlc
 from mpl_finance import candlestick2_ohlc
@@ -15,18 +15,16 @@ Class for formatting X axis date labels
  - This is created to avoid the gap occuring for weekends and holidays
 ============================================================================================================
 '''
-class MyFormatter(Formatter): #test002
-  def __init__(self, dateNumList, fmt='%d\n%b'):
+class MyFormatter(Formatter):
+  def __init__(self, dateList, fmt='%d\n%b'):
     self.fmt = fmt
-    self.dateNumList = dateNumList
+    self.dateList = dateList
   def __call__(self, x, pos=0):
     idx=int(x)
-    if idx < 0:
-      return num2date(self.dateNumList[0]+idx).strftime(self.fmt)
-    elif idx >= len(self.dateNumList):
-      return num2date(self.dateNumList[-1]+(idx-len(self.dateNumList)-1)).strftime(self.fmt)
+    if idx >= len(self.dateList) or idx < 0::
+      return ''
     else:
-      return num2date(self.dateNumList[idx]).strftime(self.fmt)
+      return self.dateList[idx].strftime(self.fmt)
 
 '''
 ============================================================================================================
@@ -35,19 +33,20 @@ Candlestick plot
 '''
 def plotCandlestick(df,filename,w,h):
   ohlc = []
-  dateNumList = [] #test002
-  indexList = [] #test002
+  #dateNumList = []
+  indexList = []
   i=0
   for index, row in df.iterrows():
-    nDate=date2num(row.name.to_pydatetime())
+    #nDate=date2num(row.name.to_pydatetime())
     rec = i, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
-    dateNumList.append(nDate) #test002
-    indexList.append(i) #test002
+    #dateNumList.append(nDate)
+    indexList.append(i)
     i+=1
   
+  dateList=df.index.values
   fig, ax = plt.subplots(figsize=(w,h))
-  formatter = MyFormatter(dateNumList)  #test002
+  formatter = MyFormatter(dateList)
   ax.xaxis.set_major_formatter(formatter)
 
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#b72015')
