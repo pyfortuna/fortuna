@@ -31,8 +31,8 @@ def plotCandlestick(df,filename,w,h):
     rec = nDate, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
     dateNumList.append(nDate) #test002
-    i+=1
     indexList.append(i) #test002
+    i+=1
   
   print('DEBUG: [dateNumList]')
   print(dateNumList)
