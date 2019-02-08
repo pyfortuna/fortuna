@@ -5,7 +5,7 @@ import fortunacommon as fc
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.dates as mdates
-import candleplot as cu
+import chartutil as cu
 from fpdf import FPDF
 
 # Configure parameters
