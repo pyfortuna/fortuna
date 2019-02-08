@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.dates as mdates
 import candleplot as cp
-import smaplot as sp
 from fpdf import FPDF
 
 # Configure parameters
@@ -64,11 +63,11 @@ def processCompany(companyCode):
   print('DEBUG : Creating charts for %s' % companyCode)
   imgWin=6.69 # 170 x 80 mm = 6.69 x 3.15 in
   imgHin=3.15
-  sp.plotSMA(df,smaFilename,imgWin,imgHin) 
-  sp.plotMACD(df.tail(30),macdFilename,imgWin,imgHin)
-  dfCandle=df.tail(30)
+  cp.plotSMA(df,smaFilename,imgWin,imgHin) 
+  cp.plotMACD(df.tail(30),macdFilename,imgWin,imgHin)
+  #dfCandle=df.tail(30)
   #cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
-  cp.plotCandlestick(dfCandle,candleFilename,imgWin,imgHin)
+  cp.plotCandlestick(df.tail(30),candleFilename,imgWin,imgHin)
   
   plotData = {
     "companyCode": companyCode,
