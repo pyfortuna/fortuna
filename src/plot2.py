@@ -65,7 +65,7 @@ def processCompany(companyCode):
   imgWin=6.69 # 170 x 80 mm = 6.69 x 3.15 in
   imgHin=3.15
   sp.plotSMA(df,smaFilename,imgWin,imgHin) 
-  sp.plotMACD(df,macdFilename,imgWin,imgHin)
+  sp.plotMACD(df.tail(30),macdFilename,imgWin,imgHin)
   dfCandle=df.tail(30)
   #cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
   cp.plotCandlestick(dfCandle,candleFilename,imgWin,imgHin)
