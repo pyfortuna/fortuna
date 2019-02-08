@@ -83,7 +83,6 @@ def plotMACD(df,macdFilename,w,h):
   formatter = MyFormatter(df.index.values)
   ax.xaxis.set_major_formatter(formatter)
   indexList=np.arange(len(df.index.values)).tolist()
-  print(indexList)
   ax.plot(indexList, df['macd'].values, color='#000000', linestyle='solid', marker=',', linewidth=1, label='MACD')
   ax.plot(indexList, df['signal'].values, color='#FF0000', linestyle='solid', marker=',', linewidth=1, label='Signal')
   ax.bar(indexList, df['macdhisto'].values, color=df['macdhistocolor'].values)
