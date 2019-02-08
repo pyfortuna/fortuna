@@ -5,7 +5,7 @@ import fortunacommon as fc
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.dates as mdates
-import candleplot as cp
+import candleplot as cu
 from fpdf import FPDF
 
 # Configure parameters
@@ -63,11 +63,11 @@ def processCompany(companyCode):
   print('DEBUG : Creating charts for %s' % companyCode)
   imgWin=6.69 # 170 x 80 mm = 6.69 x 3.15 in
   imgHin=3.15
-  cp.plotSMA(df,smaFilename,imgWin,imgHin) 
-  cp.plotMACD(df.tail(30),macdFilename,imgWin,imgHin)
+  cu.plotSMA(df,smaFilename,imgWin,imgHin) 
+  cu.plotMACD(df.tail(30),macdFilename,imgWin,imgHin)
   #dfCandle=df.tail(30)
-  #cp.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
-  cp.plotCandlestick(df.tail(30),candleFilename,imgWin,imgHin)
+  #cu.plotCandlestick(df1,candleFilename,'%Y-%m-%d')
+  cu.plotCandlestick(df.tail(30),candleFilename,imgWin,imgHin)
   
   plotData = {
     "companyCode": companyCode,
