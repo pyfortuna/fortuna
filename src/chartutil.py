@@ -4,7 +4,7 @@ import matplotlib.dates as mdates
 #from matplotlib.dates import num2date
 from matplotlib.ticker import Formatter
 from mpl_finance import candlestick_ohlc
-from mpl_finance import candlestick2_ohlc
+#from mpl_finance import candlestick2_ohlc
 import pandas as pd
 import numpy as np
 from datetime import datetime
@@ -21,7 +21,7 @@ class MyFormatter(Formatter):
     self.dateList = dateList
   def __call__(self, x, pos=0):
     idx=int(x)
-    if idx >= len(self.dateList) or idx < 0::
+    if idx >= len(self.dateList) or idx < 0:
       return ''
     else:
       return self.dateList[idx].strftime(self.fmt)
