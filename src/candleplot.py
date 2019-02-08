@@ -33,7 +33,7 @@ def plotCandlestick(df,filename,w,h):
 
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#b72015')
   #ax.plot_date(df.index.values, df['sma20'].values, color='b', linestyle='solid', marker=',', linewidth=1) #test002
-  ax.plot_date(np.arange(len(df.index.values)), df['sma20'].values, color='b', linestyle='solid', marker=',', linewidth=1)
+  ax.plot(np.arange(len(df.index.values)), df['sma20'].values, color='b', linestyle='solid', marker=',', linewidth=1)
   ax.autoscale_view()
   ax.fill_between(df.index.values, df['hband'].values, df['lband'].values, color='#88ccee', alpha=0.15)
   #ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=0)) #test001 #test002
