@@ -14,11 +14,11 @@ class MyFormatter(Formatter): #test002
     self.fmt = fmt
     self.dateNumList = dateNumList
   def __call__(self, x, pos=0):
-    ind=int(x)
+    idx=int(x)
     #return self.dateNumList[int(x)].strftime(self.fmt)
-    if ind >= len(self.dateNumList) or ind < 0:
-      return ''
-    return num2date(self.dateNumList[ind]).strftime(self.fmt)
+    if idx >= len(self.dateNumList) or idx < 0:
+      return num2date(self.dateNumList[0]+idx).strftime(self.fmt)
+    return num2date(self.dateNumList[idx]).strftime(self.fmt)
       
 def plotCandlestick(df,filename,w,h):
   ohlc = []
@@ -26,9 +26,7 @@ def plotCandlestick(df,filename,w,h):
   indexList = [] #test002
   i=0
   for index, row in df.iterrows():
-    #nDate=date2num(datetime.strptime(row.name,dateFormat))
     nDate=date2num(row.name.to_pydatetime())
-    #rec = nDate, row['open'], row['high'], row['low'], row['close']
     rec = i, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
     dateNumList.append(nDate) #test002
@@ -40,13 +38,10 @@ def plotCandlestick(df,filename,w,h):
   ax.xaxis.set_major_formatter(formatter)
 
   candlestick_ohlc(ax, ohlc, colorup='#77d879', colordown='#b72015')
-  #xxx- ax.plot_date(df.index.values, df['sma20'].values, color='b', linestyle='solid', marker=',', linewidth=1) #test002
   ax.plot(indexList, df['sma20'].values, color='#5899bb', linestyle='solid', marker=',', linewidth=1)
   ax.plot(indexList, df['hband'].values, color='#5899bb', linestyle='solid', marker=',', linewidth=1)
   ax.plot(indexList, df['lband'].values, color='#5899bb', linestyle='solid', marker=',', linewidth=1)
   #ax.autoscale_view()
   ax.fill_between(indexList, df['hband'].values, df['lband'].values, color='#88ccee', alpha=0.15) #test002
-  #xxx- ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=0)) #test001 #test002
-  #xxx- ax.xaxis.set_major_formatter(mdates.DateFormatter('%d\n%b'))  #test002
   fig.savefig(filename, dpi=300, bbox_inches='tight', pad_inches=0)
 
