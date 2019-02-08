@@ -18,7 +18,7 @@ class MyFormatter(Formatter): #test002
     #return self.dateNumList[int(x)].strftime(self.fmt)
     if ind >= len(self.dateNumList) or ind < 0:
       return ''
-    return self.dateNumList[ind].strftime(self.fmt)
+    return num2date(self.dateNumList[ind]).strftime(self.fmt)
       
 def plotCandlestick(df,filename,w,h):
   ohlc = []
