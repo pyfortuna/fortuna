@@ -2,7 +2,7 @@ type,companyName,targetPrice,active
 Sell,Tata Motors,205,Y
 Sell,Ashok Leyland,125,Y
 Sell,Indiabulls Hsg,925,Y
-Sell,ABB India,1350,Y
+Sell,ABB India,1450,Y
 Sell,Adani Ports,390,Y
 Sell,Biocon,650,Y
 Sell,BPCL,380,Y
@@ -20,7 +20,7 @@ Sell,IOC,145,Y
 Sell,KRBL,300,Y
 Sell,L&T Finance,160,Y
 Sell,Pidilite Ind,1200,Y
-Sell,Reliance,1150,Y
+Buy,Reliance,1250,Y
 Sell,Sun TV Network,617,Y
 Sell,TV TodayNetwork,380,Y
 Sell,TVS Motor,585,Y
@@ -29,3 +29,15 @@ Sell,Yes Bank,190,Y
 Sell,Zee Learn,36,Y
 Sell,NOCIL,220,Y
 Sell,Rane Holdings,1450,Y
+Buy,Asian Paints,1300,Y
+Sell,Avenue Supermar,1550,Y
+Buy,CESC,660,Y
+Buy,Cholamandalam,1150,Y
+Buy,Endurance Techn,1150,Y
+Buy,IndusInd Bank,1475,Y
+Buy,LIC Housing Fin,450,Y
+Buy,Power Grid Corp,180,Y
+Buy,RBL Bank,565,Y
+Buy,Sundaram Fin,1400,Y
+Buy,Tata Chemicals,550,Y
+Buy,Whirlpool,1325,Y
