@@ -24,13 +24,15 @@ def plotCandlestick(df,filename,w,h):
   ohlc = []
   dateNumList = [] #test002
   indexList = [] #test002
+  i=0
   for index, row in df.iterrows():
     #nDate=date2num(datetime.strptime(row.name,dateFormat))
     nDate=date2num(row.name.to_pydatetime())
     rec = nDate, row['open'], row['high'], row['low'], row['close']
     ohlc.append(rec)
     dateNumList.append(nDate) #test002
-    indexList.append(index) #test002
+    i+=1
+    indexList.append(i) #test002
   
   print('DEBUG: [dateNumList]')
   print(dateNumList)
