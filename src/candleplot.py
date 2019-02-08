@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.dates import date2num
+from matplotlib.dates import num2date
 from matplotlib.ticker import Formatter
 from mpl_finance import candlestick_ohlc
 from mpl_finance import candlestick2_ohlc
