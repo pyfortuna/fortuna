@@ -101,7 +101,10 @@ class Portfolio:
 		else:
 			print(self.bsDF.loc[self.bsDF['ACC'] == account][['ACC', 'DESCRIPTION', 'DR', 'CR']])
 	def printSummary(self):
-		print(self.bsDF[['ACC', 'DR', 'CR']].fillna(0).groupby(['ACC']).sum())
+		tempDF = self.bsDF[['ACC', 'DR', 'CR']]
+		tempDF = tempDF.fillna(0)
+		print(tempDF)
+		print(tempDF.groupby(['ACC']).sum())
 '''
 	Test program
 '''
