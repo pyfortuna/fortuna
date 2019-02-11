@@ -24,6 +24,14 @@ class Portfolio:
 		sebiTurnoverFee = round(totalTrade*15/10000000,2)
 		stampDuty=round((totalTrade*0.01/100),2)
 		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty
+		print('DEBUG : totalTrade: %6.2f' % totalTrade)
+		print('DEBUG : brokerage: %6.2f' % brokerage)
+		print('DEBUG : exchangeTxnCharge: %6.2f' % exchangeTxnCharge)
+		print('DEBUG : gst: %6.2f' % gst)
+		print('DEBUG : securityTxnTax: %6.2f' % securityTxnTax)
+		print('DEBUG : sebiTurnoverFee: %6.2f' % sebiTurnoverFee)
+		print('DEBUG : stampDuty: %6.2f' % stampDuty)
+		print('DEBUG : totalCharges: %6.2f' % totalCharges)
 		return totalCharges
 	def calculateSellBrokerage (self, price, qty):
 		totalTrade	= price * qty
@@ -35,6 +43,16 @@ class Portfolio:
 		stampDuty=round((totalTrade*0.01/100),2)
 		dpCharges = 15.93
 		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty + dpCharges
+		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty
+		print('DEBUG : totalTrade: %6.2f' % totalTrade)
+		print('DEBUG : brokerage: %6.2f' % brokerage)
+		print('DEBUG : exchangeTxnCharge: %6.2f' % exchangeTxnCharge)
+		print('DEBUG : gst: %6.2f' % gst)
+		print('DEBUG : securityTxnTax: %6.2f' % securityTxnTax)
+		print('DEBUG : sebiTurnoverFee: %6.2f' % sebiTurnoverFee)
+		print('DEBUG : stampDuty: %6.2f' % stampDuty)
+		print('DEBUG : dpCharges: %6.2f' % dpCharges)
+		print('DEBUG : totalCharges: %6.2f' % totalCharges)
 		return totalCharges
 	def addCapital (self, amount):
 		self.capCr += amount
