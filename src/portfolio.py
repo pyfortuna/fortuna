@@ -102,7 +102,9 @@ class Portfolio:
 			print(self.bsDF.loc[self.bsDF['ACC'] == account][['ACC', 'DESCRIPTION', 'DR', 'CR']])
 	def printSummary(self):
 		tempDF = self.bsDF[['ACC', 'DR', 'CR']]
+		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
 		print(tempDF.groupby(['ACC']).sum())
+		print(tempDF.sum())
 '''
 	Test program
 '''
@@ -112,8 +114,8 @@ if __name__ == "__main__":
 	pf.buy(460,5)
 	pf.sell(460,490,5)
 	pf.printSummary()
-	pf.printBalanceSheet()
-	pf.printBalanceSheet('TRD')
+	#pf.printBalanceSheet()
+	#pf.printBalanceSheet('TRD')
 	b=pf.getBalance()
 	if(b==0):
 		print('BALANCESHEET : OK')
