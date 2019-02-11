@@ -95,8 +95,11 @@ class Portfolio:
 		grossPL = self.salCr - self.cogDr
 		netPL = grossPL - self.brkDr
 		return grossPL, netPL
-	def printBalanceSheet(self):
-		print(self.bsDF[['ACC', 'DESCRIPTION', 'DR', 'CR']])
+	def printBalanceSheet(self, account='NA'):
+		if (account=='NA'):
+			print(self.bsDF[['ACC', 'DESCRIPTION', 'DR', 'CR']])
+		else
+			print(self.bsDF.loc[self.bsDF['ACC'] == account][['ACC', 'DESCRIPTION', 'DR', 'CR']])
 '''
 	Test program
 '''
@@ -106,6 +109,7 @@ if __name__ == "__main__":
 	pf.buy(460,5)
 	pf.sell(460,490,5)
 	pf.printBalanceSheet()
+	pf.printBalanceSheet('TRD')
 	b=pf.getBalance()
 	if(b==0):
 		print('BALANCESHEET : OK')
