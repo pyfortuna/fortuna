@@ -1,3 +1,5 @@
+import pandas as pd
+
 '''
 	Class to manage portfolio & related transactions
 '''
@@ -15,6 +17,8 @@ class Portfolio:
 		self.salCr = 0	# Sales (CR)
 		self.cogDr = 0	# Cost of Goods (DR)
 		self.cogCr = 0	# Cost of Goods (CR)
+		col_names =  ['ACC', 'DESCRIPTION', 'DR', 'CR']
+		self.bsDF = pd.DataFrame(columns = col_names)
 	def calculateBuyBrokerage (self, price, qty):
 		totalTrade	= price * qty
 		brokerage =	0.01
@@ -24,14 +28,6 @@ class Portfolio:
 		sebiTurnoverFee = round(totalTrade*15/10000000,2)
 		stampDuty=round((totalTrade*0.01/100),2)
 		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty
-		print('DEBUG : totalTrade: %6.2f' % totalTrade)
-		print('DEBUG : brokerage: %6.2f' % brokerage)
-		print('DEBUG : exchangeTxnCharge: %6.2f' % exchangeTxnCharge)
-		print('DEBUG : gst: %6.2f' % gst)
-		print('DEBUG : securityTxnTax: %6.2f' % securityTxnTax)
-		print('DEBUG : sebiTurnoverFee: %6.2f' % sebiTurnoverFee)
-		print('DEBUG : stampDuty: %6.2f' % stampDuty)
-		print('DEBUG : totalCharges: %6.2f' % totalCharges)
 		return totalCharges
 	def calculateSellBrokerage (self, price, qty):
 		totalTrade	= price * qty
@@ -43,25 +39,21 @@ class Portfolio:
 		stampDuty=round((totalTrade*0.01/100),2)
 		dpCharges = 15.93
 		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty + dpCharges
-		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty
-		print('DEBUG : totalTrade: %6.2f' % totalTrade)
-		print('DEBUG : brokerage: %6.2f' % brokerage)
-		print('DEBUG : exchangeTxnCharge: %6.2f' % exchangeTxnCharge)
-		print('DEBUG : gst: %6.2f' % gst)
-		print('DEBUG : securityTxnTax: %6.2f' % securityTxnTax)
-		print('DEBUG : sebiTurnoverFee: %6.2f' % sebiTurnoverFee)
-		print('DEBUG : stampDuty: %6.2f' % stampDuty)
-		print('DEBUG : dpCharges: %6.2f' % dpCharges)
-		print('DEBUG : totalCharges: %6.2f' % totalCharges)
 		return totalCharges
 	def addCapital (self, amount):
 		self.capCr += amount
 		self.trdDr += amount
-	def buy (self, buyPrice, qty, brokerage):
+		t1=pd.DataFrame([{'ACC': 'CAP', 'DESCRIPTION': 'Adding Capital', 'DR': '', 'CR':amount}])
+		self.bsDF.append(t1)
+		t2=pd.DataFrame([{'ACC': 'TRD', 'DESCRIPTION': 'Adding Capital', 'DR': amount, 'CR':''}])
+		self.bsDF.append(t2)
+	def buy (self, buyPrice, qty):
+		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
 		self.trdCr += (buyPrice*qty) + brokerage
 		self.invDr += (buyPrice*qty)
 		self.brkDr += brokerage
-	def sell(self, buyPrice,sellPrice,qty,brokerage):
+	def sell(self, buyPrice, sellPrice, qty):
+		brokerage = self.calculateSellBrokerage(sellPrice, qty)
 		self.trdDr += (sellPrice*qty)
 		self.brkDr += brokerage
 		self.cogDr += (buyPrice*qty)
@@ -84,17 +76,17 @@ class Portfolio:
 		grossPL = self.salCr - self.cogDr
 		netPL = grossPL - self.brkDr
 		return grossPL, netPL
-
+	def printBalanceSheet(self):
+		print(self.bsDF)
+'''
+	Test program
+'''
 if __name__ == "__main__":
 	pf = Portfolio()
-	pf.addCapital(10000)
-	bbrk=pf.calculateBuyBrokerage(460,5)
-	print('BUY BROKERAGE: %6.2f' % bbrk)
-	pf.buy(460,5,2.34)
-	brk=2.36+15.93
-	pf.sell(460,490,5,brk)
-	sbrk=pf.calculateSellBrokerage(490,5)
-	print('SELL BROKRAGE: %6.2f' % sbrk)
+	pf.addCapital(5000)
+	pf.printBalanceSheet()
+	pf.buy(460,5)
+	pf.sell(460,490,5)
 	b=pf.getBalance()
 	if(b==0):
 		print('BALANCESHEET : OK')
