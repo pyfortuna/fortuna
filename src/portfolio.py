@@ -43,7 +43,7 @@ class Portfolio:
 		return totalCharges
 	def addBalanceSheetRecord (self, record):
 		tempDF=pd.DataFrame([record])
-		self.bsDF=self.bsDF.append(tempDF)
+		self.bsDF=self.bsDF.append(tempDF, sort=True)
 	def addCapital (self, amount):
 		self.capCr += amount
 		self.trdDr += amount
