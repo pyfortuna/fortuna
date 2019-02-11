@@ -34,7 +34,7 @@ class Portfolio:
 		salBal = self.salDr - self.salCr
 		cogBal = self.cogDr - self.cogCr
 		totBal = capBal + trdBal + brkBal + invBal + salBal + cogBal
-		return totBal
+		return int(totBal)
 	def getResults(self):
 		grossPL = self.salCr - self.cogDr
 		netPL = grossPL - self.brkDr
