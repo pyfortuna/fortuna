@@ -19,7 +19,7 @@ class Portfolio:
 		self.cogDr = 0	# Cost of Goods (DR)
 		self.cogCr = 0	# Cost of Goods (CR)
 		col_names =  ['ACC', 'DESCRIPTION', 'DR', 'CR']
-		self.bsDF = pd.DataFrame(columns=col_names)
+		self.bsDF = pd.DataFrame(columns=col_names, inplace=True)
 	def calculateBuyBrokerage (self, price, qty):
 		totalTrade	= price * qty
 		brokerage =	0.01
