@@ -19,7 +19,7 @@ class Portfolio:
 		self.cogDr = 0	# Cost of Goods (DR)
 		self.cogCr = 0	# Cost of Goods (CR)
 		col_names =  ['ACC', 'DESCRIPTION', 'DR', 'CR']
-		self.bsDF = pd.DataFrame(columns=col_names, inplace=True)
+		self.bsDF = pd.DataFrame(columns=col_names)
 	def calculateBuyBrokerage (self, price, qty):
 		totalTrade	= price * qty
 		brokerage =	0.01
@@ -96,7 +96,7 @@ class Portfolio:
 		netPL = grossPL - self.brkDr
 		return grossPL, netPL
 	def printBalanceSheet(self):
-		print(self.bsDF)
+		print(self.bsDF[['ACC', 'DESCRIPTION', 'DR', 'CR']])
 '''
 	Test program
 '''
