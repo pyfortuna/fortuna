@@ -22,7 +22,7 @@ class Portfolio:
 		gst = round((brokerage + exchangeTxnCharge)*18/100,2)
 		securityTxnTax = round((totalTrade*0.001),0)
 		sebiTurnoverFee = round(totalTrade*15/10000000,2)
-		stampDuty=round((O4*0.01/100),2)
+		stampDuty=round((totalTrade*0.01/100),2)
 		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty
 		return totalCharges
 	def calculateSellBrokerage (self, price, qty):
