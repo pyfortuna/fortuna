@@ -1,3 +1,6 @@
+'''
+	Class to manage portfolio & related transactions
+'''
 class Portfolio:
 	def __init__ (self):
 		self.capDr = 0	# Capital (DR)
