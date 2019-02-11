@@ -48,9 +48,12 @@ if __name__ == "__main__":
 	brk=2.36+15.93
 	pf.sell(460,490,5,brk)
 	b=pf.getBalance()
-	print('BALANCE : %6.2f' % b)
+	if(b==0):
+		print('BALANCESHEET : OK')
+	else:
+		print('BALANCESHEET : ERROR')
 	g,n,c=pf.getResults()
-	print('GROSS P/L : %6.2f' % g)
-	print('NET P/L : %6.2f' % n)
+	print('GROSS P/L    : %6.2f' % g)
+	print('NET P/L      : %6.2f' % n)
 	print('CASH BALANCE : %6.2f' % c)
 	
