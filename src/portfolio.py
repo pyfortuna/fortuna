@@ -45,7 +45,8 @@ if __name__ == "__main__":
 	pf = Portfolio()
 	pf.addCapital(10000)
 	pf.buy(460,5,2.34)
-	pf.sell(460,490,5,2.36)
+	brk=2.36+15.93
+	pf.sell(460,490,5,brk)
 	b=pf.getBalance()
 	print('BALANCE : %6.2f' % b)
 	g,n,c=pf.getResults()
