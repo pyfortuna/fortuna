@@ -47,8 +47,8 @@ class Portfolio:
 	def addCapital (self, amount):
 		self.capCr += amount
 		self.trdDr += amount
-		self.addBalanceSheetRecord({'ACC': 'CAP', 'DESCRIPTION': 'Adding Capital', 'DR': '', 'CR':amount})
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Adding Capital', 'DR': amount, 'CR':''})
+		self.addBalanceSheetRecord({'ACC': 'CAP', 'DESCRIPTION': 'Capital', 'DR': '', 'CR':amount})
+		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Capital', 'DR': amount, 'CR':''})
 	def buy (self, buyPrice, qty):
 		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
 		buyAmt = (buyPrice*qty)
@@ -57,9 +57,9 @@ class Portfolio:
 		self.brkDr += brokerage
 		self.invQty += qty
 		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Buy', 'DR': '', 'CR':buyAmt})
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage', 'DR': '', 'CR':brokerage})
+		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': '', 'CR':brokerage})
 		self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Buy', 'DR': buyAmt, 'CR':''})
-		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage', 'DR': brokerage, 'CR':''})
+		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': brokerage, 'CR':''})
 	def sell(self, buyPrice, sellPrice, qty):
 		brokerage = self.calculateSellBrokerage(sellPrice, qty)
 		sellAmt = (sellPrice*qty)
@@ -72,10 +72,10 @@ class Portfolio:
 		self.invCr += buyAmt
 		self.invQty -= qty
 		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Sell', 'DR': sellAmt, 'CR':''})
-		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Sell (Brokerage)', 'DR': brokerage, 'CR':''})
+		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': brokerage, 'CR':''})
 		self.addBalanceSheetRecord({'ACC': 'COG', 'DESCRIPTION': 'Sell', 'DR': buyAmt, 'CR':''})
 		self.addBalanceSheetRecord({'ACC': 'SAL', 'DESCRIPTION': 'Sell', 'DR': '', 'CR':sellAmt})
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Sell (Brokerage)', 'DR': '', 'CR':brokerage})
+		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': '', 'CR':brokerage})
 		self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Sell', 'DR': '', 'CR':buyAmt})
 	def getBalance(self):
 		capBal = self.capDr - self.capCr
@@ -95,11 +95,13 @@ class Portfolio:
 		grossPL = self.salCr - self.cogDr
 		netPL = grossPL - self.brkDr
 		return grossPL, netPL
-	def printBalanceSheet(self, account='NA'):
-		if (account=='NA'):
+	def printBalanceSheet(self, account='none'):
+		if (account=='none'):
 			print(self.bsDF[['ACC', 'DESCRIPTION', 'DR', 'CR']])
 		else:
 			print(self.bsDF.loc[self.bsDF['ACC'] == account][['ACC', 'DESCRIPTION', 'DR', 'CR']])
+	def printSummary(self):
+		print(self.bsDF[['ACC', 'DR', 'CR']].groupby(['ACC']).sum())
 '''
 	Test program
 '''
@@ -108,6 +110,7 @@ if __name__ == "__main__":
 	pf.addCapital(5000)
 	pf.buy(460,5)
 	pf.sell(460,490,5)
+	pf.printSummary()
 	pf.printBalanceSheet()
 	pf.printBalanceSheet('TRD')
 	b=pf.getBalance()
