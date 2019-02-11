@@ -15,6 +15,27 @@ class Portfolio:
 		self.salCr = 0	# Sales (CR)
 		self.cogDr = 0	# Cost of Goods (DR)
 		self.cogCr = 0	# Cost of Goods (CR)
+	def calculateBuyBrokerage (self, price, qty):
+		totalTrade	= price * qty
+		brokerage =	0.01
+		exchangeTxnCharge = round(totalTrade*0.00325/100,2)
+		gst = round((brokerage + exchangeTxnCharge)*18/100,2)
+		securityTxnTax = round((totalTrade*0.001),0)
+		sebiTurnoverFee = round(totalTrade*15/10000000,2)
+		stampDuty=round((O4*0.01/100),2)
+		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty
+		return totalCharges
+	def calculateSellBrokerage (self, price, qty):
+		totalTrade	= price * qty
+		brokerage =	0.01
+		exchangeTxnCharge = round(totalTrade*0.00325/100,2)
+		gst = round((brokerage + exchangeTxnCharge)*18/100,2)
+		securityTxnTax = round((totalTrade*0.001),0)
+		sebiTurnoverFee = round(totalTrade*15/10000000,2)
+		stampDuty=round((O4*0.01/100),2)
+		dpCharges = 15.93
+		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty + dpCharges
+		return totalCharges
 	def addCapital (self, amount):
 		self.capCr += amount
 		self.trdDr += amount
@@ -49,8 +70,13 @@ class Portfolio:
 if __name__ == "__main__":
 	pf = Portfolio()
 	pf.addCapital(10000)
+	bbrk=pf.calculateBuyBrokerage(460,5)
+	print('BUY BROKERAGE: %6.2f' % bbrk)
 	pf.buy(460,5,2.34)
-	pf.sell(460,490,5,2.36)
+	brk=2.36+15.93
+	pf.sell(460,490,5,brk)
+	sbrk=pf.calculateSellBrokerage(490,5)
+	print('SELL BROKRAGE: %6.2f' % sbrk)
 	b=pf.getBalance()
 	if(b==0):
 		print('BALANCESHEET : OK')
