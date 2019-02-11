@@ -44,9 +44,9 @@ class Portfolio:
 		self.capCr += amount
 		self.trdDr += amount
 		t1=pd.DataFrame([{'ACC': 'CAP', 'DESCRIPTION': 'Adding Capital', 'DR': '', 'CR':amount}])
-		self.bsDF.append(t1)
+		self.bsDF=self.bsDF.append(t1)
 		t2=pd.DataFrame([{'ACC': 'TRD', 'DESCRIPTION': 'Adding Capital', 'DR': amount, 'CR':''}])
-		self.bsDF.append(t2)
+		self.bsDF=self.bsDF.append(t2)
 	def buy (self, buyPrice, qty):
 		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
 		self.trdCr += (buyPrice*qty) + brokerage
