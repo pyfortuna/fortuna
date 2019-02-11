@@ -104,7 +104,7 @@ class Portfolio:
 		tempDF = self.bsDF[['ACC', 'DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
 		print(tempDF.groupby(['ACC']).sum())
-		print(tempDF.sum())
+		print(int(tempDF[['BAL']].sum()))
 '''
 	Test program
 '''
