@@ -98,7 +98,7 @@ class Portfolio:
 	def printBalanceSheet(self, account='NA'):
 		if (account=='NA'):
 			print(self.bsDF[['ACC', 'DESCRIPTION', 'DR', 'CR']])
-		else
+		else:
 			print(self.bsDF.loc[self.bsDF['ACC'] == account][['ACC', 'DESCRIPTION', 'DR', 'CR']])
 '''
 	Test program
