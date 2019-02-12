@@ -124,8 +124,8 @@ if __name__ == "__main__":
 	pf.buy('2018-02-08',460,5)
 	pf.sell('2018-02-14',490,5)
 	pf.printSummary()
-	#pf.printBalanceSheet()
-	#pf.printBalanceSheet('TRD')
+	pf.printBalanceSheet()
+	pf.printBalanceSheet('TRD')
 	b=pf.getBalance()
 	if(b==0):
 		print('BALANCESHEET : OK')
