@@ -1,5 +1,19 @@
 import pandas as pd
-
+'''
+	Class to manage price of inventory
+'''
+class InventoryList:
+	def __init__(self):
+		self.items = [] 
+	def add(self, price, qty):
+		for i in range(0, int(qty)):
+			self.items.append(price) 
+	def remove(self, qty):
+		totalPrice = 0;
+		for i in range(0, int(qty)):
+			totalPrice += self.items.pop(0)
+		avgPrice = round(totalPrice/qty,2)
+		return avgPrice
 '''
 	Class to manage portfolio & related transactions
 '''
@@ -35,8 +49,6 @@ class Portfolio:
 		tempDF=pd.DataFrame([drRecord,crRecord])
 		self.bsDF=self.bsDF.append(tempDF, sort=True)
 	def addCapital (self, amount):
-		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Capital', 'DR': amount, 'CR':0})
-		#self.addBalanceSheetRecord({'ACC': 'CAP', 'DESCRIPTION': 'Capital', 'DR': 0, 'CR':amount})
 		self.addBalanceSheetRecord ('TRD', 'CAP', 'Capital', amount)
 	def buy (self, buyPrice, qty):
 		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
@@ -44,10 +56,6 @@ class Portfolio:
 		self.invQty += qty
 		self.addBalanceSheetRecord ('INV', 'TRD', 'Buy', buyAmt)
 		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Buy)', brokerage)
-		#self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Buy', 'DR': buyAmt, 'CR':0})
-		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Buy', 'DR': 0, 'CR':buyAmt})
-		#self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': brokerage, 'CR':0})
-		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': 0, 'CR':brokerage})
 	def sell(self, buyPrice, sellPrice, qty):
 		brokerage = self.calculateSellBrokerage(sellPrice, qty)
 		sellAmt = (sellPrice*qty)
@@ -56,16 +64,8 @@ class Portfolio:
 		self.addBalanceSheetRecord ('TRD', 'SAL', 'Sell', sellAmt)
 		self.addBalanceSheetRecord ('COG', 'INV', 'Sell', buyAmt)
 		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Sell)', brokerage)
-		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Sell', 'DR': sellAmt, 'CR':0})
-		#self.addBalanceSheetRecord({'ACC': 'SAL', 'DESCRIPTION': 'Sell', 'DR': 0, 'CR':sellAmt})
-		#self.addBalanceSheetRecord({'ACC': 'COG', 'DESCRIPTION': 'Sell', 'DR': buyAmt, 'CR':0})
-		#self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Sell', 'DR': 0, 'CR':buyAmt})
-		#self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': brokerage, 'CR':0})
-		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': 0, 'CR':brokerage})
 	def getBalance(self):
-		#tempDF = self.bsDF[['DR', 'CR']]
 		tempSerBal = self.bsDF['DR'] - self.bsDF['CR']
-		#tempDF=tempDF.assign('BAL'=tempSerBal)
 		totBal =int(tempSerBal.sum())
 		return int(totBal)
 	def getInventoryBalance(self):
@@ -97,6 +97,7 @@ class Portfolio:
 	Test program
 '''
 if __name__ == "__main__":
+	'''
 	pf = Portfolio()
 	pf.addCapital(5000)
 	pf.buy(460,5)
@@ -116,4 +117,9 @@ if __name__ == "__main__":
 	print('NET P/L      : %6.2f' % n)
 	print('CASH BALANCE : %6.2f' % c)
 	print('INV BALANCE  : %6.2f' % i)
+	'''
+	i = InventoryList()
+	i.add(460,5)
+	x=i.remove(460,5)
+	print('AVG PRICE : %6.2f' % x)
 	
