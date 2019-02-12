@@ -102,9 +102,9 @@ class Portfolio:
 		#cashBalance = (self.capCr + self.salCr) - (self.invDr + self.brkDr)
 		return cashBalance
 	def getResults(self):
-		salCr = round(self.bsDF.loc[self.bsDF['ACC'] == 'SAL'][['CR']].sum(),2)
-		cogDr = round(self.bsDF.loc[self.bsDF['ACC'] == 'COG'][['DR']].sum(),2)
-		brkDr = round(self.bsDF.loc[self.bsDF['ACC'] == 'BRK'][['DR']].sum(),2)
+		salCr = round(self.bsDF.loc[self.bsDF['ACC'] == 'SAL']['CR'].sum(),2)
+		cogDr = round(self.bsDF.loc[self.bsDF['ACC'] == 'COG']['DR'].sum(),2)
+		brkDr = round(self.bsDF.loc[self.bsDF['ACC'] == 'BRK']['DR'].sum(),2)
 		grossPL = salCr - cogDr
 		netPL = grossPL - brkDr
 		return grossPL, netPL
