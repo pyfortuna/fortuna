@@ -37,13 +37,13 @@ class Portfolio:
 	def addCapital (self, amount):
 		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Capital', 'DR': amount, 'CR':0})
 		#self.addBalanceSheetRecord({'ACC': 'CAP', 'DESCRIPTION': 'Capital', 'DR': 0, 'CR':amount})
-		self.addBalanceSheetRecord (self, 'TRD', 'CAP', 'Capital', amount)
+		self.addBalanceSheetRecord ('TRD', 'CAP', 'Capital', amount)
 	def buy (self, buyPrice, qty):
 		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
 		buyAmt = (buyPrice*qty)
 		self.invQty += qty
-		self.addBalanceSheetRecord (self, 'INV', 'TRD', 'Buy', buyAmt)
-		self.addBalanceSheetRecord (self, 'BRK', 'TRD', 'Brokerage (Buy)', brokerage)
+		self.addBalanceSheetRecord ('INV', 'TRD', 'Buy', buyAmt)
+		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Buy)', brokerage)
 		#self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Buy', 'DR': buyAmt, 'CR':0})
 		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Buy', 'DR': 0, 'CR':buyAmt})
 		#self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': brokerage, 'CR':0})
@@ -53,9 +53,9 @@ class Portfolio:
 		sellAmt = (sellPrice*qty)
 		buyAmt = (buyPrice*qty)
 		self.invQty -= qty
-		self.addBalanceSheetRecord (self, 'TRD', 'SAL', 'Sell', sellAmt)
-		self.addBalanceSheetRecord (self, 'COG', 'INV', 'Sell', buyAmt)
-		self.addBalanceSheetRecord (self, 'BRK', 'TRD', 'Brokerage (Sell)', brokerage)
+		self.addBalanceSheetRecord ('TRD', 'SAL', 'Sell', sellAmt)
+		self.addBalanceSheetRecord ('COG', 'INV', 'Sell', buyAmt)
+		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Sell)', brokerage)
 		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Sell', 'DR': sellAmt, 'CR':0})
 		#self.addBalanceSheetRecord({'ACC': 'SAL', 'DESCRIPTION': 'Sell', 'DR': 0, 'CR':sellAmt})
 		#self.addBalanceSheetRecord({'ACC': 'COG', 'DESCRIPTION': 'Sell', 'DR': buyAmt, 'CR':0})
