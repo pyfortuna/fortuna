@@ -1,3 +1,4 @@
+from datetime import datetime
 import pandas as pd
 
 '''
@@ -39,10 +40,10 @@ class InventoryList:
 '''
 class Portfolio:
 	def __init__ (self):
-		col_names =  ['ACC', 'DESCRIPTION', 'DR', 'CR']
+		col_names =  ['ACC', 'DATE', 'DESCRIPTION', 'DR', 'CR']
 		self.bsDF = pd.DataFrame(columns=col_names)
 		self.invList = InventoryList()
-	def calculateBuyBrokerage (self, price, qty):
+	def calculateBuyBrokerage(self, price, qty):
 		totalTrade	= price * qty
 		brokerage =	0.01
 		exchangeTxnCharge = round(totalTrade*0.00325/100,2)
@@ -52,7 +53,7 @@ class Portfolio:
 		stampDuty=round((totalTrade*0.01/100),2)
 		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty
 		return totalCharges
-	def calculateSellBrokerage (self, price, qty):
+	def calculateSellBrokerage(self, price, qty):
 		totalTrade	= price * qty
 		brokerage =	0.01
 		exchangeTxnCharge = round(totalTrade*0.00325/100,2)
@@ -63,27 +64,27 @@ class Portfolio:
 		dpCharges = 15.93
 		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty + dpCharges
 		return totalCharges
-	def addBalanceSheetRecord (self, drAccount, crAccount, description, amount):
-		drRecord={'ACC': drAccount, 'DESCRIPTION': description, 'DR': amount, 'CR':0}
-		crRecord={'ACC': crAccount, 'DESCRIPTION': description, 'DR': 0, 'CR':amount}
+	def addBalanceSheetRecord(self, date, drAccount, crAccount, description, amount):
+		drRecord={'ACC': drAccount, 'DATE':datetime.strptime(date, '%Y-%m-%d'), 'DESCRIPTION': description, 'DR': amount, 'CR':0}
+		crRecord={'ACC': crAccount, 'DATE':datetime.strptime(date, '%Y-%m-%d'), 'DESCRIPTION': description, 'DR': 0, 'CR':amount}
 		tempDF=pd.DataFrame([drRecord,crRecord])
 		self.bsDF=self.bsDF.append(tempDF, sort=True)
-	def addCapital (self, amount):
-		self.addBalanceSheetRecord ('TRD', 'CAP', 'Capital', amount)
-	def buy (self, buyPrice, qty):
+	def addCapital(self, date, amount):
+		self.addBalanceSheetRecord (date, 'TRD', 'CAP', 'Capital', amount)
+	def buy(self, date, buyPrice, qty):
 		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
 		buyAmt = (buyPrice*qty)
 		self.invList.add(buyPrice, qty)
-		self.addBalanceSheetRecord ('INV', 'TRD', 'Buy', buyAmt)
-		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Buy)', brokerage)
-	def sell(self, sellPrice, qty):
+		self.addBalanceSheetRecord (date, 'INV', 'TRD', 'Buy', buyAmt)
+		self.addBalanceSheetRecord (date, 'BRK', 'TRD', 'Brokerage (Buy)', brokerage)
+	def sell(self, date, sellPrice, qty):
 		brokerage = self.calculateSellBrokerage(sellPrice, qty)
 		sellAmt = (sellPrice*qty)
 		buyPrice=self.invList.remove(qty)
 		buyAmt = (buyPrice*qty)
-		self.addBalanceSheetRecord ('TRD', 'SAL', 'Sell', sellAmt)
-		self.addBalanceSheetRecord ('COG', 'INV', 'Sell', buyAmt)
-		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Sell)', brokerage)
+		self.addBalanceSheetRecord (date, 'TRD', 'SAL', 'Sell', sellAmt)
+		self.addBalanceSheetRecord (date, 'COG', 'INV', 'Sell', buyAmt)
+		self.addBalanceSheetRecord (date, 'BRK', 'TRD', 'Brokerage (Sell)', brokerage)
 	def getBalance(self):
 		tempSerBal = self.bsDF['DR'] - self.bsDF['CR']
 		totBal =int(tempSerBal.sum())
@@ -104,11 +105,11 @@ class Portfolio:
 		return grossPL, netPL
 	def printBalanceSheet(self, account='none'):
 		if (account=='none'):
-			print(self.bsDF[['ACC', 'DESCRIPTION', 'DR', 'CR']])
+			print(self.bsDF[['ACC', 'DATE', 'DESCRIPTION', 'DR', 'CR']])
 		else:
-			tempDF = self.bsDF.loc[self.bsDF['ACC'] == account][['DESCRIPTION', 'DR', 'CR']]
+			tempDF = self.bsDF.loc[self.bsDF['ACC'] == account][['DATE', 'DESCRIPTION', 'DR', 'CR']]
 			tempDF['BAL'] = tempDF['DR'].cumsum() - tempDF['CR'].cumsum()
-			print(tempDF[['DESCRIPTION', 'DR', 'CR', 'BAL']].round(2).to_string())
+			print(tempDF[['DATE', 'DESCRIPTION', 'DR', 'CR', 'BAL']].round(2).to_string())
 	def printSummary(self):
 		tempDF = self.bsDF[['ACC', 'DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
@@ -120,8 +121,8 @@ class Portfolio:
 if __name__ == "__main__":
 	pf = Portfolio()
 	pf.addCapital(5000)
-	pf.buy(460,5)
-	pf.sell(490,6)
+	pf.buy('2018-02-08',460,5)
+	pf.sell('2018-02-14',490,5)
 	pf.printSummary()
 	#pf.printBalanceSheet()
 	#pf.printBalanceSheet('TRD')
