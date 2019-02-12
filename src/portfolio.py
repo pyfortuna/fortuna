@@ -1,19 +1,42 @@
 import pandas as pd
+
+'''
+	Base class for other exceptions
+'''
+class Error(Exception):
+	pass
+
+'''
+	Raised on invalid transactions
+'''
+class InvalidTransaction(Error):
+	pass
+
 '''
 	Class to manage price of inventory
 '''
 class InventoryList:
 	def __init__(self):
 		self.items = [] 
+		self.qty = 0
 	def add(self, price, qty):
+		if (qty < 0):
+			raise InvalidTransaction
+		self.qty += qty
 		for i in range(0, int(qty)):
 			self.items.append(price) 
 	def remove(self, qty):
+		if (self.qty < qty) or (qty < 0):
+			raise InvalidTransaction
+		self.qty -= qty
 		totalPrice = 0;
 		for i in range(0, int(qty)):
 			totalPrice += self.items.pop(0)
 		avgPrice = round(totalPrice/qty,2)
 		return avgPrice
+	def count(self):
+		return self.qty
+
 '''
 	Class to manage portfolio & related transactions
 '''
@@ -55,7 +78,7 @@ class Portfolio:
 		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
 		buyAmt = (buyPrice*qty)
 		self.invList.add(buyPrice, qty)
-		self.invQty += qty
+		#self.invQty += qty
 		self.addBalanceSheetRecord ('INV', 'TRD', 'Buy', buyAmt)
 		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Buy)', brokerage)
 	def sell(self, sellPrice, qty):
@@ -63,7 +86,7 @@ class Portfolio:
 		sellAmt = (sellPrice*qty)
 		buyPrice=self.invList.remove(qty)
 		buyAmt = (buyPrice*qty)
-		self.invQty -= qty
+		#self.invQty -= qty
 		self.addBalanceSheetRecord ('TRD', 'SAL', 'Sell', sellAmt)
 		self.addBalanceSheetRecord ('COG', 'INV', 'Sell', buyAmt)
 		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Sell)', brokerage)
@@ -72,7 +95,8 @@ class Portfolio:
 		totBal =int(tempSerBal.sum())
 		return int(totBal)
 	def getInventoryBalance(self):
-		return int(self.invQty)
+		#return int(self.invQty)
+		return self.invList.count()
 	def getcashBalance(self):
 		tempDF = self.bsDF.loc[self.bsDF['ACC'] == 'TRD'][['DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
@@ -96,6 +120,7 @@ class Portfolio:
 		tempDF = self.bsDF[['ACC', 'DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
 		print(tempDF.groupby(['ACC']).sum())
+
 '''
 	Test program
 '''
@@ -105,8 +130,8 @@ if __name__ == "__main__":
 	pf.buy(460,5)
 	pf.sell(490,5)
 	pf.printSummary()
-	pf.printBalanceSheet()
-	pf.printBalanceSheet('TRD')
+	#pf.printBalanceSheet()
+	#pf.printBalanceSheet('TRD')
 	b=pf.getBalance()
 	if(b==0):
 		print('BALANCESHEET : OK')
