@@ -143,5 +143,5 @@ if __name__ == "__main__":
 				{'txnType': 'BUY', 'date':'2018-03-02', 'price': 120, 'qty': 2},
 				{'txnType': 'SELL', 'date':'2018-03-05', 'price': 140, 'qty': 3}]
 	for txn in txnList:
-		print('%s : %s %s x %s',(txn['date'],txn['txnType'],txn['price'],txn['qty']))
+		print('%s : %s %s x %s'%(txn['date'],txn['txnType'],txn['price'],txn['qty']))
 	
