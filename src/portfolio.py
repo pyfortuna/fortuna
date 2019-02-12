@@ -29,31 +29,39 @@ class Portfolio:
 		dpCharges = 15.93
 		totalCharges = brokerage + exchangeTxnCharge + gst + securityTxnTax + sebiTurnoverFee + stampDuty + dpCharges
 		return totalCharges
-	def addBalanceSheetRecord (self, record):
-		tempDF=pd.DataFrame([record])
+	def addBalanceSheetRecord (self, drAccount, crAccount, description, amount):
+		drRecord={'ACC': drAccount, 'DESCRIPTION': description, 'DR': amount, 'CR':0}
+		crRecord={'ACC': crAccount, 'DESCRIPTION': description, 'DR': 0, 'CR':amount}
+		tempDF=pd.DataFrame([drRecord,crRecord])
 		self.bsDF=self.bsDF.append(tempDF, sort=True)
 	def addCapital (self, amount):
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Capital', 'DR': amount, 'CR':0})
-		self.addBalanceSheetRecord({'ACC': 'CAP', 'DESCRIPTION': 'Capital', 'DR': 0, 'CR':amount})
+		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Capital', 'DR': amount, 'CR':0})
+		#self.addBalanceSheetRecord({'ACC': 'CAP', 'DESCRIPTION': 'Capital', 'DR': 0, 'CR':amount})
+		self.addBalanceSheetRecord (self, 'TRD', 'CAP', 'Capital', amount)
 	def buy (self, buyPrice, qty):
 		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
 		buyAmt = (buyPrice*qty)
 		self.invQty += qty
-		self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Buy', 'DR': buyAmt, 'CR':0})
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Buy', 'DR': 0, 'CR':buyAmt})
-		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': brokerage, 'CR':0})
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': 0, 'CR':brokerage})
+		self.addBalanceSheetRecord (self, 'INV', 'TRD', 'Buy', buyAmt)
+		self.addBalanceSheetRecord (self, 'BRK', 'TRD', 'Brokerage (Buy)', brokerage)
+		#self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Buy', 'DR': buyAmt, 'CR':0})
+		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Buy', 'DR': 0, 'CR':buyAmt})
+		#self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': brokerage, 'CR':0})
+		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': 0, 'CR':brokerage})
 	def sell(self, buyPrice, sellPrice, qty):
 		brokerage = self.calculateSellBrokerage(sellPrice, qty)
 		sellAmt = (sellPrice*qty)
 		buyAmt = (buyPrice*qty)
 		self.invQty -= qty
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Sell', 'DR': sellAmt, 'CR':0})
-		self.addBalanceSheetRecord({'ACC': 'SAL', 'DESCRIPTION': 'Sell', 'DR': 0, 'CR':sellAmt})
-		self.addBalanceSheetRecord({'ACC': 'COG', 'DESCRIPTION': 'Sell', 'DR': buyAmt, 'CR':0})
-		self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Sell', 'DR': 0, 'CR':buyAmt})
-		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': brokerage, 'CR':0})
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': 0, 'CR':brokerage})
+		self.addBalanceSheetRecord (self, 'TRD', 'SAL', 'Sell', sellAmt)
+		self.addBalanceSheetRecord (self, 'COG', 'INV', 'Sell', buyAmt)
+		self.addBalanceSheetRecord (self, 'BRK', 'TRD', 'Brokerage (Sell)', brokerage)
+		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Sell', 'DR': sellAmt, 'CR':0})
+		#self.addBalanceSheetRecord({'ACC': 'SAL', 'DESCRIPTION': 'Sell', 'DR': 0, 'CR':sellAmt})
+		#self.addBalanceSheetRecord({'ACC': 'COG', 'DESCRIPTION': 'Sell', 'DR': buyAmt, 'CR':0})
+		#self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Sell', 'DR': 0, 'CR':buyAmt})
+		#self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': brokerage, 'CR':0})
+		#self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': 0, 'CR':brokerage})
 	def getBalance(self):
 		#tempDF = self.bsDF[['DR', 'CR']]
 		tempSerBal = self.bsDF['DR'] - self.bsDF['CR']
