@@ -120,6 +120,9 @@ if __name__ == "__main__":
 	'''
 	i = InventoryList()
 	i.add(460,5)
+	i.add(470,4)
 	x=i.remove(5)
+	print('AVG PRICE : %6.2f' % x)
+	x=i.remove(4)
 	print('AVG PRICE : %6.2f' % x)
 	
