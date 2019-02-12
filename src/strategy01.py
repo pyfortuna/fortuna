@@ -32,7 +32,7 @@ class Strategy01:
 		df['trend'] = se1.values
 		se2 = pd.Series(trendStrengthList)
 		df['strength'] = se2.values
-		print(df.tail(20))
+		print(df[['close','sma200','trend','strength']].to_string())
 '''
 	Test program
 '''
