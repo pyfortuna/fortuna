@@ -2,7 +2,7 @@ import nseUtil as nu
 import datetime
 
 class Strategy01:
-	def executeStrategy(capital,df):
+	def executeStrategy(self,capital,df):
 		print(df.tail(20))
 '''
 	Test program
