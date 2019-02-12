@@ -56,7 +56,7 @@ class Portfolio:
 		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': 0, 'CR':brokerage})
 	def getBalance(self):
 		tempDF = self.bsDF[['DR', 'CR']]
-		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
+		tempDF['BAL'] = self.bsDF['DR'] - self.bsDF['CR']
 		totBal =int(tempDF[['BAL']].sum())
 		return int(totBal)
 	def getInventoryBalance(self):
@@ -78,9 +78,6 @@ class Portfolio:
 			print(self.bsDF[['ACC', 'DESCRIPTION', 'DR', 'CR']])
 		else:
 			tempDF = self.bsDF.loc[self.bsDF['ACC'] == account][['DESCRIPTION', 'DR', 'CR']]
-			# = tempDF['DR'].cumsum()
-			#tempSerCr = tempDF['CR'].cumsum()
-			#tempSerBal = tempSerDr - tempSerCr
 			tempDF['BAL'] = tempDF['DR'].cumsum() - tempDF['CR'].cumsum()
 			print(tempDF[['DESCRIPTION', 'DR', 'CR', 'BAL']].round(2).to_string())
 	def printSummary(self):
