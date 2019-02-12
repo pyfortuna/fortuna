@@ -78,8 +78,8 @@ class Portfolio:
 			print(self.bsDF[['ACC', 'DESCRIPTION', 'DR', 'CR']])
 		else:
 			tempDF = self.bsDF.loc[self.bsDF['ACC'] == account][['DESCRIPTION', 'DR', 'CR']]
-			tempSerDr = tempDF['DR'].cusum()
-			tempSerCr = tempDF['CR'].cusum()
+			tempSerDr = tempDF['DR'].cumsum()
+			tempSerCr = tempDF['CR'].cumsum()
 			tempSerBal = tempSerDr - tempSerCr
 			tempDF['BAL'] = tempSerBal
 			print(tempDF[['DESCRIPTION', 'DR', 'CR', 'BAL']])
