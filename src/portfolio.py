@@ -22,6 +22,7 @@ class Portfolio:
 		self.invQty = 0	# Inventory (Qty)
 		col_names =  ['ACC', 'DESCRIPTION', 'DR', 'CR']
 		self.bsDF = pd.DataFrame(columns=col_names)
+		self.invList = InventoryList()
 	def calculateBuyBrokerage (self, price, qty):
 		totalTrade	= price * qty
 		brokerage =	0.01
@@ -53,12 +54,14 @@ class Portfolio:
 	def buy (self, buyPrice, qty):
 		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
 		buyAmt = (buyPrice*qty)
+		self.invList.add(buyPrice, qty)
 		self.invQty += qty
 		self.addBalanceSheetRecord ('INV', 'TRD', 'Buy', buyAmt)
 		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Buy)', brokerage)
-	def sell(self, buyPrice, sellPrice, qty):
+	def sell(self, sellPrice, qty):
 		brokerage = self.calculateSellBrokerage(sellPrice, qty)
 		sellAmt = (sellPrice*qty)
+		buyPrice=self.invList.remove(qty)
 		buyAmt = (buyPrice*qty)
 		self.invQty -= qty
 		self.addBalanceSheetRecord ('TRD', 'SAL', 'Sell', sellAmt)
@@ -97,11 +100,10 @@ class Portfolio:
 	Test program
 '''
 if __name__ == "__main__":
-	'''
 	pf = Portfolio()
 	pf.addCapital(5000)
 	pf.buy(460,5)
-	pf.sell(460,490,5)
+	pf.sell(490,5)
 	pf.printSummary()
 	pf.printBalanceSheet()
 	pf.printBalanceSheet('TRD')
@@ -117,12 +119,4 @@ if __name__ == "__main__":
 	print('NET P/L      : %6.2f' % n)
 	print('CASH BALANCE : %6.2f' % c)
 	print('INV BALANCE  : %6.2f' % i)
-	'''
-	i = InventoryList()
-	i.add(460,5)
-	i.add(470,4)
-	x=i.remove(6)
-	print('AVG PRICE : %6.2f' % x)
-	x=i.remove(3)
-	print('AVG PRICE : %6.2f' % x)
 	
