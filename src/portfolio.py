@@ -118,7 +118,7 @@ class Portfolio:
 			print(tempDF[['DATE', 'DESCRIPTION', 'DR', 'CR', 'BAL']].round(2).to_string())
 	def printSummary(self):
 		tempDF = self.bsDF[['ACC', 'DR', 'CR']]
-		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
+		tempDF['BAL'] = tempDF['DR'].copy() - tempDF['CR'].copy()
 		print(tempDF.groupby(['ACC']).sum())
 
 '''
