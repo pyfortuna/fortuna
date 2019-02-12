@@ -139,3 +139,9 @@ if __name__ == "__main__":
 	print('CASH BALANCE : %6.2f' % c)
 	print('INV BALANCE  : %6.2f' % i)
 	
+	txnList = [{'txnType': 'BUY', 'date':'2018-03-01', 'price': 100, 'qty': 1},
+				{'txnType': 'BUY', 'date':'2018-03-02', 'price': 120, 'qty': 2},
+				{'txnType': 'SELL', 'date':'2018-03-05', 'price': 140, 'qty': 3}]
+	for txn in txnList:
+		print('%s : %s %s x %s',(txn['date'],txn['txnType'],txn['price'],txn['qty']))
+	
