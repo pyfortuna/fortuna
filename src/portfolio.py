@@ -78,11 +78,11 @@ class Portfolio:
 			print(self.bsDF[['ACC', 'DESCRIPTION', 'DR', 'CR']])
 		else:
 			tempDF = self.bsDF.loc[self.bsDF['ACC'] == account][['DESCRIPTION', 'DR', 'CR']]
-			tempSerDr = tempDF['DR'].cumsum()
-			tempSerCr = tempDF['CR'].cumsum()
-			tempSerBal = tempSerDr - tempSerCr
-			tempDF['BAL'] = tempSerBal
-			print(tempDF[['DESCRIPTION', 'DR', 'CR', 'BAL']])
+			# = tempDF['DR'].cumsum()
+			#tempSerCr = tempDF['CR'].cumsum()
+			#tempSerBal = tempSerDr - tempSerCr
+			tempDF['BAL'] = tempDF['DR'].cumsum() - tempDF['CR'].cumsum()
+			print(tempDF[['DESCRIPTION', 'DR', 'CR', 'BAL']].round(2).to_string())
 	def printSummary(self):
 		tempDF = self.bsDF[['ACC', 'DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
