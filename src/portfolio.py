@@ -78,6 +78,10 @@ class Portfolio:
 		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': 0, 'CR':brokerage})
 		self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Sell', 'DR': 0, 'CR':buyAmt})
 	def getBalance(self):
+		tempDF = self.bsDF[['DR', 'CR']]
+		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
+		totBal =int(tempDF[['BAL']].sum())
+		'''
 		capBal = self.capDr - self.capCr
 		trdBal = self.trdDr - self.trdCr
 		brkBal = self.brkDr - self.brkCr
@@ -85,11 +89,15 @@ class Portfolio:
 		salBal = self.salDr - self.salCr
 		cogBal = self.cogDr - self.cogCr
 		totBal = capBal + trdBal + brkBal + invBal + salBal + cogBal
+		'''
 		return int(totBal)
 	def getInventoryBalance(self):
 		return int(self.invQty)
 	def getcashBalance(self):
-		cashBalance = (self.capCr + self.salCr) - (self.invDr + self.brkDr)
+		tempDF = sself.bsDF.loc[self.bsDF['ACC'] == 'TRD"][['DR', 'CR']]
+		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
+		cashBalance =round(tempDF[['BAL']].sum(),2)
+		#cashBalance = (self.capCr + self.salCr) - (self.invDr + self.brkDr)
 		return cashBalance
 	def getResults(self):
 		grossPL = self.salCr - self.cogDr
@@ -104,7 +112,6 @@ class Portfolio:
 		tempDF = self.bsDF[['ACC', 'DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
 		print(tempDF.groupby(['ACC']).sum())
-		print(int(tempDF[['BAL']].sum()))
 '''
 	Test program
 '''
