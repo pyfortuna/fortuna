@@ -52,8 +52,8 @@ class Portfolio:
 		self.addBalanceSheetRecord({'ACC': 'CAP', 'DESCRIPTION': 'Capital', 'DR': 0, 'CR':amount})
 		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Capital', 'DR': amount, 'CR':0})
 	def buy (self, buyPrice, qty):
-		#brokerage = self.calculateBuyBrokerage(buyPrice, qty)
-		#buyAmt = (buyPrice*qty)
+		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
+		buyAmt = (buyPrice*qty)
 		#self.trdCr += buyAmt + brokerage
 		#self.invDr += buyAmt
 		#self.brkDr += brokerage
@@ -63,9 +63,9 @@ class Portfolio:
 		self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Buy', 'DR': buyAmt, 'CR':0})
 		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': brokerage, 'CR':0})
 	def sell(self, buyPrice, sellPrice, qty):
-		#brokerage = self.calculateSellBrokerage(sellPrice, qty)
-		#sellAmt = (sellPrice*qty)
-		#buyAmt = (buyPrice*qty)
+		brokerage = self.calculateSellBrokerage(sellPrice, qty)
+		sellAmt = (sellPrice*qty)
+		buyAmt = (buyPrice*qty)
 		#self.trdDr += sellAmt
 		#self.brkDr += brokerage
 		#self.cogDr += buyAmt
