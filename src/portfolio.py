@@ -120,7 +120,7 @@ class Portfolio:
 '''
 if __name__ == "__main__":
 	pf = Portfolio()
-	pf.addCapital(5000)
+	pf.addCapital('2018-02-08',5000)
 	pf.buy('2018-02-08',460,5)
 	pf.sell('2018-02-14',490,5)
 	pf.printSummary()
