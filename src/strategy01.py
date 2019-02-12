@@ -1,7 +1,7 @@
 import nseUtil as nu
 import datetime
 
-class Stategy01:
+class Strategy01:
 	def executeStrategy(capital,df):
 		print(df.tail(20))
 '''
@@ -13,5 +13,5 @@ if __name__ == "__main__":
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)
-	s1 = Stategy01()
+	s1 = Strategy01()
 	s1.executeStrategy(capital,df)
