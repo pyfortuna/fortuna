@@ -14,12 +14,12 @@ class Portfolio:
 		self.brkCr = 0	# Brokerage (CR)
 		self.invDr = 0	# Inventory (DR)
 		self.invCr = 0	# Inventory (CR)
-		self.invQty = 0	# Inventory (Qty)
 		self.salDr = 0	# Sales (DR)
 		self.salCr = 0	# Sales (CR)
 		self.cogDr = 0	# Cost of Goods (DR)
 		self.cogCr = 0	# Cost of Goods (CR)
 		'''
+		self.invQty = 0	# Inventory (Qty)
 		col_names =  ['ACC', 'DESCRIPTION', 'DR', 'CR']
 		self.bsDF = pd.DataFrame(columns=col_names)
 	def calculateBuyBrokerage (self, price, qty):
