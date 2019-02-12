@@ -94,7 +94,7 @@ class Portfolio:
 	def getInventoryBalance(self):
 		return int(self.invQty)
 	def getcashBalance(self):
-		tempDF = sself.bsDF.loc[self.bsDF['ACC'] == 'TRD'][['DR', 'CR']]
+		tempDF = self.bsDF.loc[self.bsDF['ACC'] == 'TRD'][['DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
 		cashBalance =round(tempDF[['BAL']].sum(),2)
 		#cashBalance = (self.capCr + self.salCr) - (self.invDr + self.brkDr)
