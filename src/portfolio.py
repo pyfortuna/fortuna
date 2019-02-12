@@ -55,9 +55,10 @@ class Portfolio:
 		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': brokerage, 'CR':0})
 		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': 0, 'CR':brokerage})
 	def getBalance(self):
-		tempDF = self.bsDF[['DR', 'CR']]
-		tempDF['BAL'] = self.bsDF['DR'] - self.bsDF['CR']
-		totBal =int(tempDF[['BAL']].sum())
+		#tempDF = self.bsDF[['DR', 'CR']]
+		tempSerBal = self.bsDF['DR'] - self.bsDF['CR']
+		#tempDF=tempDF.assign('BAL'=tempSerBal)
+		totBal =int(tempSerBal.sum())
 		return int(totBal)
 	def getInventoryBalance(self):
 		return int(self.invQty)
