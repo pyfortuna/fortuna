@@ -18,31 +18,27 @@ class InvalidTransaction(Error):
 class InventoryList:
 	def __init__(self):
 		self.items = [] 
-		self.qty = 0
 	def add(self, price, qty):
 		if (qty < 0):
 			raise InvalidTransaction
-		self.qty += qty
 		for i in range(0, int(qty)):
 			self.items.append(price) 
 	def remove(self, qty):
-		if (self.qty < qty) or (qty < 0):
+		if (len(self.items) < qty) or (qty < 0):
 			raise InvalidTransaction
-		self.qty -= qty
 		totalPrice = 0;
 		for i in range(0, int(qty)):
 			totalPrice += self.items.pop(0)
 		avgPrice = round(totalPrice/qty,2)
 		return avgPrice
 	def count(self):
-		return self.qty
+		return len(self.items)
 
 '''
 	Class to manage portfolio & related transactions
 '''
 class Portfolio:
 	def __init__ (self):
-		self.invQty = 0	# Inventory (Qty)
 		col_names =  ['ACC', 'DESCRIPTION', 'DR', 'CR']
 		self.bsDF = pd.DataFrame(columns=col_names)
 		self.invList = InventoryList()
@@ -78,7 +74,6 @@ class Portfolio:
 		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
 		buyAmt = (buyPrice*qty)
 		self.invList.add(buyPrice, qty)
-		#self.invQty += qty
 		self.addBalanceSheetRecord ('INV', 'TRD', 'Buy', buyAmt)
 		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Buy)', brokerage)
 	def sell(self, sellPrice, qty):
@@ -86,7 +81,6 @@ class Portfolio:
 		sellAmt = (sellPrice*qty)
 		buyPrice=self.invList.remove(qty)
 		buyAmt = (buyPrice*qty)
-		#self.invQty -= qty
 		self.addBalanceSheetRecord ('TRD', 'SAL', 'Sell', sellAmt)
 		self.addBalanceSheetRecord ('COG', 'INV', 'Sell', buyAmt)
 		self.addBalanceSheetRecord ('BRK', 'TRD', 'Brokerage (Sell)', brokerage)
@@ -95,7 +89,6 @@ class Portfolio:
 		totBal =int(tempSerBal.sum())
 		return int(totBal)
 	def getInventoryBalance(self):
-		#return int(self.invQty)
 		return self.invList.count()
 	def getcashBalance(self):
 		tempDF = self.bsDF.loc[self.bsDF['ACC'] == 'TRD'][['DR', 'CR']]
