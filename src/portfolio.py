@@ -5,20 +5,6 @@ import pandas as pd
 '''
 class Portfolio:
 	def __init__ (self):
-		'''
-		self.capDr = 0	# Capital (DR)
-		self.capCr = 0	# Capital (CR)
-		self.trdDr = 0	# Trade (DR)
-		self.trdCr = 0	# Trade (CR)
-		self.brkDr = 0	# Brokerage (DR)
-		self.brkCr = 0	# Brokerage (CR)
-		self.invDr = 0	# Inventory (DR)
-		self.invCr = 0	# Inventory (CR)
-		self.salDr = 0	# Sales (DR)
-		self.salCr = 0	# Sales (CR)
-		self.cogDr = 0	# Cost of Goods (DR)
-		self.cogCr = 0	# Cost of Goods (CR)
-		'''
 		self.invQty = 0	# Inventory (Qty)
 		col_names =  ['ACC', 'DESCRIPTION', 'DR', 'CR']
 		self.bsDF = pd.DataFrame(columns=col_names)
@@ -47,51 +33,31 @@ class Portfolio:
 		tempDF=pd.DataFrame([record])
 		self.bsDF=self.bsDF.append(tempDF, sort=True)
 	def addCapital (self, amount):
-		#self.capCr += amount
-		#self.trdDr += amount
-		self.addBalanceSheetRecord({'ACC': 'CAP', 'DESCRIPTION': 'Capital', 'DR': 0, 'CR':amount})
 		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Capital', 'DR': amount, 'CR':0})
+		self.addBalanceSheetRecord({'ACC': 'CAP', 'DESCRIPTION': 'Capital', 'DR': 0, 'CR':amount})
 	def buy (self, buyPrice, qty):
 		brokerage = self.calculateBuyBrokerage(buyPrice, qty)
 		buyAmt = (buyPrice*qty)
-		#self.trdCr += buyAmt + brokerage
-		#self.invDr += buyAmt
-		#self.brkDr += brokerage
 		self.invQty += qty
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Buy', 'DR': 0, 'CR':buyAmt})
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': 0, 'CR':brokerage})
 		self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Buy', 'DR': buyAmt, 'CR':0})
+		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Buy', 'DR': 0, 'CR':buyAmt})
 		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': brokerage, 'CR':0})
+		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Buy)', 'DR': 0, 'CR':brokerage})
 	def sell(self, buyPrice, sellPrice, qty):
 		brokerage = self.calculateSellBrokerage(sellPrice, qty)
 		sellAmt = (sellPrice*qty)
 		buyAmt = (buyPrice*qty)
-		#self.trdDr += sellAmt
-		#self.brkDr += brokerage
-		#self.cogDr += buyAmt
-		#self.salCr += sellAmt
-		#self.trdCr += brokerage
-		#self.invCr += buyAmt
 		self.invQty -= qty
 		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Sell', 'DR': sellAmt, 'CR':0})
-		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': brokerage, 'CR':0})
-		self.addBalanceSheetRecord({'ACC': 'COG', 'DESCRIPTION': 'Sell', 'DR': buyAmt, 'CR':0})
 		self.addBalanceSheetRecord({'ACC': 'SAL', 'DESCRIPTION': 'Sell', 'DR': 0, 'CR':sellAmt})
-		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': 0, 'CR':brokerage})
+		self.addBalanceSheetRecord({'ACC': 'COG', 'DESCRIPTION': 'Sell', 'DR': buyAmt, 'CR':0})
 		self.addBalanceSheetRecord({'ACC': 'INV', 'DESCRIPTION': 'Sell', 'DR': 0, 'CR':buyAmt})
+		self.addBalanceSheetRecord({'ACC': 'BRK', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': brokerage, 'CR':0})
+		self.addBalanceSheetRecord({'ACC': 'TRD', 'DESCRIPTION': 'Brokerage (Sell)', 'DR': 0, 'CR':brokerage})
 	def getBalance(self):
 		tempDF = self.bsDF[['DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
 		totBal =int(tempDF[['BAL']].sum())
-		'''
-		capBal = self.capDr - self.capCr
-		trdBal = self.trdDr - self.trdCr
-		brkBal = self.brkDr - self.brkCr
-		invBal = self.invDr - self.invCr			
-		salBal = self.salDr - self.salCr
-		cogBal = self.cogDr - self.cogCr
-		totBal = capBal + trdBal + brkBal + invBal + salBal + cogBal
-		'''
 		return int(totBal)
 	def getInventoryBalance(self):
 		return int(self.invQty)
@@ -99,7 +65,6 @@ class Portfolio:
 		tempDF = self.bsDF.loc[self.bsDF['ACC'] == 'TRD'][['DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
 		cashBalance =round(tempDF[['BAL']].sum(),2)
-		#cashBalance = (self.capCr + self.salCr) - (self.invDr + self.brkDr)
 		return cashBalance
 	def getResults(self):
 		salCr = round(self.bsDF.loc[self.bsDF['ACC'] == 'SAL']['CR'].sum(),2)
@@ -112,7 +77,12 @@ class Portfolio:
 		if (account=='none'):
 			print(self.bsDF[['ACC', 'DESCRIPTION', 'DR', 'CR']])
 		else:
-			print(self.bsDF.loc[self.bsDF['ACC'] == account][['ACC', 'DESCRIPTION', 'DR', 'CR']])
+			tempDF = self.bsDF.loc[self.bsDF['ACC'] == account][['DESCRIPTION', 'DR', 'CR']])
+			tempSerDr = tempDF['DR'].cusum()
+			tempSerCr = tempDF['CR'].cusum()
+			tempSerBal = tempSerDr - tempSerCr
+			tempDF['BAL'] = tempSerBal
+			print(tempDF[['DESCRIPTION', 'DR', 'CR', 'BAL']])
 	def printSummary(self):
 		tempDF = self.bsDF[['ACC', 'DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
