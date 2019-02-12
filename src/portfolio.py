@@ -121,7 +121,7 @@ if __name__ == "__main__":
 	pf = Portfolio()
 	pf.addCapital(5000)
 	pf.buy(460,5)
-	pf.sell(490,3)
+	pf.sell(490,6)
 	pf.printSummary()
 	#pf.printBalanceSheet()
 	#pf.printBalanceSheet('TRD')
