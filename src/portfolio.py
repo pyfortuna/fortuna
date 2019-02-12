@@ -85,6 +85,12 @@ class Portfolio:
 		self.addBalanceSheetRecord (date, 'TRD', 'SAL', 'Sell', sellAmt)
 		self.addBalanceSheetRecord (date, 'COG', 'INV', 'Sell', buyAmt)
 		self.addBalanceSheetRecord (date, 'BRK', 'TRD', 'Brokerage (Sell)', brokerage)
+	def processTxnList(self, txnList):
+		for txn in txnList:
+			if(txn['txnType']=='BUY'):
+				self.buy(txn['date'],txn['price'],txn['qty'])
+			elif(txn['txnType']=='SELL'):
+				self.sell(txn['date'],txn['price'],txn['qty'])
 	def getBalance(self):
 		tempSerBal = self.bsDF['DR'] - self.bsDF['CR']
 		totBal =int(tempSerBal.sum())
@@ -122,7 +128,11 @@ if __name__ == "__main__":
 	pf = Portfolio()
 	pf.addCapital('2018-02-07',5000)
 	pf.buy('2018-02-08',460,5)
-	pf.sell('2018-02-14',490,5)
+	pf.sell('2018-02-14',490,5)	
+	txnList = [{'txnType': 'BUY', 'date':'2018-03-01', 'price': 460, 'qty': 1},
+				{'txnType': 'BUY', 'date':'2018-03-02', 'price': 460, 'qty': 2},
+				{'txnType': 'SELL', 'date':'2018-03-05', 'price': 490, 'qty': 3}]
+	pf.processTxnList(txnList)
 	pf.printSummary()
 	pf.printBalanceSheet()
 	pf.printBalanceSheet('TRD')
@@ -138,10 +148,4 @@ if __name__ == "__main__":
 	print('NET P/L      : %6.2f' % n)
 	print('CASH BALANCE : %6.2f' % c)
 	print('INV BALANCE  : %6.2f' % i)
-	
-	txnList = [{'txnType': 'BUY', 'date':'2018-03-01', 'price': 100, 'qty': 1},
-				{'txnType': 'BUY', 'date':'2018-03-02', 'price': 120, 'qty': 2},
-				{'txnType': 'SELL', 'date':'2018-03-05', 'price': 140, 'qty': 3}]
-	for txn in txnList:
-		print('%s : %s %s x %s'%(txn['date'],txn['txnType'],txn['price'],txn['qty']))
 	
