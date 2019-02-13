@@ -128,8 +128,9 @@ class Portfolio:
 		g,n=self.getPL()
 		c=self.getcashBalance()
 		i=self.getInventoryBalance()
-		result={'idx':1, 'STATUS':bs, 'GROSS_PL':g, 'NET_PL':n, 'CASH':c, 'INV':i}
-		resultDF=pd.DataFrame([result], index='idx')
+		result={'a':1, 'STATUS':bs, 'GROSS_PL':g, 'NET_PL':n, 'CASH':c, 'INV':i}
+		resultDF=pd.DataFrame([result])
+		resultDF = resultDF.reset_index(drop=True)
 		return resultDF
 
 '''
