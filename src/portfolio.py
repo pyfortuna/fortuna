@@ -131,7 +131,7 @@ class Portfolio:
 		result={'a':1, 'STATUS':bs, 'GROSS_PL':round(g,2), 'NET_PL':round(n,2), 'CASH':c, 'INV':i}
 		resultDF=pd.DataFrame([result])
 		resultDF = resultDF.reset_index(drop=True)
-		return resultDF
+		return resultDF[['STATUS']]
 
 '''
 	Test program
