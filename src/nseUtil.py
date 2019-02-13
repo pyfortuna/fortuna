@@ -19,8 +19,8 @@ def nse_headers():
     return {'Accept': '*/*',
             'Accept-Language': 'en-US,en;q=0.5',
             'Host': 'nseindia.com',
-            'Referer': "https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=INFY&illiquid=0&smeFlag=0&itpFlag=0",
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',
+            'Referer': 'https://www.nseindia.com/products/content/equities/equities/eq_security.htm',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36',
             'X-Requested-With': 'XMLHttpRequest'
             }
 
