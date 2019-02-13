@@ -4,16 +4,23 @@ import pandas as pd
 
 class Strategy01:
 	def executeStrategy(self,capital,df):
-		sma200 = df['close'].rolling(200).mean()
-		df=df.assign(sma200=sma200)
+		# -----------
+		# Paramters
+		# -----------
+		SMA_DAYS = 200
+		# -----------
+		# Pre-process
+		# -----------
+		sma = df['close'].rolling(SMA_DAYS).mean()
+		df=df.assign(sma=sma)
 		df=df.dropna()
 		# Create Trend List
-		sma200List=list(df['sma200'])
+		smaList=list(df['sma'])
 		trendList = []
 		trendList.append('-')
 		i = 1
-		while i < len(sma200List):
-			if sma200List[i] > sma200List[i-1]:
+		while i < len(smaList):
+			if smaList[i] > smaList[i-1]:
 				trendList.append('U')
 			else:
 				trendList.append('D')
@@ -32,7 +39,17 @@ class Strategy01:
 		df['trend'] = se1.values
 		se2 = pd.Series(trendStrengthList)
 		df['strength'] = se2.values
-		print(df[['close','sma200','trend','strength']].to_string())
+		print(df.tail(20))
+		# -----------
+		# Process
+		# -----------
+		dfBuy=df.loc[(df['trend'] == 'U') & (dfBuy['strength'] == 5)]
+		dfSell=df.loc[(df['trend'] == 'D') & (dfBuy['strength'] == 5)]
+		print('-'*25)
+		print(dfBuy)
+		print('-'*25)
+		print(dfSell)
+		print('-'*25)
 '''
 	Test program
 '''
