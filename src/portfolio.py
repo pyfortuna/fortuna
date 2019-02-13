@@ -128,7 +128,7 @@ class Portfolio:
 		g,n=self.getPL()
 		c=self.getcashBalance()
 		i=self.getInventoryBalance()
-		result={'STATUS':bs, 'GROSS_PL':g, 'NET_PL':n, 'CASH':c, 'INV':i}
+		result={'idx':1, 'STATUS':bs, 'GROSS_PL':g, 'NET_PL':n, 'CASH':c, 'INV':i}
 		resultDF=pd.DataFrame([result])
 		return resultDF
 
