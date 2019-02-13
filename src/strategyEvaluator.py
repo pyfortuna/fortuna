@@ -1,7 +1,7 @@
 import nseUtil as nu
 import datetime
 import pandas as pd
-import strategy01 as s
+import strategy01 as s01
 import portfolio as p
 
 '''
@@ -14,7 +14,7 @@ if __name__ == "__main__":
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)
 	# get recommendation
-	s1 = s.Strategy01()
+	s1 = s01.Strategy01()
 	txnList = s1.executeStrategy(capital,df)
 	# test recommendation
 	pf = p.Portfolio()
