@@ -13,10 +13,15 @@ if __name__ == "__main__":
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)
-	param1 = {'capital':capital,'smaDays':50,'trendStrength':5}
-	param2 = {'capital':capital,'smaDays':100,'trendStrength':5}
-	param3 = {'capital':capital,'smaDays':150,'trendStrength':5}
-	paramList = [param1,param2,param3]
+	paramList = []
+	paramList.append({'capital':capital,'smaDays':30,'trendStrength':5})
+	paramList.append({'capital':capital,'smaDays':50,'trendStrength':5})
+	paramList.append({'capital':capital,'smaDays':100,'trendStrength':5})
+	paramList.append({'capital':capital,'smaDays':150,'trendStrength':5})
+	paramList.append({'capital':capital,'smaDays':30,'trendStrength':10})
+	paramList.append({'capital':capital,'smaDays':50,'trendStrength':10})
+	paramList.append({'capital':capital,'smaDays':100,'trendStrength':10})
+	paramList.append({'capital':capital,'smaDays':150,'trendStrength':10})
 	
 	for param in paramList:
 		# get recommendation
