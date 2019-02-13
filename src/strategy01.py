@@ -2,16 +2,14 @@ import nseUtil as nu
 import datetime
 import pandas as pd
 
-def units(amount, price):
-	return int(amount/price)
-
 class Strategy01:
-	def executeStrategy(self,capital,df):
+	def executeStrategy(self,param,df):
 		# -----------
 		# Paramters
 		# -----------
-		SMA_DAYS = 50
-		TREND_STRENGTH = 5
+		SMA_DAYS = param['smaDays']
+		TREND_STRENGTH = param['trendStrength']
+		capital = param['capital']
 		# -----------
 		# Pre-process
 		# -----------
@@ -56,7 +54,8 @@ class Strategy01:
 		for index, row in dfRes.iterrows():
 			if(row['trend']=='D'): # BUY
 				price = row['close']
-				qty=units(balance,price)
+				buffer = 50
+				qty=int((balance-buffer)/price)
 				if(qty>0):
 					balance -= (qty * price)
 					invQty += qty
@@ -80,5 +79,6 @@ if __name__ == "__main__":
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)
 	s1 = Strategy01()
-	txnList = s1.executeStrategy(capital,df)
+	param = {'capital':capital,'smaDays':5,'trendStrength':5}
+	txnList = s1.executeStrategy(param,df)
 	print(txnList)
