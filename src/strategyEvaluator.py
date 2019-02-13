@@ -21,7 +21,7 @@ if __name__ == "__main__":
 	for param in paramList:
 		# get recommendation
 		s1 = s01.Strategy01()
-		txnList = s1.executeStrategy(param1,df)
+		txnList = s1.executeStrategy(param,df)
 		# test recommendation
 		pf = p.Portfolio()
 		pf.addCapital('2017-01-01',capital)
