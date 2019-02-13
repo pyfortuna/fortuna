@@ -58,14 +58,14 @@ class Strategy01:
 		invQty=0
 		balance=capital
 		for index, row in dfRes.iterrows():
-			if(row['trend']='D'): # BUY
+			if(row['trend']=='D'): # BUY
 				price = row['close']
 				qty=units(balance,price)
 				balance -= (qty * price)
 				invQty += qty
 				txn = {'txnType': 'BUY', 'date':row.name.strftime('%Y-%m-%d'), 'price': price, 'qty': qty}
 				txnList.append(txn)
-			elif(row['trend']='S' and invQty>0): # SELL
+			elif(row['trend']=='S' and invQty>0): # SELL
 				price = row['close']
 				qty=invQty
 				balance += (qty * price)
