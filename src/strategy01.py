@@ -66,7 +66,7 @@ class Strategy01:
 					invQty += qty
 					txn = {'txnType': 'BUY', 'date':row.name.strftime('%Y-%m-%d'), 'price': price, 'qty': qty}
 					txnList.append(txn)
-			elif(row['trend']=='S' and invQty>0): # SELL
+			elif(row['trend']=='U' and invQty>0): # SELL
 				price = row['close']
 				qty=invQty
 				balance += (qty * price)
