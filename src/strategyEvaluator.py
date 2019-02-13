@@ -13,10 +13,12 @@ if __name__ == "__main__":
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)
+	# get recommendation
 	s1 = s.Strategy01()
 	txnList = s1.executeStrategy(capital,df)
+	# test recommendation
 	pf = p.Portfolio()
-	pf.addCapital('2018-02-07',5000)
+	pf.addCapital('2017-01-01',capital)
 	pf.processTxnList(txnList)
 	pf.printSummary()
 	pf.printBalanceSheet()
