@@ -102,7 +102,7 @@ class Portfolio:
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
 		cashBalance =round(tempDF[['BAL']].sum(),2)
 		return cashBalance
-	def getResults(self):
+	def getPL(self):
 		salCr = round(self.bsDF.loc[self.bsDF['ACC'] == 'SAL']['CR'].sum(),2)
 		cogDr = round(self.bsDF.loc[self.bsDF['ACC'] == 'COG']['DR'].sum(),2)
 		brkDr = round(self.bsDF.loc[self.bsDF['ACC'] == 'BRK']['DR'].sum(),2)
@@ -118,8 +118,19 @@ class Portfolio:
 			print(tempDF[['DATE', 'DESCRIPTION', 'DR', 'CR', 'BAL']].round(2).to_string())
 	def printSummary(self):
 		tempDF = self.bsDF[['ACC', 'DR', 'CR']]
-		tempDF['BAL'] = tempDF['DR'].copy() - tempDF['CR'].copy()
+		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
 		print(tempDF.groupby(['ACC']).sum())
+	def getResult(self):
+		if(self.getBalance()==0):
+			bs='OK'
+		else:
+			bs='ERROR'
+		g,n=self.getPL()
+		c=self.getcashBalance()
+		i=self.getInventoryBalance()
+		result={'STATUS':bs, 'GROSS_PL':g, 'NET_PL':n, 'CASH':c, 'INV':i}
+		resultDF=pd.DataFrame([result])
+		return resultDF
 
 '''
 	Test program
@@ -134,18 +145,8 @@ if __name__ == "__main__":
 				{'txnType': 'SELL', 'date':'2018-03-05', 'price': 490, 'qty': 3}]
 	pf.processTxnList(txnList)
 	pf.printSummary()
-	pf.printBalanceSheet()
+	#pf.printBalanceSheet()
 	pf.printBalanceSheet('TRD')
-	b=pf.getBalance()
-	if(b==0):
-		print('BALANCESHEET : OK')
-	else:
-		print('BALANCESHEET : ERROR')
-	g,n=pf.getResults()
-	c=pf.getcashBalance()
-	i=pf.getInventoryBalance()
-	print('GROSS P/L    : %6.2f' % g)
-	print('NET P/L      : %6.2f' % n)
-	print('CASH BALANCE : %6.2f' % c)
-	print('INV BALANCE  : %6.2f' % i)
+	resultDF=pf.getResult()
+	print(resultDF)
 	
