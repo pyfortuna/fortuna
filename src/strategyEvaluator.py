@@ -15,29 +15,19 @@ if __name__ == "__main__":
 	df = nu.getHistoricPrice(companyCode,s,e)
 	param1 = {'capital':capital,'smaDays':50,'trendStrength':5}
 	param2 = {'capital':capital,'smaDays':100,'trendStrength':5}
+	param3 = {'capital':capital,'smaDays':150,'trendStrength':5}
+	paramList = [param1,param2,param3]
 	
-	# get recommendation
-	s1 = s01.Strategy01()
-	txnList = s1.executeStrategy(param1,df)
-	# test recommendation
-	pf = p.Portfolio()
-	pf.addCapital('2017-01-01',capital)
-	pf.processTxnList(txnList)
-	pf.printSummary()
-	#pf.printBalanceSheet()
-	pf.printBalanceSheet('TRD')
-	resultDF=pf.getResult()
-	print(resultDF)
-	
-	# get recommendation
-	s1 = s01.Strategy01()
-	txnList = s1.executeStrategy(param2,df)
-	# test recommendation
-	pf = p.Portfolio()
-	pf.addCapital('2017-01-01',capital)
-	pf.processTxnList(txnList)
-	pf.printSummary()
-	#pf.printBalanceSheet()
-	pf.printBalanceSheet('TRD')
-	resultDF=pf.getResult()
-	print(resultDF)
+	for param in paramList:
+		# get recommendation
+		s1 = s01.Strategy01()
+		txnList = s1.executeStrategy(param1,df)
+		# test recommendation
+		pf = p.Portfolio()
+		pf.addCapital('2017-01-01',capital)
+		pf.processTxnList(txnList)
+		pf.printSummary()
+		#pf.printBalanceSheet()
+		#pf.printBalanceSheet('TRD')
+		resultDF=pf.getResult()
+		print(resultDF)
