@@ -11,6 +11,7 @@ class Strategy01:
 		# Paramters
 		# -----------
 		SMA_DAYS = 50
+		TREND_STRENGTH = 5
 		# -----------
 		# Pre-process
 		# -----------
@@ -38,22 +39,17 @@ class Strategy01:
 			else:
 				trendStrengthList.append(trendStrengthList[i-1]+1)
 			i += 1
-		se1 = pd.Series(trendList)
-		df['trend'] = se1.values
-		se2 = pd.Series(trendStrengthList)
-		df['strength'] = se2.values
-		print(df.tail(20))
+		s1 = pd.Series(trendList)
+		df['trend'] = s1.values
+		s2 = pd.Series(trendStrengthList)
+		df['strength'] = s2.values
+		#print(df.tail(20))
 		# -----------
 		# Process
 		# -----------
-		#dfBuy=df.loc[(df['trend'] == 'U') & (df['strength'] == 5)]
-		#dfSell=df.loc[(df['trend'] == 'D') & (df['strength'] == 5)]
-		dfRes=df.loc[(df['strength'] == 5)][['close','sma','trend']]
-		print('-'*25)
-		print(dfRes)
+		dfRes=df.loc[(df['strength'] == TREND_STRENGTH)][['close','sma','trend']]
 		#print('-'*25)
-		#print(dfSell)
-		#print('-'*25)
+		#print(dfRes)
 		txnList=[]
 		invQty=0
 		balance=capital
@@ -73,7 +69,7 @@ class Strategy01:
 				invQty = 0
 				txn = {'txnType': 'SELL', 'date':row.name.strftime('%Y-%m-%d'), 'price': price, 'qty': qty}
 				txnList.append(txn)
-		print(txnList)
+		return txnList
 '''
 	Test program
 '''
@@ -84,4 +80,5 @@ if __name__ == "__main__":
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)
 	s1 = Strategy01()
-	s1.executeStrategy(capital,df)
+	txnList = s1.executeStrategy(capital,df)
+	print(txnList)
