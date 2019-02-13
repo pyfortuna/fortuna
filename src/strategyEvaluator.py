@@ -13,9 +13,11 @@ if __name__ == "__main__":
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)
+	param1 = {'capital':capital,'smaDays':5,'trendStrength':5}
+	
 	# get recommendation
 	s1 = s01.Strategy01()
-	txnList = s1.executeStrategy(capital,df)
+	txnList = s1.executeStrategy(param1,df)
 	# test recommendation
 	pf = p.Portfolio()
 	pf.addCapital('2017-01-01',capital)
