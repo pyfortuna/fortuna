@@ -150,4 +150,3 @@ if __name__ == "__main__":
 	pf.printBalanceSheet('TRD')
 	resultDF=pf.getResult()
 	print(resultDF)
-	
