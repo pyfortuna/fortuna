@@ -100,7 +100,7 @@ class Portfolio:
 	def getcashBalance(self):
 		tempDF = self.bsDF.loc[self.bsDF['ACC'] == 'TRD'][['DR', 'CR']]
 		tempDF['BAL'] = tempDF['DR'] - tempDF['CR']
-		cashBalance =round(tempDF[['BAL']].sum(),2)
+		cashBalance =round(tempDF['BAL'].sum(),2)
 		return cashBalance
 	def getPL(self):
 		salCr = round(self.bsDF.loc[self.bsDF['ACC'] == 'SAL']['CR'].sum(),2)
@@ -131,7 +131,7 @@ class Portfolio:
 		result={'a':1, 'STATUS':bs, 'GROSS_PL':round(g,2), 'NET_PL':round(n,2), 'CASH':c, 'INV':i}
 		resultDF=pd.DataFrame([result])
 		resultDF = resultDF.reset_index(drop=True)
-		return resultDF[['STATUS','GROSS_PL','NET_PL','INV']]
+		return resultDF[['STATUS','GROSS_PL','NET_PL','CASH','INV']]
 
 '''
 	Test program
