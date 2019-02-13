@@ -61,10 +61,11 @@ class Strategy01:
 			if(row['trend']=='D'): # BUY
 				price = row['close']
 				qty=units(balance,price)
-				balance -= (qty * price)
-				invQty += qty
-				txn = {'txnType': 'BUY', 'date':row.name.strftime('%Y-%m-%d'), 'price': price, 'qty': qty}
-				txnList.append(txn)
+				if(qty>0):
+					balance -= (qty * price)
+					invQty += qty
+					txn = {'txnType': 'BUY', 'date':row.name.strftime('%Y-%m-%d'), 'price': price, 'qty': qty}
+					txnList.append(txn)
 			elif(row['trend']=='S' and invQty>0): # SELL
 				price = row['close']
 				qty=invQty
