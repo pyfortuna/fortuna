@@ -7,7 +7,7 @@ class Strategy01:
 		# -----------
 		# Paramters
 		# -----------
-		SMA_DAYS = 200
+		SMA_DAYS = 50
 		# -----------
 		# Pre-process
 		# -----------
