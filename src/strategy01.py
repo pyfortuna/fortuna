@@ -43,8 +43,8 @@ class Strategy01:
 		# -----------
 		# Process
 		# -----------
-		dfBuy=df.loc[(df['trend'] == 'U') & (dfBuy['strength'] == 5)]
-		dfSell=df.loc[(df['trend'] == 'D') & (dfBuy['strength'] == 5)]
+		dfBuy=df.loc[(df['trend'] == 'U') & (df['strength'] == 5)]
+		dfSell=df.loc[(df['trend'] == 'D') & (df['strength'] == 5)]
 		print('-'*25)
 		print(dfBuy)
 		print('-'*25)
