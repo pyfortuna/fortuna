@@ -1,4 +1,4 @@
 cd ~/fortuna/fortuna/src
-python3 strategyEvaluator.py
+python3 portfolio.py
 
 exit
