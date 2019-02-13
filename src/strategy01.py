@@ -2,6 +2,9 @@ import nseUtil as nu
 import datetime
 import pandas as pd
 
+def units(amount, price):
+	return int(amount/price)
+
 class Strategy01:
 	def executeStrategy(self,capital,df):
 		# -----------
@@ -43,14 +46,33 @@ class Strategy01:
 		# -----------
 		# Process
 		# -----------
-		dfBuy=df.loc[(df['trend'] == 'U') & (df['strength'] == 5)]
-		dfSell=df.loc[(df['trend'] == 'D') & (df['strength'] == 5)]
+		#dfBuy=df.loc[(df['trend'] == 'U') & (df['strength'] == 5)]
+		#dfSell=df.loc[(df['trend'] == 'D') & (df['strength'] == 5)]
 		dfRes=df.loc[(df['strength'] == 5)][['close','sma','trend']]
 		print('-'*25)
 		print(dfRes)
 		#print('-'*25)
 		#print(dfSell)
 		#print('-'*25)
+		txnList=[]
+		invQty=0
+		balance=capital
+		for index, row in dfRes.iterrows():
+			if(row['trend']='D'): # BUY
+				price = row['close']
+				qty=units(balance,price)
+				balance -= (qty * price)
+				invQty += qty
+				txn = {'txnType': 'BUY', 'date':row.name.strftime('%Y-%m-%d'), 'price': price, 'qty': qty}
+				txnList.append(txn)
+			elif(row['trend']='S' and invQty>0): # SELL
+				price = row['close']
+				qty=invQty
+				balance += (qty * price)
+				invQty = 0
+				txn = {'txnType': 'SELL', 'date':row.name.strftime('%Y-%m-%d'), 'price': price, 'qty': qty}
+				txnList.append(txn)
+		print(txnList)
 '''
 	Test program
 '''
