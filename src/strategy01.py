@@ -41,7 +41,8 @@ class Strategy01:
 		df['trend'] = s1.values
 		s2 = pd.Series(trendStrengthList)
 		df['strength'] = s2.values
-		#print(df.tail(20))
+		lastDate = df.index[-1].strftime('%Y-%m-%d')
+		lastPrice = df['close'][-1]
 		# -----------
 		# Process
 		# -----------
@@ -51,7 +52,9 @@ class Strategy01:
 		txnList=[]
 		invQty=0
 		balance=capital
+		i = 0
 		for index, row in dfRes.iterrows():
+			i += 1
 			if(row['trend']=='D'): # BUY
 				price = row['close']
 				buffer = 50
@@ -67,6 +70,9 @@ class Strategy01:
 				balance += (qty * price)
 				invQty = 0
 				txn = {'txnType': 'SELL', 'date':row.name.strftime('%Y-%m-%d'), 'price': price, 'qty': qty}
+				txnList.append(txn)
+			if ((i == len(dfRes.index)-1) and (invQty>0)):
+				txn = {'txnType': 'SELL', 'date':lastDate, 'price': lastPrice, 'qty': invQty}
 				txnList.append(txn)
 		return txnList
 '''
