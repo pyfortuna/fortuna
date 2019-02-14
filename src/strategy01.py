@@ -52,7 +52,6 @@ class Strategy01:
 		txnList=[]
 		invQty=0
 		balance=capital
-		i = 0
 		for index, row in dfRes.iterrows():
 			i += 1
 			if(row['trend']=='D'): # BUY
@@ -71,9 +70,9 @@ class Strategy01:
 				invQty = 0
 				txn = {'txnType': 'SELL', 'date':row.name.strftime('%Y-%m-%d'), 'price': price, 'qty': qty}
 				txnList.append(txn)
-			if ((i == len(dfRes.index)-1) and (invQty>0)):
-				txn = {'txnType': 'SELL', 'date':lastDate, 'price': lastPrice, 'qty': invQty}
-				txnList.append(txn)
+		if (invQty>0):
+			txn = {'txnType': 'SELL', 'date':lastDate, 'price': lastPrice, 'qty': invQty}
+			txnList.append(txn)
 		return txnList
 '''
 	Test program
