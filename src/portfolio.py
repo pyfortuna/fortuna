@@ -116,7 +116,7 @@ class Portfolio:
 		grossPL, netPL = self.getPL()
 		if (sales>0):
 			profitMargin = round(netPL/sales*100,2)
-		else
+		else:
 			profitMargin = 0
 		roce = round(netPL/capital*100,2)
 		capitalTurn = round(sales/capital,2)
