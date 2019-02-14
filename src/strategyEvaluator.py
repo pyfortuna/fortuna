@@ -15,13 +15,13 @@ if __name__ == "__main__":
 	df = nu.getHistoricPrice(companyCode,s,e)
 	paramList = []
 	paramList.append({'id':1,'capital':capital,'smaDays':30,'trendStrength':5})
-	paramList.append({'id':2,'smaDays':50,'trendStrength':5})
-	paramList.append({'id':3,'smaDays':100,'trendStrength':5})
-	paramList.append({'id':4,'smaDays':150,'trendStrength':5})
-	paramList.append({'id':5,'smaDays':30,'trendStrength':10})
-	paramList.append({'id':6,'smaDays':50,'trendStrength':10})
-	paramList.append({'id':7,'smaDays':100,'trendStrength':10})
-	paramList.append({'id':8,'smaDays':150,'trendStrength':10})
+	paramList.append({'id':2,'capital':capital,'smaDays':50,'trendStrength':5})
+	paramList.append({'id':3,'capital':capital,'smaDays':100,'trendStrength':5})
+	paramList.append({'id':4,'capital':capital,'smaDays':150,'trendStrength':5})
+	paramList.append({'id':5,'capital':capital,'smaDays':30,'trendStrength':10})
+	paramList.append({'id':6,'capital':capital,'smaDays':50,'trendStrength':10})
+	paramList.append({'id':7,'capital':capital,'smaDays':100,'trendStrength':10})
+	paramList.append({'id':8,'capital':capital,'smaDays':150,'trendStrength':10})
 	res = pd.DataFrame()
 	
 	for param in paramList:
