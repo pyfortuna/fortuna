@@ -13,7 +13,9 @@ if __name__ == "__main__":
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)	
-	paramList = []
+	confDF = DataFrame.from_csv('/ec2-user/home/fortuna/fortuna/data/s01conf.tsv', sep='\t', header=0)
+	paramList = confDF.to_dict('records')
+	'''
 	paramList.append({'id':1,'capital':capital,'smaDays':30,'trendStrength':5})
 	paramList.append({'id':2,'capital':capital,'smaDays':50,'trendStrength':5})
 	paramList.append({'id':3,'capital':capital,'smaDays':100,'trendStrength':5})
@@ -22,6 +24,7 @@ if __name__ == "__main__":
 	paramList.append({'id':6,'capital':capital,'smaDays':50,'trendStrength':10})
 	paramList.append({'id':7,'capital':capital,'smaDays':100,'trendStrength':10})
 	paramList.append({'id':8,'capital':capital,'smaDays':150,'trendStrength':10})
+	'''
 	res = pd.DataFrame()
 	
 	for param in paramList:
