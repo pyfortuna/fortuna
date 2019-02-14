@@ -13,8 +13,8 @@ if __name__ == "__main__":
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)
-	lastDate = df.index(-1)
-	lastPrice = df['close'](-1)
+	lastDate = df.index[-1]
+	lastPrice = df['close'][-1]
 	print('------------------')
 	print(lastDate)
 	print(lastPrice)
