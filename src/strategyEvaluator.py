@@ -9,22 +9,12 @@ import portfolio as p
 '''
 if __name__ == "__main__":
 	capital=10000
-	companyCode='DMART'	
+	companyCode='PIDILITIND'	
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)	
 	confDF = pd.read_table('/home/ec2-user/fortuna/fortuna/data/s01conf.tsv', header=0)
 	paramList = confDF.to_dict('records')
-	'''
-	paramList.append({'id':1,'capital':capital,'smaDays':30,'trendStrength':5})
-	paramList.append({'id':2,'capital':capital,'smaDays':50,'trendStrength':5})
-	paramList.append({'id':3,'capital':capital,'smaDays':100,'trendStrength':5})
-	paramList.append({'id':4,'capital':capital,'smaDays':150,'trendStrength':5})
-	paramList.append({'id':5,'capital':capital,'smaDays':30,'trendStrength':10})
-	paramList.append({'id':6,'capital':capital,'smaDays':50,'trendStrength':10})
-	paramList.append({'id':7,'capital':capital,'smaDays':100,'trendStrength':10})
-	paramList.append({'id':8,'capital':capital,'smaDays':150,'trendStrength':10})
-	'''
 	res = pd.DataFrame()
 	
 	for param in paramList:
