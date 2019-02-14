@@ -110,6 +110,14 @@ class Portfolio:
 		grossPL = salCr - cogDr
 		netPL = grossPL - brkDr
 		return grossPL, netPL
+	def getRatio(self):
+		sales = round(self.bsDF.loc[self.bsDF['ACC'] == 'SAL']['CR'].sum(),2)
+		capital = round(self.bsDF.loc[self.bsDF['ACC'] == 'CAP']['CR'].sum(),2)
+		grossPL, netPL = self.getPL()
+		profitMargin = round(netPL/sales*100,2)
+		roce = round(netPL/capital*100,2)
+		capitalTurn = round(sales/capital,2)
+		return profitMargin,roce,capitalTurn
 	def printBalanceSheet(self, account='none'):
 		if (account=='none'):
 			print(self.bsDF[['ACC', 'DATE', 'DESCRIPTION', 'DR', 'CR']])
@@ -129,10 +137,11 @@ class Portfolio:
 		g,n=self.getPL()
 		c=self.getcashBalance()
 		i=self.getInventoryBalance()
-		result={'ID':self.id, 'STATUS':bs, 'GROSS_PL':round(g,2), 'NET_PL':round(n,2), 'CASH':c, 'INV':i}
+		pm,roce,ctr = self.getRatio()
+		result={'ID':self.id, 'STATUS':bs, 'GROSS_PL':round(g,2), 'NET_PL':round(n,2), 'CASH':c, 'INV':i, 'MARGIN':pm, 'ROCE':roce, 'TURN':ctr}
 		resultDF=pd.DataFrame([result])
 		resultDF = resultDF.reset_index(drop=True)
-		return resultDF[['ID','STATUS','CASH','INV','GROSS_PL','NET_PL']]
+		return resultDF[['ID','STATUS','CASH','INV','GROSS_PL','NET_PL','MARGIN','ROCE',TURN']]
 
 '''
 	Test program
