@@ -37,4 +37,4 @@ if __name__ == "__main__":
 		#pf.printBalanceSheet('TRD')
 		resultDF=pf.getResult()
 		res = res.append(resultDF)
-	print(resultDF)
+	print(res)
