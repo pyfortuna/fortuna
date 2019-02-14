@@ -17,9 +17,8 @@ class InvalidTransaction(Error):
 	Class to manage price of inventory
 '''
 class InventoryList:
-	def __init__(self,id):
+	def __init__(self):
 		self.items = []
-		self.id = id
 	def add(self, price, qty):
 		if (qty < 0):
 			raise InvalidTransaction
@@ -40,7 +39,8 @@ class InventoryList:
 	Class to manage portfolio & related transactions
 '''
 class Portfolio:
-	def __init__ (self):
+	def __init__ (self,id):
+		self.id = id
 		col_names =  ['ACC', 'DATE', 'DESCRIPTION', 'DR', 'CR']
 		self.bsDF = pd.DataFrame(columns=col_names)
 		self.invList = InventoryList()
