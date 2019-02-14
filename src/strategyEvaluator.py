@@ -9,7 +9,7 @@ import portfolio as p
 '''
 if __name__ == "__main__":
 	capital=10000
-	companyCode='ASIANPAINT'	
+	companyCode='DABUR'	
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)
