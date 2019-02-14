@@ -9,23 +9,26 @@ import portfolio as p
 '''
 if __name__ == "__main__":
 	capital=10000
-	companyCode='DABUR'	
+	companyCode='RELIANCE'	
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)
+	lastDate = df.index(-1)
+	lastPrice = df['close'](-1)
+	print('------------------')
+	print(lastDate)
+	print(lastPrice)
+	print('------------------')
+	
 	paramList = []
-	paramList.append({'id':1,'capital':capital,'smaDays':30,'trendStrength':3})
-	paramList.append({'id':2,'capital':capital,'smaDays':50,'trendStrength':3})
-	paramList.append({'id':3,'capital':capital,'smaDays':100,'trendStrength':3})
-	paramList.append({'id':4,'capital':capital,'smaDays':150,'trendStrength':3})
-	paramList.append({'id':5,'capital':capital,'smaDays':30,'trendStrength':5})
-	paramList.append({'id':6,'capital':capital,'smaDays':50,'trendStrength':5})
-	paramList.append({'id':7,'capital':capital,'smaDays':100,'trendStrength':5})
-	paramList.append({'id':8,'capital':capital,'smaDays':150,'trendStrength':5})
-	paramList.append({'id':9,'capital':capital,'smaDays':30,'trendStrength':10})
-	paramList.append({'id':10,'capital':capital,'smaDays':50,'trendStrength':10})
-	paramList.append({'id':11,'capital':capital,'smaDays':100,'trendStrength':10})
-	paramList.append({'id':12,'capital':capital,'smaDays':150,'trendStrength':10})
+	paramList.append({'id':1,'capital':capital,'smaDays':30,'trendStrength':5})
+	paramList.append({'id':2,'capital':capital,'smaDays':50,'trendStrength':5})
+	paramList.append({'id':3,'capital':capital,'smaDays':100,'trendStrength':5})
+	paramList.append({'id':4,'capital':capital,'smaDays':150,'trendStrength':5})
+	paramList.append({'id':5,'capital':capital,'smaDays':30,'trendStrength':10})
+	paramList.append({'id':6,'capital':capital,'smaDays':50,'trendStrength':10})
+	paramList.append({'id':7,'capital':capital,'smaDays':100,'trendStrength':10})
+	paramList.append({'id':8,'capital':capital,'smaDays':150,'trendStrength':10})
 	res = pd.DataFrame()
 	
 	for param in paramList:
