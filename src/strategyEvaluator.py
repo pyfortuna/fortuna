@@ -12,14 +12,7 @@ if __name__ == "__main__":
 	companyCode='DMART'	
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
-	df = nu.getHistoricPrice(companyCode,s,e)
-	lastDate = df.index[-1]
-	lastPrice = df['close'][-1]
-	print('------------------')
-	print(lastDate)
-	print(lastPrice)
-	print('------------------')
-	
+	df = nu.getHistoricPrice(companyCode,s,e)	
 	paramList = []
 	paramList.append({'id':1,'capital':capital,'smaDays':30,'trendStrength':5})
 	paramList.append({'id':2,'capital':capital,'smaDays':50,'trendStrength':5})
