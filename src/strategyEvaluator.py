@@ -13,7 +13,7 @@ if __name__ == "__main__":
 	e = datetime.datetime.now()
 	s = e - datetime.timedelta(days=700)
 	df = nu.getHistoricPrice(companyCode,s,e)	
-	confDF = pd.read_table('/ec2-user/home/fortuna/fortuna/data/s01conf.tsv', header=0)
+	confDF = pd.read_table('/home/ec2-user/fortuna/fortuna/data/s01conf.tsv', header=0)
 	paramList = confDF.to_dict('records')
 	'''
 	paramList.append({'id':1,'capital':capital,'smaDays':30,'trendStrength':5})
