@@ -17,8 +17,9 @@ class InvalidTransaction(Error):
 	Class to manage price of inventory
 '''
 class InventoryList:
-	def __init__(self):
-		self.items = [] 
+	def __init__(self,id):
+		self.items = []
+		self.id = id
 	def add(self, price, qty):
 		if (qty < 0):
 			raise InvalidTransaction
@@ -128,16 +129,16 @@ class Portfolio:
 		g,n=self.getPL()
 		c=self.getcashBalance()
 		i=self.getInventoryBalance()
-		result={'a':1, 'STATUS':bs, 'GROSS_PL':round(g,2), 'NET_PL':round(n,2), 'CASH':c, 'INV':i}
+		result={'ID':self.id, 'STATUS':bs, 'GROSS_PL':round(g,2), 'NET_PL':round(n,2), 'CASH':c, 'INV':i}
 		resultDF=pd.DataFrame([result])
 		resultDF = resultDF.reset_index(drop=True)
-		return resultDF[['STATUS','CASH','INV','GROSS_PL','NET_PL']]
+		return resultDF[['ID','STATUS','CASH','INV','GROSS_PL','NET_PL']]
 
 '''
 	Test program
 '''
 if __name__ == "__main__":
-	pf = Portfolio()
+	pf = Portfolio(1)
 	pf.addCapital('2018-02-07',5000)
 	pf.buy('2018-02-08',460,5)
 	pf.sell('2018-02-14',490,5)	
@@ -150,3 +151,4 @@ if __name__ == "__main__":
 	pf.printBalanceSheet('TRD')
 	resultDF=pf.getResult()
 	print(resultDF)
+	
