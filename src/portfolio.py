@@ -114,7 +114,10 @@ class Portfolio:
 		sales = round(self.bsDF.loc[self.bsDF['ACC'] == 'SAL']['CR'].sum(),2)
 		capital = round(self.bsDF.loc[self.bsDF['ACC'] == 'CAP']['CR'].sum(),2)
 		grossPL, netPL = self.getPL()
-		profitMargin = round(netPL/sales*100,2)
+		if (sales>0):
+			profitMargin = round(netPL/sales*100,2)
+		else
+			profitMargin = 0
 		roce = round(netPL/capital*100,2)
 		capitalTurn = round(sales/capital,2)
 		return profitMargin,roce,capitalTurn
