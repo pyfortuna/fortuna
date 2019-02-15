@@ -3,6 +3,7 @@ import datetime
 import pandas as pd
 import strategy01 as s01
 import portfolio as p
+import fortunacommon as fc
 
 '''
 	Test program
@@ -31,3 +32,6 @@ if __name__ == "__main__":
 			resultDF=pf.getResult()
 			res = res.append(resultDF)
 	print(res)
+	outputFilename = '/home/ec2-user/plutus/s01output.csv'
+	res.to_csv(outputFilename)
+	fc.sendMail('S01','S01',outputFilename)
