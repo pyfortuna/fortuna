@@ -16,6 +16,10 @@ class Strategy01:
 		sma = df['close'].rolling(SMA_DAYS).mean()
 		df=df.assign(sma=sma)
 		df=df.dropna()
+		# print start date
+		print('-'*25)
+		print(df.head(0).name)
+		print('-'*25)
 		# Create Trend List
 		smaList=list(df['sma'])
 		trendList = []
