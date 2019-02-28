@@ -24,7 +24,7 @@ if __name__ == "__main__":
 			s1 = s01.Strategy01()
 			txnList = s1.executeStrategy(param,df)
 			# test recommendation
-			pf = p.Portfolio("%s:%d" % (companyCode, param['id']))
+			pf = p.Portfolio(param['id'])
 			pf.addCapital('2017-01-01',param['capital'])
 			pf.processTxnList(txnList)
 			#pf.printSummary()
