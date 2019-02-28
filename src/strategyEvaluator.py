@@ -16,6 +16,7 @@ if __name__ == "__main__":
 	companyList = confDF['companyCode'].unique()
 	for companyCode in companyList:
 		compConfDF = confDF.loc[confDF['companyCode']==companyCode][['id','capital','smaDays','trendStrength']]
+		print('DEBUG : Downloading NSE data for %s' % companyCode)
 		df = nu.getHistoricPrice(companyCode,s,e)		
 		paramList = compConfDF.to_dict('records')
 		for param in paramList:
