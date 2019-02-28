@@ -18,7 +18,7 @@ class Strategy01:
 		df=df.dropna()
 		# print start date
 		print('-'*25)
-		print(df.head(0).name)
+		print(df.index.values[0])
 		print('-'*25)
 		# Create Trend List
 		smaList=list(df['sma'])
