@@ -10,6 +10,7 @@ class Strategy01:
 		SMA_DAYS = param['smaDays']
 		TREND_STRENGTH = param['trendStrength']
 		capital = param['capital']
+		START_DATE = datetime.datetime.strptime('2018-01-01', '%Y-%m-%d')
 		# -----------
 		# Pre-process
 		# -----------
@@ -19,7 +20,10 @@ class Strategy01:
 		# print start date
 		print('-'*25)
 		print(df.index.values[0])
+		df=df.loc[df.index>=START_DATE]
+		print(df.index.values[0])
 		print('-'*25)
+		
 		# Create Trend List
 		smaList=list(df['sma'])
 		trendList = []
