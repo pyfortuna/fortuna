@@ -18,11 +18,11 @@ class Strategy01:
 		df=df.assign(sma=sma)
 		df=df.dropna()
 		# print start date
-		print('-'*25)
-		print(df.index.values[0])
+		#print('-'*25)
+		#print(df.index.values[0])
 		df=df.loc[df.index>=START_DATE]
-		print(df.index.values[0])
-		print('-'*25)
+		#print(df.index.values[0])
+		#print('-'*25)
 		
 		# Create Trend List
 		smaList=list(df['sma'])
