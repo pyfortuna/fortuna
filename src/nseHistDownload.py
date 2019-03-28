@@ -12,10 +12,13 @@ confDF = pd.read_table('/home/ec2-user/fortuna/fortuna/data/nselist.tsv', header
 companyList = confDF['companyCode'].unique()
 companyList.sort()
 for companyCode in companyList:
-	print('DEBUG : Downloading data for %s' % companyCode)
-	df = nu.getHistoricPrice(companyCode,s,e)
-	output_filename = '/home/ec2-user/plutus/nsedata/%s.csv' % companyCode
-	df.to_csv(output_filename)
+	try:
+		print('DEBUG : Downloading data for %s' % companyCode)
+		df = nu.getHistoricPrice(companyCode,s,e)
+		output_filename = '/home/ec2-user/plutus/nsedata/%s.csv' % companyCode
+		df.to_csv(output_filename)
+	except:
+		print('ERROR : Download failed for %s' % companyCode)
 print('DEBUG : Download completed')
 
 print('DEBUG : Compression started')
