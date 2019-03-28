@@ -23,7 +23,7 @@ zipfile_path = '/home/ec2-user/plutus/nsedata.zip'
 zipf = zipfile.ZipFile(zipfile_path, 'w', zipfile.ZIP_DEFLATED)
 for root, dirs, files in os.walk('/home/ec2-user/plutus/nsedata/'):
 	for file in files:
-        	zipf.write(os.path.join(root, file))
+        	zipf.write(os.path.join(root, file),file)
 zipf.close()
 print('DEBUG : Compression completed')
 
